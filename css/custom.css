@@ -849,3 +849,28 @@ svg.icon {
   fill: currentColor;
   overflow: hidden;
 }
+/* 主页文章栏变大 */
+.layout{
+  max-width: 1400px !important;
+}
+/* 侧边栏适配主页文章栏变大 */
+.aside-content{
+  max-width: 23%;
+  min-width: 300px;
+}
+
+#page h1.page-title{
+  text-align: center;
+}
+
+span.talk_tag {
+    display: none;
+}
+
+
+
+
+
+
+
+
