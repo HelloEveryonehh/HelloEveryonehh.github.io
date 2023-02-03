@@ -870,7 +870,9 @@ span.talk_tag {
 
 
 
-
-
-
-
+#page-header.not-home-page {
+    height: 50px;
+}
+div#page-site-info {
+    display: none;
+}
