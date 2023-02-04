@@ -852,7 +852,7 @@ svg.icon {
 }
 /* 主页文章栏变大 */
 .layout{
-  max-width: 1400px !important;
+  max-width: 1500px !important;
 }
 /* 侧边栏适配主页文章栏变大 */
 .aside-content{
