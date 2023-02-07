@@ -200,6 +200,10 @@ div#category {
   border-radius: 5px;
   background: var(--anzhiyu-blue);
 }
+/*直达评论按钮*/
+#rightside > div > button:hover, #rightside > div > a{
+  background:var(--anzhiyu-blue);
+}
 
 /* 滚动条 */
 
@@ -516,6 +520,7 @@ li.card-archive-list-item {
 #aside-content .card-categories ul.card-category-list > .card-category-list-item a span:first-child {
   width: auto;
   flex: inherit;
+  font-weight:700;
 }
 #aside-content .card-archives ul.card-archive-list,
 #aside-content .card-categories ul.card-category-list {
@@ -1188,4 +1193,64 @@ h1.page-title + .tag-cloud-list {
 }
 #search-button a.site-page.social-icon.search span {
   display: none;
+}
+
+
+/* 标题增强 */
+.site-name::before {
+  opacity: 0;
+  background-color: var(--anzhiyu-main) !important;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  position: absolute;
+  top: 0 !important;
+  right: 0 !important;
+  width: 100%;
+  height: 100%;
+  content: "\f015";
+  box-shadow: 0 0 5px var(--anzhiyu-main);
+  font-family: "Font Awesome 6 Free";
+  text-align: center;
+  color: white;
+  line-height: 34px; /*如果有溢出或者垂直不居中的现象微调一下这个参数*/
+  font-size: 18px; /*根据个人喜好*/
+}
+.site-name:hover::before {
+  opacity: 1;
+  scale: 1.03;
+}
+.site-name {
+  position: relative;
+  font-size: 24px; /*一定要把字体调大点，否则效果惨不忍睹！*/
+}
+
+.fa-folder-open:before{
+  display:none;
+}
+.fa-archive:before, .fa-box-archive:before{
+  display:none;
+}
+
+#category-bar {
+    padding: 0.4rem 1rem 0.4rem 0.5rem;
+    background: var(--heo-card-bg);
+    border-radius: 12px;
+    display: flex;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-bottom: 0rem;
+    margin-top:1rem;
+    border: var(--style-border);
+    font-family: PingFangSC!important;
+}
+.category-bar-item.select a{
+  border-radius:10px;
 }
