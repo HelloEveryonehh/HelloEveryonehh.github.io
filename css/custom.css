@@ -904,7 +904,9 @@ h1.page-title + .tag-cloud-list {
     transition:0.5s;
     height:120px;
 }
-
+[data-theme="dark"] .article-sort-item:not(.year){
+  background:black;
+}
 .article-sort-item-a{
     position:absolute;
     width:100%;
