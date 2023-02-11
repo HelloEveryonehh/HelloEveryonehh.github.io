@@ -241,8 +241,8 @@ ul.menus_item_child {
 /* 一级菜单居中 */
 #nav .menus_items {
     position: absolute;
-    width: fit-content;
-    left: 50%;
+    width: 44%;
+    left: 72%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: row;
@@ -298,9 +298,9 @@ ul.menus_item_child {
 }
 
 #menus > div.menus_items > div > a {
-    letter-spacing: 0.3rem;
+    letter-spacing: 0rem;
     font-weight: 700;
-    padding: 0em 0.3em 0em 0.5em;
+    padding: 0em 0.0em 0em 0.0em;
     height: 35px;
     line-height: 35px;
 }
@@ -321,6 +321,10 @@ ul.menus_item_child {
     display: flex;
     opacity: 0;
 }
+#page-header.nav-fixed #nav #page-name {
+    font-family: PingFangSC!important;
+    font-weight: 700;
+}
 #page-name::before {
     font-size: 18px;
     position: absolute;
@@ -338,7 +342,7 @@ ul.menus_item_child {
     -ms-transition: all 0.3s;
     -o-transition: all 0.3s;
     opacity: 0;
-    box-shadow: 0 0 3px var(--zhsher-theme);
+    margin-top:5px;
 }
 #page-name:hover:before {
     opacity: 1;
@@ -363,7 +367,6 @@ center#name-container {
     width: 100%;
     left: 50%;
     transform: translateX(-50%);
-    font-family: "ZhuZiAYuanJWD";
 }
 .nav-fixed.nav-visible #name-container {
     transition: 0.3s;
@@ -527,6 +530,7 @@ center#name-container {
 #page-header #nav .back-home-button {
     cursor: pointer;
     position: relative;
+    color:#4c4948;
 }
 
 @media screen and (min-width: 1300px) {

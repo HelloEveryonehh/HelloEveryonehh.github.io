@@ -439,9 +439,10 @@ div#menus{
    font-family: PingFangSC!important;
    font-weight:700;
 }
-#nav .site-name{
-    font-family: PingFangSC!important;
-    font-size:larger;
+div.title{
+  font-family: PingFangSC!important;
+  font-weight:700;
+}
 }
 h1#site-title {
   font-family: PingFangSC!important;
@@ -1045,4 +1046,13 @@ h1.page-title + .tag-cloud-list {
 }
 .category-bar-item.select a{
   border-radius:10px;
+}
+#article-container code {
+    color: white;
+    padding: .2rem .4rem;
+    border-radius: 4px;
+    margin: 0 4px;
+    background: #f47466;
+    line-height: 2;
+    box-shadow: 0 8px 16px -4px #2c2d300c;
 }
