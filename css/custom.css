@@ -1,6 +1,8 @@
 /* 颜色 */
 :root {
   --anzhiyu-theme-op: #4259ef23;
+  --anzhiyu-meta-theme-color: #f7f9fe;
+  --anzhiyu-bar-background: var(--anzhiyu-main);
   --anzhiyu-gray-op: #9999992b;
   --anzhiyu-theme-top: var(--anzhiyu-theme);
   --anzhiyu-white: #fff;
@@ -38,8 +40,12 @@
 }
 
 [data-theme="light"] {
+  --anzhiyu-meta-theme-post-color: #f7f9fe;
+  --anzhiyu-meta-theme-color: #f7f9fe;
   --anzhiyu-theme: #3b70fc;
   --anzhiyu-theme-op: #4259ef23;
+  --anzhiyu-theme-op-deep: #4259efdd;
+  --anzhiyu-theme-none: #4259ef01;
   --anzhiyu-blue: #3b70fc;
   --anzhiyu-red: #d8213c;
   --anzhiyu-pink: #ff7c7c;
@@ -66,9 +72,13 @@
 }
 
 [data-theme="dark"] {
+  --anzhiyu-meta-theme-post-color: #1d1e22;
+  --anzhiyu-meta-theme-color: #000;
   --global-bg: #191919;
   --anzhiyu-theme: #0084ff;
   --anzhiyu-theme-op: #0084ff23;
+  --anzhiyu-theme-op-deep:#0084ffdd;
+  --anzhiyu-theme-none:#0084FF00;
   --anzhiyu-blue: #0084ff;
   --anzhiyu-red: #ff3842;
   --anzhiyu-pink: #ff7c7c;
@@ -1056,3 +1066,252 @@ h1.page-title + .tag-cloud-list {
     line-height: 2;
     box-shadow: 0 8px 16px -4px #2c2d300c;
 }
+
+
+[data-theme="dark"] hr:before{
+  color:#f2b94b;
+}
+
+
+
+
+/*洪哥首页*/
+@media screen and (min-width: 1300px) {
+    #page-header.post-bg {
+        height: 35rem;
+    }
+}
+
+#page-cover::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    box-shadow: 110px -130px 300px 60px var(--anzhiyu-theme) inset;
+}
+
+#page-header {
+    display: flex;
+    justify-content: center;
+    background-image: none !important;
+}
+
+
+#page-header.post-bg {
+    overflow: hidden;
+    background: var(--anzhiyu-main) !important;
+}
+
+#page-header.post-bg::before {
+    background: var(--anzhiyu-main) !important;
+}
+
+#post-cover {
+    width: 80%;
+    height: 100%;
+    position: relative;
+    margin: 0px -15% 0px auto;
+    overflow: hidden;
+    transform: rotate(10deg) translateY(-30px) scale(1.1);
+    filter: blur(30px) !important;
+}
+
+#post-cover::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    box-shadow: 100px -100px 275px 75px  inset;
+    background: var(--main-lighter) ;
+}
+
+#post-cover-img {
+    object-fit: cover;
+    min-width: 50vw;
+    min-height: 20rem;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#post-cover-img {
+    object-fit: cover;
+    min-width: 50vw;
+    min-height: 20rem;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+@media screen and (max-width: 900px) {
+    #post-cover {
+        width: 100%;
+        height: 300px;
+        transform: translate(0px, 0px);
+        margin: 0px;
+        filter: none;
+        position: fixed;
+    }
+
+    #post-cover::after {
+        box-shadow: 0 -150px 150px 35px var(--anzhiyu-theme) inset ;
+    }
+}
+
+#page-header #post-info {
+    text-align: left;
+    bottom: 30%;
+    left: 0px;
+    right: 0px;
+    position: absolute;
+    padding: 0px 3%;
+    margin: 0px auto;
+}
+
+#page-header #post-info .post-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+#page-header #post-info #post-meta .meta-firstline .post-meta-icon {
+    display: none;
+}
+
+#page-header #post-info .post-meta-separator {
+    display: none;
+}
+
+#post-info #post-meta > .meta-secondline > span:first-child {
+    display: unset;
+}
+
+#post-info #post-meta .meta-secondline > span:not(:last-child) {
+    opacity: 0.9;
+    margin-right: 1rem;
+}
+#post-info #post-meta .meta-firstline a.post-meta-categories {
+    font-weight: 700;
+    font-size: 0.95rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 0.3rem 0.4rem;
+    margin-right: 1rem;
+}
+
+#post-info #post-meta .meta-firstline a.post-meta-categories:hover {
+    color: var(--anzhiyu-theme);
+}
+
+#post-info #post-meta .meta-firstline span.post-meta-categories {
+    margin-right: 1rem;
+}
+
+#post-info #post-meta .meta-firstline a.post-meta-tags {
+    opacity: 0.9;
+    margin-right: 1rem;
+}
+
+@media screen and (max-width: 900px) {
+    #page-header.post-bg {
+        height: 500px;
+    }
+
+    #page-header #post-info {
+        text-align: center;
+        bottom: 20%;
+    }
+
+    #page-header #post-info .post-title {
+        font-size: 2.5rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #post-info #post-meta .post-meta-label {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #page-header #post-info {
+        bottom: 20%;
+    }
+}
+
+#page-header #post-info #post-meta {
+    font-size: 14px ;
+    color:var(--anzhiyu-black);
+}
+
+#post > #post-info {
+    position: absolute;
+    top: 4rem;
+    left: 10%;
+    width: 80%;
+    text-align: center;
+}
+
+#post-info .post-title {
+    color: var(--anzhiyu-black);
+    font-weight: 700;
+    font-size: 2.3rem;
+    line-height: 1.2;
+    text-align: left;
+    -webkit-line-clamp: 2;
+    padding: 0px;
+    overflow: hidden;
+    margin: 1rem 0px !important;
+}
+
+a.post-meta-original {
+    padding: 0px 0.5rem;
+    font-size: 0.7rem;
+    margin: auto;
+    border-radius: 8px;
+    font-weight: bold;
+    line-height: 32px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background: var(--anzhiyu-white-op) !important;
+    color: var(--anzhiyu-white) !important;
+}
+
+a.post-meta-categories {
+    color: var(--anzhiyu-white) !important;
+}
+
+.post-meta__tags {
+    opacity: 0.4;
+    margin-right: 1rem;
+    color: var(--anzhiyu-white) !important;
+}
+
+@media screen and (min-width: 1300px) {
+    #page-header.post-bg {
+        height: 35rem;
+    }
+}
+
+#page-cover::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    box-shadow: 110px -130px 300px 60px var(--anzhiyu-main) inset;
+}
+
+#page-header {
+    display: flex;
+    justify-content: center;
+    background-image: none !important;
+}
+
+
