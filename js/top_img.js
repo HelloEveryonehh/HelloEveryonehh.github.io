@@ -1,129 +1,150 @@
-var Jay = {
-        // 更改主题色
-    changeThemeColor: function(color) {
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-            document
-                .querySelector('meta[name="theme-color"]')
-                .setAttribute("content", color);
-        }
-    },
-    
-    is_Post: function() {
-        var url = window.location.href; //获取url
-        if (url.indexOf("/posts/") >= 0) {
-            //判断url地址中是否包含code字符串
-            return true;
-        } else {
-            return false;
-        }
-    },
-    // 自适应主题色
-    initThemeColor: function() {
-        if (Jay.is_Post()) {
-            const currentTop = window.scrollY || document.documentElement.scrollTop;
-            if (currentTop === 0) {
-                let themeColor = getComputedStyle(
-                    document.documentElement
-                ).getPropertyValue("--anzhiyu-main");
-                Jay.changeThemeColor(themeColor);
-            } else {
-                let themeColor = getComputedStyle(
-                    document.documentElement
-                ).getPropertyValue("--anzhiyu-background");
-                Jay.changeThemeColor(themeColor);
-            }
-        } else {
-            let themeColor = getComputedStyle(
-                document.documentElement
-            ).getPropertyValue("--anzhiyu-background");
-              Jay.changeThemeColor(themeColor);
-        }
-    },
+function checkOpen() {}
+checkOpen.toString = function () {
+  this.opened = true;
 };
 
+//封面纯色
 function coverColor() {
-    let e = document.getElementById("post-cover-img")?.src;
-    void 0 !== e ? RGBaster.colors(e, {
-        paletteSize: 30,
-        exclude: ["rgb(255,255,255)", "rgb(0,0,0)", "rgb(254,254,254)"],
-        success: function(e) {
-            if ("rgb(66,90,239)" !== e.dominant) {
-                const t = e.dominant.match(/\d+/g);
-                let o = colorHex(`rgb(${t[0]},${t[1]},${t[2]})`);
-                "light" === getContrastYIQ(colorHex(o)) && (o = LightenDarkenColor(colorHex(o), -40)),
-                document.styleSheets[0].addRule(":root", "--anzhiyu-main:" + o + "!important"),
-                document.styleSheets[0].addRule(":root", "--anzhiyu-main-op:" + o + "23!important"),
-                document.styleSheets[0].addRule(":root", "--anzhiyu-main-op-deep:" + o + "dd!important"),
-                document.styleSheets[0].addRule(":root", "--anzhiyu-main-none:" + o + "00!important"),
-                Jay.initThemeColor(),
-                document.getElementById("coverdiv").classList.add("loaded")
-            }
+  var path = document.getElementById("post-cover")?.src;
+  // console.log(path);
+  if (path !== undefined) {
+    var httpRequest = new XMLHttpRequest(); //第一步：建立所需的对象
+    httpRequest.open('GET', path + '?imageAve', true); //第二步：打开连接  将请求参数写在url中  ps:"./Ptest.php?name=test&nameone=testone"
+    httpRequest.send(); //第三步：发送请求  将请求参数写在URL中
+    /**
+     * 获取数据后的处理程序
+     */
+    httpRequest.onreadystatechange = function () {
+      if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+        var json = httpRequest.responseText; //获取到json字符串，还需解析
+        var obj = eval('(' + json + ')');
+        var value = obj.RGB;
+        value = "#" + value.slice(2)
+        // console.log(value);
+        //   document.getElementById('page-header').style.backgroundColor=value;
+        // document.styleSheets[0].addRule('#page-header:before','background: '+ value +'!important');
+
+        if (getContrastYIQ(value) == "light") {
+          value = LightenDarkenColor(colorHex(value), -40)
         }
-    }) : (document.styleSheets[0].addRule(":root", "--anzhiyu-main: var(--anzhiyu-theme)!important"),
-    document.styleSheets[0].addRule(":root", "--anzhiyu-main-op: var(--anzhiyu-theme-op)!important"),
-    document.styleSheets[0].addRule(":root", "--anzhiyu-main-op-deep:var(--anzhiyu-theme-op-deep)!important"),
-    document.styleSheets[0].addRule(":root", "--anzhiyu-main-none: var(--anzhiyu-theme-none)!important"),
-    Jay.initThemeColor())
+
+        document.styleSheets[0].addRule(':root', '--heo-main:' + value + '!important');
+        document.styleSheets[0].addRule(':root', '--heo-main-op:' + value + '23!important');
+        document.styleSheets[0].addRule(':root', '--heo-main-op-deep:' + value + 'dd!important');
+        document.styleSheets[0].addRule(':root', '--heo-main-none:' + value + '00!important');
+        heo.initThemeColor()
+        document.getElementById("coverdiv").classList.add("loaded");
+      }
+    };
+  } else {
+    // document.styleSheets[0].addRule('#page-header:before','background: none!important');
+    document.styleSheets[0].addRule(':root', '--heo-main: var(--heo-theme)!important');
+    document.styleSheets[0].addRule(':root', '--heo-main-op: var(--heo-theme-op)!important');
+    document.styleSheets[0].addRule(':root', '--heo-main-op-deep:var(--heo-theme-op-deep)!important');
+    document.styleSheets[0].addRule(':root', '--heo-main-none: var(--heo-theme-none)!important');
+    heo.initThemeColor()
+  }
 }
-function colorHex(e) {
-    let t = e;
-    if (/^(rgb|RGB)/.test(t)) {
-        let e = t.replace(/(?:\(|\)|rgb|RGB)*/g, "").split(",")
-          , o = "#";
-        for (let t = 0; t < e.length; t++) {
-            let n = Number(e[t]).toString(16);
-            "0" === n && (n += n),
-            o += n
-        }
-        return 7 !== o.length && (o = t),
-        o
+
+//RGB颜色转化为16进制颜色
+function colorHex(str) {
+  var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+  var that = str;
+  if (/^(rgb|RGB)/.test(that)) {
+    var aColor = that.replace(/(?:\(|\)|rgb|RGB)*/g, "").split(",");
+    var strHex = "#";
+    for (var i = 0; i < aColor.length; i++) {
+      var hex = Number(aColor[i]).toString(16);
+      if (hex === "0") {
+        hex += hex;
+      }
+      strHex += hex;
     }
-    if (!/^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/.test(t))
-        return t;
-    {
-        let e = t.replace(/#/, "").split("");
-        if (6 === e.length)
-            return t;
-        if (3 === e.length) {
-            let t = "#";
-            for (let o = 0; o < e.length; o += 1)
-                t += e[o] + e[o];
-            return t
-        }
+    if (strHex.length !== 7) {
+      strHex = that;
     }
-}
-function colorRgb(e) {
-    let t = e.toLowerCase();
-    if (t && /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/.test(t)) {
-        if (4 === t.length) {
-            let e = "#";
-            for (let o = 1; o < 4; o += 1)
-                e += t.slice(o, o + 1).concat(t.slice(o, o + 1));
-            t = e
-        }
-        let e = [];
-        for (let o = 1; o < 7; o += 2)
-            e.push(parseInt("0x" + t.slice(o, o + 2)));
-        return "rgb(" + e.join(",") + ")"
+    return strHex;
+  } else if (reg.test(that)) {
+    var aNum = that.replace(/#/, "").split("");
+    if (aNum.length === 6) {
+      return that;
+    } else if (aNum.length === 3) {
+      var numHex = "#";
+      for (var i = 0; i < aNum.length; i += 1) {
+        numHex += (aNum[i] + aNum[i]);
+      }
+      return numHex;
     }
-    return t
+  } else {
+    return that;
+  }
 }
-function LightenDarkenColor(e, t) {
-    let o = !1;
-    "#" === e[0] && (e = e.slice(1),
-    o = !0);
-    let n = parseInt(e, 16)
-      , a = (n >> 16) + t;
-    a > 255 ? a = 255 : a < 0 && (a = 0);
-    let i = (n >> 8 & 255) + t;
-    i > 255 ? i = 255 : i < 0 && (i = 0);
-    let r = (255 & n) + t;
-    return r > 255 ? r = 255 : r < 0 && (r = 0),
-    (o ? "#" : "") + String("000000" + (r | i << 8 | a << 16).toString(16)).slice(-6)
+
+//16进制颜色转化为RGB颜色
+function colorRgb(str) {
+  var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+  var sColor = str.toLowerCase();
+  if (sColor && reg.test(sColor)) {
+    if (sColor.length === 4) {
+      var sColorNew = "#";
+      for (var i = 1; i < 4; i += 1) {
+        sColorNew += sColor.slice(i, i + 1).concat(sColor.slice(i, i + 1));
+      }
+      sColor = sColorNew;
+    }
+    //处理六位的颜色值
+    var sColorChange = [];
+    for (var i = 1; i < 7; i += 2) {
+      sColorChange.push(parseInt("0x" + sColor.slice(i, i + 2)));
+    }
+    return "rgb(" + sColorChange.join(",") + ")";
+  } else {
+    return sColor;
+  }
 }
-function getContrastYIQ(e) {
-    let t, o = colorRgb(e).match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-    return t = 299 * o[1] + 587 * o[2] + 114 * o[3],
-    t /= 255e3,
-    t >= .5 ? "light" : "dark"
+
+//变暗变亮主方法
+function LightenDarkenColor(col, amt) {
+  var usePound = false;
+
+  if (col[0] == "#") {
+    col = col.slice(1);
+    usePound = true;
+  }
+
+  var num = parseInt(col, 16);
+
+  var r = (num >> 16) + amt;
+
+  if (r > 255) r = 255;
+  else if (r < 0) r = 0;
+
+  var b = ((num >> 8) & 0x00FF) + amt;
+
+  if (b > 255) b = 255;
+  else if (b < 0) b = 0;
+
+  var g = (num & 0x0000FF) + amt;
+
+  if (g > 255) g = 255;
+  else if (g < 0) g = 0;
+
+
+  return (usePound ? "#" : "") + String("000000" + (g | (b << 8) | (r << 16)).toString(16)).slice(-6);
+}
+//判断是否为亮色
+function getContrastYIQ(hexcolor) {
+  var colorrgb = colorRgb(hexcolor);
+  var colors = colorrgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+  var red = colors[1];
+  var green = colors[2];
+  var blue = colors[3];
+  var brightness;
+  brightness = (red * 299) + (green * 587) + (blue * 114);
+  brightness = brightness / 255000;
+  if (brightness >= 0.5) {
+    return "light";
+  } else {
+    return "dark";
+  }
 }

@@ -1,1 +1,1 @@
-var posts=["2023/02/13/hello-world/","2023/01/26/对象指针和对象数组/","2022/12/27/我的第一篇文章/","2022/12/27/数据结构实验课设/","2023/01/24/类与对象作业1/","2023/01/24/类的封装/","2023/01/27/类的有元与类的继承/","2023/01/25/类的静态成员/","2023/01/29/虚函数与多态/"];function toRandomPost(){pjax.loadUrl('/'+posts[Math.floor(Math.random() * posts.length)]);};
+var posts=["posts/16107/","posts/59648/","posts/62824/","posts/49164/","posts/37501/","posts/41655/","posts/38447/","posts/9231/","posts/541/"];function toRandomPost(){pjax.loadUrl('/'+posts[Math.floor(Math.random() * posts.length)]);};
