@@ -148,3 +148,9 @@ function getContrastYIQ(hexcolor) {
     return "dark";
   }
 }
+
+document.addEventListener("pjax:complete", (function() {
+        coverColor()
+        heo.initThemeColor()
+    }
+));

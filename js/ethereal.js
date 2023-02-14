@@ -1,4 +1,15 @@
 var heo = {
+  
+    //是否在首页
+  is_Post: function() {
+    var url=window.location.href;  //获取url
+  if(url.indexOf("/p/") >= 0 ) { //判断url地址中是否包含code字符串
+      return true;
+    }else {
+      return false;
+     }
+  },
+
   //更改主题色
   changeThemeColor: function(color) {
     if (document.querySelector('meta[name="theme-color"]') !== null) {
