@@ -1,9 +1,30 @@
-function checkOpen() {}
-checkOpen.toString = function () {
-  this.opened = true;
-};
+var heo = {
+    //是否在首页
+    is_Post: function() {
+        return window.location.href.indexOf("/posts/") >= 0
+    },
 
-//封面纯色
+  //更改主题色
+  changeThemeColor: function(e) {
+        null !== document.querySelector('meta[name="theme-color"]') && document.querySelector('meta[name="theme-color"]').setAttribute("content", e)
+    },
+    initThemeColor: function() {
+        if (heo.is_Post()) {
+            if (0 === (window.scrollY || document.documentElement.scrollTop)) {
+                let e = getComputedStyle(document.documentElement).getPropertyValue("--heo-main");
+                heo.changeThemeColor(e)
+            } else {
+                let e = getComputedStyle(document.documentElement).getPropertyValue("--heo-background");
+                heo.changeThemeColor(e)
+            }
+        } else {
+            let e = getComputedStyle(document.documentElement).getPropertyValue("--heo-background");
+            heo.changeThemeColor(e)
+        }
+    }
+}
+
+function checkOpen() {}
 function coverColor() {
     var e = document.getElementById("post-cover")?.src;
     void 0 !== e ? RGBaster.colors(e, {
@@ -28,114 +49,65 @@ function coverColor() {
         document.styleSheets[0].addRule(":root", "--heo-main-none: var(--heo-theme-none)!important"),
         heo.initThemeColor())
 }
-
-
-
-//RGB颜色转化为16进制颜色
-function colorHex(str) {
-  var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
-  var that = str;
-  if (/^(rgb|RGB)/.test(that)) {
-    var aColor = that.replace(/(?:\(|\)|rgb|RGB)*/g, "").split(",");
-    var strHex = "#";
-    for (var i = 0; i < aColor.length; i++) {
-      var hex = Number(aColor[i]).toString(16);
-      if (hex === "0") {
-        hex += hex;
-      }
-      strHex += hex;
+function colorHex(e) {
+    var t = e;
+    if (/^(rgb|RGB)/.test(t)) {
+        for (var o = t.replace(/(?:\(|\)|rgb|RGB)*/g, "").split(","), n = "#", a = 0; a < o.length; a++) {
+            var r = Number(o[a]).toString(16);
+            "0" === r && (r += r),
+                n += r
+        }
+        return 7 !== n.length && (n = t),
+            n
     }
-    if (strHex.length !== 7) {
-      strHex = that;
+    if (!/^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/.test(t))
+        return t;
+    var i = t.replace(/#/, "").split("");
+    if (6 === i.length)
+        return t;
+    if (3 === i.length) {
+        var l = "#";
+        for (a = 0; a < i.length; a += 1)
+            l += i[a] + i[a];
+        return l
     }
-    return strHex;
-  } else if (reg.test(that)) {
-    var aNum = that.replace(/#/, "").split("");
-    if (aNum.length === 6) {
-      return that;
-    } else if (aNum.length === 3) {
-      var numHex = "#";
-      for (var i = 0; i < aNum.length; i += 1) {
-        numHex += (aNum[i] + aNum[i]);
-      }
-      return numHex;
-    }
-  } else {
-    return that;
-  }
 }
-
-//16进制颜色转化为RGB颜色
-function colorRgb(str) {
-  var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
-  var sColor = str.toLowerCase();
-  if (sColor && reg.test(sColor)) {
-    if (sColor.length === 4) {
-      var sColorNew = "#";
-      for (var i = 1; i < 4; i += 1) {
-        sColorNew += sColor.slice(i, i + 1).concat(sColor.slice(i, i + 1));
-      }
-      sColor = sColorNew;
+function colorRgb(e) {
+    var t = e.toLowerCase();
+    if (t && /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/.test(t)) {
+        if (4 === t.length) {
+            for (var o = "#", n = 1; n < 4; n += 1)
+                o += t.slice(n, n + 1).concat(t.slice(n, n + 1));
+            t = o
+        }
+        var a = [];
+        for (n = 1; n < 7; n += 2)
+            a.push(parseInt("0x" + t.slice(n, n + 2)));
+        return "rgb(" + a.join(",") + ")"
     }
-    //处理六位的颜色值
-    var sColorChange = [];
-    for (var i = 1; i < 7; i += 2) {
-      sColorChange.push(parseInt("0x" + sColor.slice(i, i + 2)));
-    }
-    return "rgb(" + sColorChange.join(",") + ")";
-  } else {
-    return sColor;
-  }
+    return t
 }
-
-//变暗变亮主方法
-function LightenDarkenColor(col, amt) {
-  var usePound = false;
-
-  if (col[0] == "#") {
-    col = col.slice(1);
-    usePound = true;
-  }
-
-  var num = parseInt(col, 16);
-
-  var r = (num >> 16) + amt;
-
-  if (r > 255) r = 255;
-  else if (r < 0) r = 0;
-
-  var b = ((num >> 8) & 0x00FF) + amt;
-
-  if (b > 255) b = 255;
-  else if (b < 0) b = 0;
-
-  var g = (num & 0x0000FF) + amt;
-
-  if (g > 255) g = 255;
-  else if (g < 0) g = 0;
-
-
-  return (usePound ? "#" : "") + String("000000" + (g | (b << 8) | (r << 16)).toString(16)).slice(-6);
+function LightenDarkenColor(e, t) {
+    var o = !1;
+    "#" == e[0] && (e = e.slice(1),
+        o = !0);
+    var n = parseInt(e, 16)
+        , a = (n >> 16) + t;
+    a > 255 ? a = 255 : a < 0 && (a = 0);
+    var r = (n >> 8 & 255) + t;
+    r > 255 ? r = 255 : r < 0 && (r = 0);
+    var i = (255 & n) + t;
+    return i > 255 ? i = 255 : i < 0 && (i = 0),
+    (o ? "#" : "") + String("000000" + (i | r << 8 | a << 16).toString(16)).slice(-6)
 }
-//判断是否为亮色
-function getContrastYIQ(hexcolor) {
-  var colorrgb = colorRgb(hexcolor);
-  var colors = colorrgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-  var red = colors[1];
-  var green = colors[2];
-  var blue = colors[3];
-  var brightness;
-  brightness = (red * 299) + (green * 587) + (blue * 114);
-  brightness = brightness / 255000;
-  if (brightness >= 0.5) {
-    return "light";
-  } else {
-    return "dark";
-  }
+function getContrastYIQ(e) {
+    var t, o = colorRgb(e).match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+    return t = 299 * o[1] + 587 * o[2] + 114 * o[3],
+        (t /= 255e3) >= .5 ? "light" : "dark"
 }
 
 document.addEventListener("pjax:complete", (function() {
-        coverColor(),
+        coverColor()
         heo.initThemeColor()
     }
 ));
