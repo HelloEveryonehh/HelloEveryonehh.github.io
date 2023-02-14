@@ -5,46 +5,31 @@ checkOpen.toString = function () {
 
 //封面纯色
 function coverColor() {
-  var path = document.getElementById("post-cover")?.src;
-  // console.log(path);
-  if (path !== undefined) {
-    var httpRequest = new XMLHttpRequest(); //第一步：建立所需的对象
-    httpRequest.open('GET', path + '?imageAve', true); //第二步：打开连接  将请求参数写在url中  ps:"./Ptest.php?name=test&nameone=testone"
-    httpRequest.send(); //第三步：发送请求  将请求参数写在URL中
-    /**
-     * 获取数据后的处理程序
-     */
-    httpRequest.onreadystatechange = function () {
-      if (httpRequest.readyState == 4 && httpRequest.status == 200) {
-        var json = httpRequest.responseText; //获取到json字符串，还需解析
-        var obj = eval('(' + json + ')');
-        var value = obj.RGB;
-        value = "#" + value.slice(2)
-        // console.log(value);
-        //   document.getElementById('page-header').style.backgroundColor=value;
-        // document.styleSheets[0].addRule('#page-header:before','background: '+ value +'!important');
-
-        if (getContrastYIQ(value) == "light") {
-          value = LightenDarkenColor(colorHex(value), -40)
+    var e = document.getElementById("post-cover")?.src;
+    void 0 !== e ? RGBaster.colors(e, {
+        paletteSize: 30,
+        exclude: ["rgb(255,255,255)", "rgb(0,0,0)", "rgb(254,254,254)"],
+        success: function(e) {
+            if ("rgb(66,90,239)" != e.dominant) {
+                const o = e.dominant.match(/\d+/g);
+                var t = `rgb(${o[0]},${o[1]},${o[2]})`;
+                "light" == getContrastYIQ(colorHex(t)) && (t = LightenDarkenColor(colorHex(t), -40)),
+                    document.styleSheets[0].addRule(":root", "--heo-main:" + t + "!important"),
+                    document.styleSheets[0].addRule(":root", "--heo-main-op:" + t + "23!important"),
+                    document.styleSheets[0].addRule(":root", "--heo-main-op-deep:" + t + "dd!important"),
+                    document.styleSheets[0].addRule(":root", "--heo-main-none:" + t + "00!important"),
+                    heo.initThemeColor(),
+                    document.getElementById("coverdiv").classList.add("loaded")
+            }
         }
-
-        document.styleSheets[0].addRule(':root', '--heo-main:' + value + '!important');
-        document.styleSheets[0].addRule(':root', '--heo-main-op:' + value + '23!important');
-        document.styleSheets[0].addRule(':root', '--heo-main-op-deep:' + value + 'dd!important');
-        document.styleSheets[0].addRule(':root', '--heo-main-none:' + value + '00!important');
-        heo.initThemeColor()
-        document.getElementById("coverdiv").classList.add("loaded");
-      }
-    };
-  } else {
-    // document.styleSheets[0].addRule('#page-header:before','background: none!important');
-    document.styleSheets[0].addRule(':root', '--heo-main: var(--heo-theme)!important');
-    document.styleSheets[0].addRule(':root', '--heo-main-op: var(--heo-theme-op)!important');
-    document.styleSheets[0].addRule(':root', '--heo-main-op-deep:var(--heo-theme-op-deep)!important');
-    document.styleSheets[0].addRule(':root', '--heo-main-none: var(--heo-theme-none)!important');
-    heo.initThemeColor()
-  }
+    }) : (document.styleSheets[0].addRule(":root", "--heo-main: var(--heo-theme)!important"),
+        document.styleSheets[0].addRule(":root", "--heo-main-op: var(--heo-theme-op)!important"),
+        document.styleSheets[0].addRule(":root", "--heo-main-op-deep:var(--heo-theme-op-deep)!important"),
+        document.styleSheets[0].addRule(":root", "--heo-main-none: var(--heo-theme-none)!important"),
+        heo.initThemeColor())
 }
+
+
 
 //RGB颜色转化为16进制颜色
 function colorHex(str) {
@@ -150,7 +135,7 @@ function getContrastYIQ(hexcolor) {
 }
 
 document.addEventListener("pjax:complete", (function() {
-        coverColor()
+        coverColor(),
         heo.initThemeColor()
     }
 ));
