@@ -111,3 +111,6 @@ document.addEventListener("pjax:complete", (function() {
         heo.initThemeColor()
     }
 ));
+window.onload = function(){
+    coverColor();
+}

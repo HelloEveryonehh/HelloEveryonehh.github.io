@@ -1,5 +1,4 @@
 var heo = {
-  
     //是否在首页
   is_Post: function() {
     var url=window.location.href;  //获取url
