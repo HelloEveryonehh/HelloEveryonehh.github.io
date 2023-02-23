@@ -1440,6 +1440,9 @@ a.post-meta-original:hover {
   -webkit-line-clamp: 2;
   padding: 0;
   overflow: hidden;
+}
+
+@media screen adn screen and (max-width: 1400px){
   font-size: 3.6rem!important;
   font-family: PingFangSC!important;
 }
@@ -1551,7 +1554,10 @@ a.post-meta-original:hover {
   overflow: hidden;
 }
 
-
+@media screen and (max-width: 900px)
+#rightside #mobile-toc-button {
+    display: none;
+}
 
 
 
