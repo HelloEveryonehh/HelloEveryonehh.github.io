@@ -1685,10 +1685,73 @@ img.footer_mini_logo:hover {
     transform-style: preserve-3d;
 }
 
+#footer-banner {
+    padding: 1rem;
+    color: var(--heo-fontcolor);
+    margin-top: 1rem;
+    background: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
+    display: flex;
+    overflow: hidden;
+    z-index: 1002;
+    transition: .3s;
+    /*border-top: var(--style-border)*/
+    font-size: 18px;
+    font-family: PingFangSC;
+    font-weight: 700;
+}
+
+[data-theme=dark] #footer-banner {
+    background: var(--heo-secondbg)
+}
+
+#footer-banner .footer-banner-links {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#footer-banner .footer-banner-left {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 32px
+}
+
+#footer-banner .footer-banner-link {
+    margin-right: 1rem;
+    color: var(--heo-fontcolor);
+    font-size: 1rem;
+    font-weight: 700;
+    white-space: nowrap
+}
+
+#footer-banner .footer-banner-link.cc {
+    margin-right: 0
+}
+
+#footer-banner .footer-banner-link.cc i {
+    margin-right: .5rem
+}
+
+#footer-banner .footer-banner-link:hover {
+    color: var(--heo-theme)
+}
+
+#footer-banner > div > div.footer-banner-left > span {
+    margin-right: 1rem
+}
+
+#footer-banner .footer-banner-right a:hover {
+    color: var(--heo-lighttext)
+}
 
 
-
-
+.footer-banner-right {
+    margin-right: -3rem;
+}
 
 
 
