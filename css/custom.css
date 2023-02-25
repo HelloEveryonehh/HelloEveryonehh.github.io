@@ -627,9 +627,6 @@ a.article-title {
 }
 
 
-#category-bar{
-  background:linear-gradient(90deg, var(--global-bg) 0%, rgb(200, 241, 255) 100%)!important;
-}
 [data-theme="dark"] #category-bar{
     background: #1d1b26 !important;
 }
@@ -745,7 +742,7 @@ svg.icon {
 }
 /* 主页文章栏变大 */
 .layout{
-  max-width: 1500px !important;
+  max-width: 1400px !important;
 }
 /* 侧边栏适配主页文章栏变大 */
 .aside-content{
@@ -1591,11 +1588,102 @@ a.post-meta-original:hover {
 #sidebar #sidebar-menus.open {
     border-radius: 12px 0 0 0;
 }
-.topGroup .top-group-list-item{
-  width:calc(100% / 2 - 5px)!important;
+
+#recent-posts>.recent-post-item {
+    position: relative;
+}
+
+/* 最新文章图标 */
+.newPost-left,
+.newPost-right {
+    position: absolute;
+    top: 0;
+    color: white;
+    padding: 0 15px;
+    background-color: #49b1f5;
+    border-radius: 0 0 10px 10px;
+}
+
+.newPost-left {
+    left: 15px;
+}
+
+.newPost-right {
+    right: 15px;
 }
 
 
+
+#footer-wrap {
+    color: var(--heo-fontcolor)
+}
+
+#footer-wrap a {
+    color: var(--heo-fontcolor);
+    height: 44px;
+    line-height: 36px
+}
+
+#footer-wrap a:hover {
+    color: var(--heo-hovertext);
+    background-color: var(--heo-none)
+}
+
+div#footer_deal {
+    justify-content: center;
+    display: flex;
+    padding-top: 2rem;
+    align-items: center
+}
+
+@media screen and (max-width: 768px) {
+    img.footer_mini_logo {
+        display: none
+    }
+
+    div#footer_deal {
+        flex-wrap: wrap;
+        flex-direction: row
+    }
+}
+#footer_deal i {
+    font-size: 1.6rem;
+    transition: .3s;
+    line-height: 1.3rem;
+    height: 1.3rem
+}
+
+a.deal_link {
+    display: flex;
+    margin: 1rem 27px;
+    color: var(--heo-card-bg);
+    border-radius: 3rem;
+    width: 32px;
+    height: 32px;
+    background: var(--heo-fontcolor);
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease 0s;
+}
+
+a.deal_link:hover {
+    color: var(--heo-white);
+    background: var(--heo-main);
+}
+
+img.footer_mini_logo {
+    width: 50px;
+    height: 50px;
+    margin: 0px 1rem;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0, 0, 0, 1.29) 0s;
+    filter: drop-shadow(0 0 12px rgba(150,255,246,.4))!important;
+}
+
+img.footer_mini_logo:hover {
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
 
 
 
