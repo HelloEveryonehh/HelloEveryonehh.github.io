@@ -1753,7 +1753,11 @@ img.footer_mini_logo:hover {
     margin-right: -3rem;
 }
 
-
+@media screen and (min-width: 768px){
+  .blog-slider__img {
+    width: 24rem;
+   }
+}
 
 
 
