@@ -1439,7 +1439,7 @@ a.post-meta-original:hover {
   overflow: hidden;
 }
 
-@media screen adn screen and (max-width: 1400px){
+@media screen and (max-width: 1400px){
   font-size: 3.6rem!important;
   font-family: PingFangSC!important;
 }
