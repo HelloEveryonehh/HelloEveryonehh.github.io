@@ -429,7 +429,8 @@ li.card-archive-list-item {
   display: flex;
   flex-direction: column;
   align-content: space-between;
-  border: var(--style-border);
+  border: var(--style-border);  
+  width:7rem;
 }
 #aside-content .card-archives ul.card-archive-list > .card-archive-list-item a span:first-child,
 #aside-content .card-categories ul.card-category-list > .card-category-list-item a span:first-child {
