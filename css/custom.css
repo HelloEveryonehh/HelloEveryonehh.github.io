@@ -1044,14 +1044,14 @@ h1.page-title + .tag-cloud-list {
 }
 
 .coverdiv {
-  width: 70%;
+  width: 120%;
   height: 100%;
   position: relative;
   margin: 0 -20% 0 auto;
   overflow: hidden;
   margin-bottom: 0;
-  transform: rotate(10deg) translateY(-10%) scale(2);
-  filter: blur(10px);
+  transform: rotate(10deg) translateY(-10%) scale(1);
+  filter: blur(5px);
 }
 
 .coverdiv.loaded {
