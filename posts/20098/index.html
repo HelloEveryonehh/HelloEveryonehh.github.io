@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据库第三章内容梳理 | Ethereal</title>
+<noscript>开启Javascript是必要的</noscript>
+<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+<link rel="apple-touch-icon" href="/img/favicon.ico">
+<meta name="apple-mobile-web-app-title" content="Ethereal">
+<link rel="bookmark" href="/img/favicon.ico">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/img/favicon.ico">
+<meta name="description" content="关系数据模型知识回顾数据模型的三大要素数据结构（静态）：对现实世界实体间的联系进行抽象：包括层次模型，网状模型，关系模型，面向对象模型数据操作（动态）:增加，删除，查找，修改数据约束：本文设计的完成性">
+<meta name="theme-color" content="#1C1C1F">
+<link rel="stylesheet" href="/css/var.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    
+
+<link rel="stylesheet" href="/lib/snackbar.min.css">
+
+
+<script src="/lib/qrcode.min.js"></script>
+
+
+    
+<script src="https://cdn.staticfile.org/twikoo/1.6.10/twikoo.all.min.js"></script>
+
+
+
+
+
+<script>var GLOBALCONFIG = {"root":"/","runtime":"2022-12-27 00:00:00","lazyload":{"enable":false,"error":"/img/acrylic.png"},"hightlight":{"enable":true,"limit":200},"lightbox":true,"randomlinks":false,"lang":{"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"recent":"最近","yesterday":"昨天","berforeyesterday":"前天","daybefore":"天前","runtime":"天"},"sayhello":{"morning":"早上好","noon":"中午好","afternoon":"下午好","night":"晚上好","goodnight":"晚安","iam":"!  我是"},"search":{"empty":"搜索结果为空","hit":"已为您找到 ${query} 条结果","placeholder":"输入关键词快速查找"}},"covercolor":true};</script><script id="site-config">var PAGECONFIG = {"is_home":false,"is_post":true,"is_page":false,"page":false,"toc":true,"comment":true};</script>
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body id="body">
+        
+        <div id="console" style="zoom: 1;" class="">
+    <div class="close-btn" onclick="acrylic.hideConsole()" href="javascript:void(0);">
+        <i class="fas fa-circle-xmark"></i>
+    </div>
+    <div class="button-group">
+        <div class="console-btn-item"> <a class="darkmode_switchbutton" onclick="acrylic.switchDarkMode()" title="显示模式切换"
+                href="javascript:void(0);" rel="external nofollow" data-pjax-state=""><i class="fas fa-moon"
+                    style="font-size: 1rem;"></i></a></div>
+        
+        <div class="console-btn-item" id="consoleFPS" onclick="acrylic.FPSToggle()" title="帧率显示开关"><a class="FPS-switch"
+                data-pjax-state=""><i class="fas fa-gauge"></i></a></div>
+    </div>
+    <div class="console-mask" onclick="acrylic.hideConsole()" href="javascript:void(0);" rel="external nofollow"></div>
+</div>
+        <div id="sidebar" style="zoom: 1;">
+    <div id="menu-mask" style="display: none;"></div>
+    <div id="sidebar-menus" class>
+        <span class="sidebar-menu-item-title">功能</span>
+        <div class="sidebar-menu-item">
+            <a class="darkmode_switchbutton menu-child" onclick="acrylic.switchDarkMode()" title="显示模式切换"
+                href="javascript:void(0);" rel="external nofollow">
+                <i class="fas fa-moon" style="font-size: 1rem;"></i>
+                <span>显示模式</span>
+            </a>
+        </div>
+        
+            <div class="back-menu-list-groups">
+    
+      
+      <div class="back-menu-list-group">
+        <div class="back-menu-list-title">
+          我的
+        </div>
+        <div class="back-menu-list">
+          
+            
+            <a class="back-menu-item" href="/" rel="external nofollow" title="博客">
+              <img class="back-menu-item-icon" src="/img/favicon.ico" loading="lazy">
+              <span class="back-menu-item-text">
+                博客
+              </span>
+            </a>
+          
+        </div>
+      </div>
+    
+  </div>
+  
+        
+        <div class="menus_items">
+    
+        <div class="menus_item">
+            
+                <a class="site-page" href="javascript:void(0);" rel="external nofollow">
+                    <span> 文库</span>
+                </a>
+                <ul class="menus_item_child">
+                    
+                        <li>
+                            <a class="site-page child" href="/archives/">
+                                <i class="fas fa-box-archive"></i>
+                                <span> 文章列表</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/categories/">
+                                <i class="fas fa-cube"></i>
+                                <span> 全部分类</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/tags/">
+                                <i class="fas fa-tags"></i>
+                                <span> 全部标签</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/talk" rel="external nofollow">
+                    <span> 即刻</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/list" rel="external nofollow">
+                    <span> 清单</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/links" rel="external nofollow">
+                    <span> 友人帐</span>
+                </a>
+             
+        </div>
+    
+</div>
+        <span class="sidebar-menu-item-title">标签</span>
+        <div class="card-widget card-tags card-archives card-webinfo card-allinfo">
+            <div class="item-headline">
+                <i class="fas fa-tags"></i>
+                <span>标签</span>
+            </div>
+            <div class="card-tag-cloud">
+                
+                    <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1em; color: #d3d3d3">算法
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%99%9A%E5%9F%BA%E7%B1%BB/" style="font-size: 1em; color: #d3d3d3">虚基类
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/CASPP/" style="font-size: 1em; color: #d3d3d3">CASPP
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1em; color: #d3d3d3">计算机组成原理
+                        <sup>3</sup>
+                    </a>
+                
+                    <a href="/tags/SRTP%E9%A1%B9%E7%9B%AE/" style="font-size: 1em; color: #d3d3d3">SRTP项目
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" style="font-size: 1em; color: #d3d3d3">C++基础学习
+                        <sup>4</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1em; color: #d3d3d3">数据结构
+                        <sup>3</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1em; color: #d3d3d3">操作系统
+                        <sup>2</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1em; color: #d3d3d3">数据库
+                        <sup>3</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B/" style="font-size: 1em; color: #d3d3d3">关系模型
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F/" style="font-size: 1em; color: #d3d3d3">完整性约束
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/SQL%E8%AF%AD%E8%A8%80/" style="font-size: 1em; color: #d3d3d3">SQL语言
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/" style="font-size: 1em; color: #d3d3d3">算法分析
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90%E5%AE%9E%E9%AA%8C/" style="font-size: 1em; color: #d3d3d3">算法设计与分析实验
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/C-%E4%BD%9C%E4%B8%9A/" style="font-size: 1em; color: #d3d3d3">C++作业
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86/" style="font-size: 1em; color: #d3d3d3">计算机存储原理
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%AD%97%E4%B8%8E%E5%AD%97%E8%8A%82/" style="font-size: 1em; color: #d3d3d3">字与字节
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%BB%A7%E6%89%BF%E4%B8%8E%E6%B4%BE%E7%94%9F/" style="font-size: 1em; color: #d3d3d3">继承与派生
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/" style="font-size: 1em; color: #d3d3d3">命名规则
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%BB%A7%E6%89%BF%E7%9A%84%E6%80%9D%E6%83%B3/" style="font-size: 1em; color: #d3d3d3">继承的思想
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" style="font-size: 1em; color: #d3d3d3">C++ 基础学习
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%AD%A6%E4%B9%A0/" style="font-size: 1em; color: #d3d3d3">面向对象学习
+                        <sup>2</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%B8%B8%E6%88%90%E5%91%98/" style="font-size: 1em; color: #d3d3d3">常成员
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E9%9D%99%E6%80%81%E6%88%90%E5%91%98/" style="font-size: 1em; color: #d3d3d3">静态成员
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%AF%B9%E8%B1%A1%E6%88%90%E5%91%98/" style="font-size: 1em; color: #d3d3d3">对象成员
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%8F%8B%E5%85%83/" style="font-size: 1em; color: #d3d3d3">友元
+                        <sup>1</sup>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</div>    
+        
+            <div class="post" id="body-wrap">
+                <header class="post-bg" id="page-header">
+    <nav id="nav" class="show">
+    <div id="nav-group">
+        <div id="blog_name">
+            
+                <div class="back-home-button" tabindex="-1">
+                    <i class="back-home-button-icon fas fa-grip-vertical"></i>
+                    <div class="back-menu-list-groups">
+    
+      
+      <div class="back-menu-list-group">
+        <div class="back-menu-list-title">
+          我的
+        </div>
+        <div class="back-menu-list">
+          
+            
+            <a class="back-menu-item" href="/" rel="external nofollow" title="博客">
+              <img class="back-menu-item-icon" src="/img/favicon.ico" loading="lazy">
+              <span class="back-menu-item-text">
+                博客
+              </span>
+            </a>
+          
+        </div>
+      </div>
+    
+  </div>
+  
+                </div>
+            
+            <a id="site-name" href="/" title="返回博客主页">
+                    
+                        <span class="heoicon">Ethereal</span>
+                    
+            </a>
+        </div>
+        <div id="page-name-mask">
+            <div id="page-name">
+                <a id="page-name-text" onclick="acrylic.toTop()">数据库第三章内容梳理</a>
+            </div>
+        </div>
+        <div id="menus">
+            <div class="menus_items">
+    
+        <div class="menus_item">
+            
+                <a class="site-page" href="javascript:void(0);" rel="external nofollow">
+                    <span> 文库</span>
+                </a>
+                <ul class="menus_item_child">
+                    
+                        <li>
+                            <a class="site-page child" href="/archives/">
+                                <i class="fas fa-box-archive"></i>
+                                <span> 文章列表</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/categories/">
+                                <i class="fas fa-cube"></i>
+                                <span> 全部分类</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/tags/">
+                                <i class="fas fa-tags"></i>
+                                <span> 全部标签</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/talk" rel="external nofollow">
+                    <span> 即刻</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/list" rel="external nofollow">
+                    <span> 清单</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/links" rel="external nofollow">
+                    <span> 友人帐</span>
+                </a>
+             
+        </div>
+    
+</div>
+        </div>
+        <!-- <div id="nav-left">
+            <div id="fps-group">
+                <div id="fps">145</div><span class="fpsText">FPS</span>
+            </div>
+        </div> -->
+        <div id="nav-right">
+            
+    <div class="nav-button only-home" id="travellings_button">
+        <a class="site-page"  target="_blank" rel="noopener external nofollow" href="https://www.travellings.cn/go.html" title="开往-友链接力"  width="120">
+            <i class="fa-solid fa-train-subway" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+
+    <div class="nav-button" id="randomPost_button">
+        <a class="site-page" onclick="toRandomPost()"
+            title="随机前往一个文章">
+            <i class="fas fa-shuffle" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+
+
+    <div class="nav-button" id="nav-console">
+        <a class="console_switchbutton" onclick="acrylic.showConsole()"
+        title="显示中控台" href="javascript:void(0);" rel="external nofollow">
+        <i class="fas fa-bars-progress" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+<div class="nav-button" id="nav-totop" onclick="acrylic.toTop()">
+    <a class="totopbtn">
+        <i class="fas fa-arrow-up"></i>
+        <span id="percent">0</span>
+    </a>
+</div>
+<div id="toggle-menu">
+    <a class="site-page">
+        <i class="fas fa-bars fa-fw" style="font-size: 1rem;"></i>
+    </a>
+</div>
+        </div>
+    </div>
+</nav>
+    
+        <div class="coverdiv" id="coverdiv">
+    <img id="post-cover" class="nolazyload" src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/20230331162811.png" alt="cover">
+</div>
+<div id="post-info">
+    <div id="post-firstinfo">
+        <div class="meta-firstline">
+            <a class="post-meta-original" title="该文章为原创文章，注意版权协议">
+                原创
+            </a>
+            <span class="post-meta-categories">
+                
+            </span>
+            <div class="tag_share">
+                <div class="post-meta__tag-list">
+                    
+                        <a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                            <span class="tags-punctuation">#</span>
+                            <span class="tags-name">数据库</span>
+                        </a>
+                    
+                        <a class="post-meta__tags" href="/tags/%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B/">
+                            <span class="tags-punctuation">#</span>
+                            <span class="tags-name">关系模型</span>
+                        </a>
+                    
+                        <a class="post-meta__tags" href="/tags/%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F/">
+                            <span class="tags-punctuation">#</span>
+                            <span class="tags-name">完整性约束</span>
+                        </a>
+                    
+                        <a class="post-meta__tags" href="/tags/SQL%E8%AF%AD%E8%A8%80/">
+                            <span class="tags-punctuation">#</span>
+                            <span class="tags-name">SQL语言</span>
+                        </a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1 class="post-title">数据库第三章内容梳理</h1>
+    <div id="post-meta">
+        <div class="meta-secondline">
+            <span class="post-meta-date" title="发布于">
+                <i class="post-meta-icon fa-fw fas fa-calendar"></i>
+                <time datetime="2023-03-31T16:27:25+08:00"></time>
+            </span>
+            
+            
+            
+                
+                    <span class="post-meta-wordcount">
+                        <i class="fas fa-file-word fa-fw post-meta-icon" title="文章字数"></i>
+                        <span class="word-count">3.6k</span>
+                    </span>
+                
+                
+                    <span class="post-meta-time">
+                        <i class="fas fa-clock post-meta-icon" title="阅读耗时"></i>
+                        <span>13 min</span>
+                    </span>
+                
+            
+            
+                
+        </div>
+    </div>
+</div>
+<section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg"
+    xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+        <path id="gentle-wave"
+            d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path>
+    </defs>
+    <g class="parallax">
+        <use href="#gentle-wave" x="48" y="0"></use>
+        <use href="#gentle-wave" x="48" y="3"></use>
+        <use href="#gentle-wave" x="48" y="5"></use>
+        <use href="#gentle-wave" x="48" y="7"></use>
+    </g>
+</svg>
+</section>
+        
+</header>
+                <main class="layout" id="content-inner">
+    <div id="post">
+        <article class="post-content" id="article-container">
+            <h1 id="关系数据模型"><a href="#关系数据模型" class="headerlink" title="关系数据模型"></a>关系数据模型</h1><h2 id="知识回顾"><a href="#知识回顾" class="headerlink" title="知识回顾"></a>知识回顾</h2><p>数据模型的三大要素</p>
+<blockquote>
+<ol>
+<li>数据结构（静态）：对现实世界<code>实体</code>间的联系进行抽象：包括层次模型，网状模型，关系模型，面向对象模型</li>
+<li>数据操作（动态）:增加，删除，查找，修改</li>
+<li>数据约束：本文设计的完成性约束就在数据约束的范围内</li>
+</ol>
+</blockquote>
+<p>关系数据模型是由<strong>E.F.codd</strong>提出的</p>
+<h2 id="关系模型的数据结构"><a href="#关系模型的数据结构" class="headerlink" title="关系模型的数据结构"></a>关系模型的数据结构</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p><strong>关系</strong>:关系常常被称为<strong>二维表</strong>，用于描述数据本身，数据之间联系，俗称”表”</p>
+<p><strong>列</strong>：也称字段，属性，在二维表中，每一列都代表一个属性</p>
+<p><strong>域</strong>：域就是指列的取值范围，便于后面的参与约束中的域约束</p>
+<p><strong>关系模式</strong>：关系模式就是由关系名、各个列构成。表示为：</p>
+<blockquote>
+<p>R（A1, A2, …, An）,R为关系名, Ai 为关系R的属性。</p>
+</blockquote>
+<p>联想ER图，关系模式就是1.实体(属性1，属性2，属性3)或者是2.联系（属性1，属性2，属性3） </p>
+<p><strong>行</strong>：有时也称“元组”（Tuple）通常情况下称为：“记录”（Record）。表示为：t&#x3D;&lt;a1, a2, …, an&gt;，其中ai为对应属性Ai的值。</p>
+<p>这个就是指一个具体的实体的具体属性的值的一个记录，例如对于学生这个实体来说，对于具体的一个学生，他的记录为</p>
+<blockquote>
+<p>（Peter,2021114062,计算机01班）</p>
+</blockquote>
+<p><strong>关系实例</strong>：记录集或元组集，常简称关系；（记录集就是记录的集合），就是所有具体实体的具体属性的集合</p>
+<p>关系实例的表示：{&lt;a1, a2, …, an&gt;,&lt;b1,b2,…,bn&gt;}</p>
+<p>例如，假设一个学生表就两名学生，那关系实例为：</p>
+<blockquote>
+<p>{（Peter,2021114062,计算机02班）,(Marry,2021114059,计算机01班)}</p>
+</blockquote>
+<p><strong>候选键</strong>：候选键就是唯一识别关系实例元组的最小字段集。和ER图中的候选键一个意思</p>
+<p><strong>主键</strong>：一个唯一识别关系实例的最小字段集合。一个关系最多有一个主键。和ER图一样，就是从候选键中选一个当主键</p>
+<p><strong>关系模式</strong>:关系的描述，包括关系名，属性名，属性向域的映像，属性间的依赖。其中关系名和属性名属于<strong>关系的型</strong>，属性像域的映像就是属性的<strong>类型、长度</strong></p>
+<p><strong>关系模式的特性</strong>：</p>
+<blockquote>
+<ol>
+<li><p>关系是一个集合。集合的元素是<strong>元组</strong>，每个元组的属性数目应该是相同的</p>
+</li>
+<li><p>关系是一种规范化的二维表格，不是一般的二维表格。他的性质如下</p>
+</li>
+</ol>
+<blockquote>
+<p>1.<strong>关系中每一个属性值都是不可分解的；</strong></p>
+<p>2.<strong>关系中不允许出现重复元组；</strong></p>
+<p>3.<strong>关系是元组的集合，因此无行序；</strong></p>
+<p>4.<strong>关系的列是有序的。</strong></p>
+</blockquote>
+</blockquote>
+<h2 id="关系模型的完整性约束"><a href="#关系模型的完整性约束" class="headerlink" title="关系模型的完整性约束"></a>关系模型的完整性约束</h2><p>完整性约束包括三大类</p>
+<blockquote>
+<ol>
+<li>实体完整性<ol>
+<li>主键限制</li>
+<li>唯一限制</li>
+</ol>
+</li>
+<li>参照完整性 <ol>
+<li>外键限制</li>
+</ol>
+</li>
+<li>用户定义完整性<ol>
+<li>域约束</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<h3 id="实体完整性"><a href="#实体完整性" class="headerlink" title="实体完整性"></a>实体完整性</h3><p><strong>概念</strong> ：指关系数据库中所有的表哦都有主键，并且不允许存在无主键值或者主键值相同的记录</p>
+<p><strong>主键限制</strong>：</p>
+<p>​    1.概念：针对主键而言，保证了主键的完整性</p>
+<p>​    2.要求：主键必须唯一，且不能为空值</p>
+<p><strong>唯一限制</strong>：</p>
+<p>​    1.概念：针对候选键而言，保证候选键的完整性</p>
+<p>​    2.要求：值为1，允许有一个且仅有一个空值</p>
+<h3 id="参考完整性"><a href="#参考完整性" class="headerlink" title="参考完整性"></a>参考完整性</h3><p><strong>概念</strong>：称引用完整性。在关系模型中，实体与实体之间的<strong>联系</strong>是用<strong>关系</strong>表示的，这样就自然存在着关系与关系间的引用</p>
+<p><strong>外键</strong>：一张表的<strong>某个属性</strong>（字段）是另一张表的<code>候选键</code>&#x2F;<code>主键</code>，含有外键的表称为<code>从表</code>，外键在<code>主表</code>做主键</p>
+<p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230331195245744.png" alt="image-20230331195245744"></p>
+<p>表间数据完整性应该从两个方向来完成</p>
+<ol>
+<li>主表—-&gt;从表</li>
+<li>从表—-&gt;主表</li>
+</ol>
+<h4 id="主表—-gt-从表"><a href="#主表—-gt-从表" class="headerlink" title="主表—-&gt;从表"></a>主表—-&gt;从表</h4><p>对主表的主键进行操作：只列出会影响到从表的操作，剩余操作不会影响</p>
+<blockquote>
+<p>1.<strong>修改</strong>：可能会影响与该主键相关的从表的外键值。当相应的外键值存在时，有两个策略可用：</p>
+<ol>
+<li>改变对应从表的所有外键值，使之与主键一致</li>
+<li>不允许修改主表中的主键值</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>2.<strong>删除</strong>：可能会影响与该主键相关的从表的外键值，若相应的外键存在时，有两个策略可用</p>
+<ol>
+<li>不允许删除主表的主键值</li>
+<li>级联删除从表中相应外键值所在的行</li>
+</ol>
+</blockquote>
+<h4 id="从表—-gt-主表"><a href="#从表—-gt-主表" class="headerlink" title="从表—-&gt;主表"></a>从表—-&gt;主表</h4><blockquote>
+<p>1.<strong>插入</strong>：要求插入的外键值应该参照主表中的主键值</p>
+<p>2.<strong>修改</strong>：要求修改的外键值参照主表中主键值</p>
+</blockquote>
+<p>表间数据完整性的维护：</p>
+<blockquote>
+<ol>
+<li>外键约束</li>
+<li>触发器</li>
+<li>断言</li>
+</ol>
+</blockquote>
+<h3 id="用户定义的完整性"><a href="#用户定义的完整性" class="headerlink" title="用户定义的完整性"></a>用户定义的完整性</h3><p><strong>任何RDBMS</strong>都应该支持实体的完整性和参照的完整性，除此之外的其他数据库管理系统需要的特殊约束条件来满足用户定义的完整性</p>
+<blockquote>
+<p><strong>在用户定义完整性中最常见的是限定属性的取值范围，即对值域的约束</strong></p>
+</blockquote>
+<h2 id="SQL语言"><a href="#SQL语言" class="headerlink" title="SQL语言"></a>SQL语言</h2><p>不同的数据库管理商使用不同的SQL语言，本课程学习的是T-SQL语言</p>
+<blockquote>
+<p>T-SQL语言由<code>SQL语句</code>，<code>函数</code>，<code>存储过程</code>三部分组成</p>
+</blockquote>
+<p>下面来讲一下SQL语言中最基本的语法</p>
+<p>其实，在SQL语言管理软件（SSMS）中，对与数据库和数据表的建立都可以采用GUI交互的形式来建立，但是我们为了对SQL语言更加的了解，以及使用的一般性，仍采用代码的形式来建立</p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>需要注意的是</p>
+<ul>
+<li>在SQL语言中没有大小写的区分，对于关键字，既可以大写，也可以小写</li>
+<li>SQL语言的定义中，对于数据库，二维表，以及属性的定义都可以采用中文，但是SQL语言中的关键字必须采用英文</li>
+<li>SQL语言中每段话的末尾可以加分号，也可以不加分号</li>
+</ul>
+<h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><p>如果我想创建一个<code>homework</code>的数据库，那么应该</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> database homework</span><br></pre></td></tr></table></figure>
+
+<p>然后在左栏刷新以后</p>
+<p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230416162359887.png" alt="1"></p>
+<p>就可以看大这个数据库被建立完成</p>
+<h3 id="选中数据库"><a href="#选中数据库" class="headerlink" title="选中数据库"></a>选中数据库</h3><p>在ssms中，我们需要在刚刚创建的数据库中建立二维表，所以我们在这里选中我们刚刚建立的数据库</p>
+<p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230416162753399.png" alt="image-20230416162753399"></p>
+<h3 id="建立二维表"><a href="#建立二维表" class="headerlink" title="建立二维表"></a>建立二维表</h3><p>我们想在这个数据库中建立一个<code>moviecompany</code>的二维表，应当采用<code>CREATE TABLE</code>的方式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> moviecompany</span><br><span class="line">(</span><br><span class="line">   SName <span class="type">char</span>(<span class="number">10</span>) <span class="keyword">PRIMARY</span> KEY,<span class="comment">--公司名称 </span></span><br><span class="line">   Scountry <span class="type">char</span> (<span class="number">10</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span><span class="comment">--所在国家</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>在这个语句中有几点需要注意的地方</p>
+<ul>
+<li><p>moviecompany 代表的就是数据库的名字</p>
+</li>
+<li><p>SName 代表二维表的字段，也就是他的属性，这里可以采用中文</p>
+</li>
+<li><p><code>PEIMARY KEY</code>代表的是当前的属性是主键</p>
+</li>
+<li><p><code>NOT NULL</code> 代表的是该属性在插入的时候不能是空值</p>
+</li>
+<li><p>char 代表的就是该属性保存在二维表中的类型 其中的（10）代表最大的长度，如果输入的值小于10，SQL会在后面补空格，但是如果输入的字符大于10，多于10的部分会被截断，可能导致数据的丢失</p>
+</li>
+</ul>
+<h3 id="关键字总结"><a href="#关键字总结" class="headerlink" title="关键字总结"></a>关键字总结</h3><blockquote>
+<ul>
+<li><p>primary key:主键 如果是联合主键的形式就是:   <strong>PRIMARY KEY (CID,SID)</strong></p>
+</li>
+<li><p>Unique ：候选键</p>
+</li>
+<li><p>NOT NULL ：不能为空值</p>
+</li>
+<li><p>AS 导出属性：</p>
+</li>
+<li><p>Foreign key references 外键</p>
+<ul>
+<li>举例：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SAge <span class="keyword">as</span> datepart(yyyy,GetDate())<span class="operator">-</span>  </span><br><span class="line">    datepart(yyyy,<span class="keyword">convert</span>(DateTime,<span class="built_in">substring</span>(SIDC,<span class="number">7</span>,<span class="number">8</span>)))  )</span><br><span class="line">  </span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+<h3 id="数据类型总结"><a href="#数据类型总结" class="headerlink" title="数据类型总结"></a>数据类型总结</h3><blockquote>
+<ul>
+<li><p>整数数据类型：<code>BIGINT</code> ,<code>INT</code>,<code>SMALLINT</code>,<code>TINYINT</code> 所能表示的最大值依次减小</p>
+</li>
+<li><p>浮点数类型： <code>decimal</code>,<code>float</code>,<code>real</code>   所能最大代表的精度依次为：38,15,7</p>
+</li>
+<li><p>字符数据类型： <code>varchar</code>,<code>char</code>,<code>TXT</code></p>
+</li>
+</ul>
+<p> 其中varchar 和 char 的区别是:</p>
+<p> <strong>varchar是可变长度的字符串，不足时不会补空格，超过时会自动截断，长度0-255；</strong></p>
+<ul>
+<li>日期和时间数据类型</li>
+</ul>
+<blockquote>
+<ul>
+<li><strong>Datetime:</strong> <strong>用于存储日期和时间的结合体。格式：YYYY-MM-DD hh:mm:ss[.nnn]</strong></li>
+<li><strong>smalldatetime：格式：YYYY-MM-DD hh:mm:ss</strong> </li>
+<li><strong>date：格式YYYY-MM-DD</strong>  精度到天</li>
+<li><strong>time：格式：hh:mm:ss[.nnnnnnn]</strong> 表示一天内的时间</li>
+</ul>
+</blockquote>
+<p> 补充常用的日期处理函数</p>
+<p> <img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230416164803912.png" alt="image-20230416164803912"></p>
+<p> 举个例子:</p>
+<p> GetDate()返回当前的日期，精确到毫秒</p>
+<p> <img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230416164926321.png" alt="image-20230416164926321"></p>
+<p> 其中最常用的就是DatePart在求年龄的时候使用：</p>
+<p> 具体使用如下： </p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Age  <span class="keyword">as</span>  Datepart(yyyy,GetDate())<span class="operator">-</span> Datepart(yyyy,BirthDate))</span><br></pre></td></tr></table></figure>
+
+<p> 其中BirthDate的变量类型为Datetime</p>
+</blockquote>
+<h3 id="查询二维表"><a href="#查询二维表" class="headerlink" title="查询二维表"></a>查询二维表</h3><p>查询使用的是select语句，也十分简单</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> moviecompany</span><br></pre></td></tr></table></figure>
+
+<p>解析: <code>*</code>代表的是moviecompany中的所有元素，当我们查询部分元素使，这个地方要改变，这个我们之后再讲。</p>
+<p>​      from 代表的就是从那个二维表中查询，后面接着二维表的名字</p>
+<p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230416165736753.png" alt="image-20230416165736753"></p>
+<p>查询结果以这样一个二维表的形式展开</p>
+<h2 id="实体模型向关系模型的转换"><a href="#实体模型向关系模型的转换" class="headerlink" title="实体模型向关系模型的转换"></a>实体模型向关系模型的转换</h2><p>实体模型向关系模型的转换，实际上就是将ER图转换成带有约束的表的集合</p>
+<p>每一个实体要转换，联系也要转换成二维表</p>
+<p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230416172154212.png" alt="image-20230416172154212"></p>
+<h3 id="实体的转换规则"><a href="#实体的转换规则" class="headerlink" title="实体的转换规则"></a>实体的转换规则</h3><p>1.复合属性：就是把符合属性的每一条都转换成一种属性放在二维表中</p>
+<p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230416172412989.png" alt="image-20230416172412989"></p>
+<p>2.多值属性：把多值属性作为外键</p>
+<p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230416172458017.png" alt="image-20230416172458017"></p>
+<h3 id="联系的转换规则"><a href="#联系的转换规则" class="headerlink" title="联系的转换规则"></a>联系的转换规则</h3><blockquote>
+<ol>
+<li><p><strong>关系的属性：与该联系相连的各实体的标识符以及联系本身的属性</strong></p>
+</li>
+<li><p><strong>关系的主键：各实体标识符的组合</strong></p>
+</li>
+</ol>
+</blockquote>
+<h4 id="1-1"><a href="#1-1" class="headerlink" title="1:1"></a>1:1</h4><p>1:1 联系可以转化为一个独立的关系模式，也可以与任意一端的关系模式合并</p>
+<ol>
+<li><strong>转换为一个独立的关系模式</strong></li>
+</ol>
+<p><strong>关系的属性</strong>：与该联系相连的各实体的标识符以及联系本身的属性</p>
+<p><strong>关系的候选键</strong>：每个实体的标识符均是该关系的候选键</p>
+<ol start="2">
+<li><strong>与某一端对应的关系模式合并</strong></li>
+</ol>
+<p><strong>合并后关系的属性</strong>：加入对应关系的主键和联系本身的属性</p>
+<p><strong>合并后关系的主键</strong>：不变</p>
+<h4 id="1-n"><a href="#1-n" class="headerlink" title="1:n"></a>1:n</h4><blockquote>
+<p>一个1:n联系可以转换为一个独立的关系模式，也可以与n端对应的关系模式合并</p>
+</blockquote>
+<p>第一种：转换为独立的关系模式  特点：联系有属性的时候</p>
+<ol>
+<li><p>关系的属性：与联系相关的两端实体的标识符号和联系本身的属性</p>
+</li>
+<li><p>关系的主键：n端实体的主键 </p>
+<p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230416174513249.png" alt="image-20230416174513249"></p>
+<p>第二种：与n端的关系模式合并 特点：联系没有属性的时候</p>
+<ol>
+<li>关系的属性：在n端关系中加入1端关系的主键和联系本身的属性（其实大部分情况下计入1端的主键即可）</li>
+<li>关系的主键：不发生改变</li>
+</ol>
+</li>
+</ol>
+<h4 id="m-n的联系"><a href="#m-n的联系" class="headerlink" title="m:n的联系"></a>m:n的联系</h4><p>m:n的就是要把联系单独转换成一个独立的关系模式</p>
+<p>举个例子：</p>
+<p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230416173117923.png" alt="image-20230416173117923"></p>
+<p>在联系转化成关系模型的时候应当为 </p>
+<p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230416173435538.png" alt="image-20230416173435538"></p>
+<p>但是有的时候联系的属性s也是主键，有的时候就不是，这里只能具体情况具体分析了。</p>
+<h3 id="m-n-k多元联系的转换方法"><a href="#m-n-k多元联系的转换方法" class="headerlink" title="m:n:k多元联系的转换方法"></a>m:n:k多元联系的转换方法</h3><p>见图片</p>
+<p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230416192756966.png" alt="image-20230416192756966"></p>
+<h4 id="一元联系-–-自联系的转换方法"><a href="#一元联系-–-自联系的转换方法" class="headerlink" title="一元联系 – 自联系的转换方法"></a>一元联系 – 自联系的转换方法</h4><p>​	自联系可以和二元联系一样，分情况讨论，如果是m：n的自联系，那么联系要转换成一个关系模式，如果是1：n或者1：1可以不用转换</p>
+<p>下面举一个例子</p>
+<p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230416194133242.png" alt="image-20230416194133242"></p>
+<p>可以看出，在这个ER图种，学生是1：n的自联系，联系属性为管理，而先导是m:n的自联系，联系的属性为:先导</p>
+<p>在进行关系转换的时候</p>
+<p>学生可以为：学生(学号,姓名,性别,<strong>监管学号</strong>,<strong>专业编码</strong>)监管学号,专业编码为外键。此时管理不单独设置关系，而是以一个不同的属性名字来区分：即监管学号和专业编号</p>
+<p>而课程和先导课程是m:n的属性，所以可以采用一个表：先导(<strong>课程编码</strong>,<strong>先导课程编码</strong>)课程编码,先导课程编码为外键</p>
+<p>给出对应的SQL创建语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span>  <span class="keyword">TABLE</span> 学生</span><br><span class="line"> ( SNo <span class="type">Char</span>(<span class="number">10</span>) <span class="keyword">primary</span> key,</span><br><span class="line">   SName <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">   SGender <span class="type">char</span>(<span class="number">2</span>) <span class="keyword">check</span>(SGender <span class="keyword">in</span>(<span class="string">&#x27;男&#x27;</span>,<span class="string">&#x27;女&#x27;</span>)),</span><br><span class="line">   JSNo <span class="type">char</span>(<span class="number">10</span>) <span class="keyword">foreign</span> key <span class="keyword">references</span> 学生(SNo), <span class="comment">-- 这一句是监管学号的外键，可以看出联系</span></span><br><span class="line">   SMajor <span class="type">char</span>(<span class="number">8</span>) <span class="keyword">foreign</span> key <span class="keyword">references</span>  专业(MNo) </span><br><span class="line"> )</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span>  <span class="keyword">TABLE</span>  先导</span><br><span class="line">(   CNo <span class="type">char</span>(<span class="number">8</span>) <span class="keyword">foreign</span> key <span class="keyword">references</span> 课程(CNo),</span><br><span class="line">    PCNo <span class="type">char</span>(<span class="number">8</span>) <span class="keyword">foreign</span> key <span class="keyword">references</span> 课程(CNo),</span><br><span class="line">    <span class="keyword">Primary</span> key(CNo,PCNo)  <span class="comment">-- 课程编码和先导课程编码联合做主键</span></span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="关系代数"><a href="#关系代数" class="headerlink" title="关系代数"></a>关系代数</h2><p>关系代数和关系运算是数据库理论的基础之一，书中称他们为<code>查询语言</code></p>
+<h3 id="关系代数-1"><a href="#关系代数-1" class="headerlink" title="关系代数"></a>关系代数</h3><p><strong>基本的运算符：</strong></p>
+<blockquote>
+<ol>
+<li>SELECTION    (选择)</li>
+<li>PROJECTION   (投影)</li>
+<li>UNION        (并)</li>
+<li>INTERSECTION （交）</li>
+<li>DIFFERENCE   （差）</li>
+<li>CROSS-PRODUCT （笛卡尔积）</li>
+</ol>
+</blockquote>
+<h3 id="选择"><a href="#选择" class="headerlink" title="选择"></a>选择</h3><p>从关系实例中选出满足条件的行，对关系做横向的剪切</p>
+<p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230419101748994.png" alt="image-20230419101748994"></p>
+<p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230419102056586.png" alt="image-20230419102056586"></p>
+<p>举个例子:</p>
+<p><img src="C:%5CUsers%5CLIUZIANG%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20230419102134325.png" alt="image-20230419102134325"></p>
+<p>给出SQL代码</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Select</span> <span class="operator">*</span> <span class="keyword">from</span> S <span class="keyword">where</span> grade<span class="operator">&gt;=</span><span class="number">3</span></span><br><span class="line"><span class="keyword">Select</span><span class="operator">*</span> <span class="keyword">from</span> S <span class="keyword">where</span> age<span class="operator">&lt;</span><span class="number">20</span></span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是:* 代表的是所有元素，从所有元素中找出grade&gt;&#x3D;3的元素，关键字 <code>where</code></p>
+<h3 id="投影"><a href="#投影" class="headerlink" title="投影"></a>投影</h3><p>选择是对行进行剪切，投影是对列进行剪切</p>
+<p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230419102705903.png" alt="image-20230419102705903"></p>
+<p>举个例子<br><img src="C:%5CUsers%5CLIUZIANG%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20230419102729226.png" alt="image-20230419102729226"></p>
+<p>对应的SQL代码为:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Select</span> sname,grade <span class="keyword">from</span> S </span><br></pre></td></tr></table></figure>
+
+<p>其中的sname和grade都是属性</p>
+<p>如果在一个属性中有重复的元组，可以通过如下代码去掉重复的元组</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Select</span> <span class="keyword">distinct</span> grade <span class="keyword">from</span> S</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230419103639429.png" alt="image-20230419103639429"></p>
+<p>重复的3已经被去掉了</p>
+<h3 id="选择与投影结合"><a href="#选择与投影结合" class="headerlink" title="选择与投影结合"></a>选择与投影结合</h3><p>其实选择与投影结合可以理解为在数据库上先对行进行切割，再对列进行切割</p>
+<p><strong>一定是选择在内部，投影在外部</strong></p>
+<p><img src="C:%5CUsers%5CLIUZIANG%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20230419205814403.png" alt="image-20230419205814403"></p>
+<h3 id="集合操作"><a href="#集合操作" class="headerlink" title="集合操作"></a>集合操作</h3><p>先给出两张表</p>
+<p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230419210036021.png" alt="image-20230419210036021"></p>
+<h4 id="并"><a href="#并" class="headerlink" title="并"></a>并</h4><p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230419210025881.png" alt="image-20230419210025881"></p>
+<h4 id="交"><a href="#交" class="headerlink" title="交"></a>交</h4><p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230419210126658.png" alt="image-20230419210126658"></p>
+<h4 id="差"><a href="#差" class="headerlink" title="差"></a>差</h4><p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230419210324538.png" alt="image-20230419210324538"></p>
+<h4 id="笛卡尔积"><a href="#笛卡尔积" class="headerlink" title="笛卡尔积"></a>笛卡尔积</h4><p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230419210614730.png" alt="image-20230419210614730"></p>
+<p>笛卡尔积比较好理解，需要注意的是</p>
+<blockquote>
+<ol>
+<li>如R中有M个属性p个元组,S中N个属性q个元组,则R×S的结果关系有M+N个属性(列)，p × q个元组</li>
+<li>如果有相同的列名，则在结果字段中不命名，只用位置表示</li>
+</ol>
+</blockquote>
+<p>举个例子：</p>
+<p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230419210827169.png" alt="image-20230419210827169"></p>
+<h2 id="课后习题"><a href="#课后习题" class="headerlink" title="课后习题"></a>课后习题</h2><p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/image-20230419213242544.png" alt="image-20230419213242544"></p>
+
+        </article>
+        <div class="post-tools" id="post-tools">
+            <div class="post-tools-left">
+                
+                <div class="share-link mobile">
+    <div class="share-qrcode">
+        <div class="share-button" title="使用手机访问这篇文章">
+            <i class="fas fa-qrcode"></i>
+        </div>
+        <div class="share-main">
+            <div class="share-main-all">
+                <div id="qrcode" title="https://www.blogethereal.top/posts/20098/">
+                </div>
+                <div class="reward-dec">使用手机访问这篇文章</div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            new QRCode(document.getElementById("qrcode"), "https://www.blogethereal.top/posts/20098/");
+        </script>
+    </div>
+</div>
+                <div class="share-link weibo"><a class="share-button" target="_blank"
+    href="https://service.weibo.com/share/share.php?title=数据库第三章内容梳理&amp;url=https://www.blogethereal.top/posts/20098/&amp;pic=https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/20230331162811.png"
+    title="分享到微博" rel="noopener external nofollow noreferrer noopener">
+    <i class="fab fa-weibo" style="font-size:22px"></i>
+</a>
+</div>
+<div class="share-link copyurl">
+<div class="share-button" id="post-share-url" title="复制链接" onclick="acrylic.copyPageUrl()">
+    <i class="fas fa-link"></i>
+</div>
+</div>
+            </div>
+            <div class="post-tools-right">
+                <div class="tag_share">
+                    <div class="post-meta__tag-list">
+                        
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-meta__tags">
+                                <span class="tags-punctuation">#</span>
+                                数据库
+                                <span class="tagsPageCount">3</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B/" class="post-meta__tags">
+                                <span class="tags-punctuation">#</span>
+                                关系模型
+                                <span class="tagsPageCount">1</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F/" class="post-meta__tags">
+                                <span class="tags-punctuation">#</span>
+                                完整性约束
+                                <span class="tagsPageCount">1</span>
+                            </a>
+                        
+                            <a href="/tags/SQL%E8%AF%AD%E8%A8%80/" class="post-meta__tags">
+                                <span class="tags-punctuation">#</span>
+                                SQL语言
+                                <span class="tagsPageCount">1</span>
+                            </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post-copyright">
+    <div class="post-copyright__author">
+        <a class="post-copyright__original" title="该文章为原创文章，注意版权协议">原创</a>
+        <a class="post-copyright-title" href="#">
+            <span>数据库第三章内容梳理</span>
+        </a>
+    </div>
+    <div class="post-copyright__type">
+        <span class="post-copyright-info" id="post-copyright-url">
+            <a href="/posts/20098/">https://www.blogethereal.top/posts/20098/</a>
+        </span>
+        <button class="post-copyright-copybtn" onclick="acrylic.copyPageUrl()">
+            <i class="fas fa-paste copy-btn"></i>
+        </button>
+    </div>
+    <div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用 <a
+                href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a> 协议，完整转载请注明来自 <a
+                href="/">Ethereal</a>
+            </span>
+        </div>
+</div>
+        <nav class="pagination-post" id="pagination">
+    
+        <div class="prev-post pull-left">
+            <a href="/posts/44313/">
+                <div class="pagination-info">
+                    <div class="label">上一篇</div>
+                    <div class="prev_info">操作系统笔记1</div>
+                </div>
+            </a>
+        </div>
+        <div class="next-post pull-right">
+            <a href="/posts/60718/">
+                <div class="pagination-info">
+                    <div class="label">下一篇</div>
+                    <div class="next_info">继承与派生</div>
+                </div>
+            </a>
+        </div>
+    
+</nav>
+        
+            <div id="post-comment">
+    <div class="comment-head">
+        <div class="comment-headline">
+            <i class="fas fa-message fa-fw"></i>
+            <span> 评论</span>
+        </div>
+    </div>
+    <div class="comment-wrap">
+        <div id="comment"></div>
+        <script>
+    async function initComment(){
+        var initOptions = Object.assign(
+            {"envId":"https://twikoo.blogethereal.top/","path":"window.location.pathname"},
+            {
+                el: '#comment',
+                onCommentLoaded: function() {
+                    GLOBALCONFIG.lightbox && acrylic.lightbox('#article-container img, #twikoo .tk-content img:not(.tk-owo-emotion)') 
+                }
+            }
+        )
+        await twikoo.init(initOptions)
+             
+    }
+</script>
+    </div>
+</div>
+            
+    </div>
+    <div class="aside-content" id="aside-content">
+    
+    
+        
+        <div class="card-widget card-info">
+    <div class="card-content">
+        <div class="card-info-avatar is-center">
+            <div class="author-info__sayhi" id="author-info__sayhi">
+            </div>
+            <div class="author-info__name">
+                Ethereal
+            </div>
+            <div class="author-info__description">这里记录了我学习过程中的所思所想，生活的点点滴滴<br/>我希望把它们<b>分享</b>给你们，希望大家<b>共同进步</b></div>
+        </div>
+    </div>
+    <div class="banner-button-group">
+        <a class="banner-button" href="/">
+            <i class="fas fa-circle-chevron-right"></i>
+            <span class="banner-button-text">个人主页</span>
+        </a>
+    </div>
+    <div class="card-info-social-icons is-center">
+        
+            <a class="social-icon" target="_blank" rel="noopener" href="https://github.com/HelloEveryonehh" title="Github">
+                <i class="fa-brands fa-github"></i>
+            </a>
+        
+            <a class="social-icon" href="mailto:2848392597@qq.com" title="Mail">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+        
+    </div>
+</div>
+     
+    
+    <div class="sticky_layout">
+        
+            <div class="card-widget" id="card-toc">
+    <div class="item-headline">
+        <i class="fas fa-bars"></i>
+        <span>文章目录</span>
+    </div>
+    <div class="toc-content" id="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="toc-text">关系数据模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE"><span class="toc-text">知识回顾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">关系模型的数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-text">概念</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F"><span class="toc-text">关系模型的完整性约束</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BD%93%E5%AE%8C%E6%95%B4%E6%80%A7"><span class="toc-text">实体完整性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E5%AE%8C%E6%95%B4%E6%80%A7"><span class="toc-text">参考完整性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E8%A1%A8%E2%80%94-gt-%E4%BB%8E%E8%A1%A8"><span class="toc-text">主表—-&gt;从表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8E%E8%A1%A8%E2%80%94-gt-%E4%B8%BB%E8%A1%A8"><span class="toc-text">从表—-&gt;主表</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E5%AE%9A%E4%B9%89%E7%9A%84%E5%AE%8C%E6%95%B4%E6%80%A7"><span class="toc-text">用户定义的完整性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E8%AF%AD%E8%A8%80"><span class="toc-text">SQL语言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">创建数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E4%B8%AD%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">选中数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E4%BA%8C%E7%BB%B4%E8%A1%A8"><span class="toc-text">建立二维表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97%E6%80%BB%E7%BB%93"><span class="toc-text">关键字总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%80%BB%E7%BB%93"><span class="toc-text">数据类型总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E4%BA%8C%E7%BB%B4%E8%A1%A8"><span class="toc-text">查询二维表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E4%BD%93%E6%A8%A1%E5%9E%8B%E5%90%91%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-text">实体模型向关系模型的转换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BD%93%E7%9A%84%E8%BD%AC%E6%8D%A2%E8%A7%84%E5%88%99"><span class="toc-text">实体的转换规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%81%94%E7%B3%BB%E7%9A%84%E8%BD%AC%E6%8D%A2%E8%A7%84%E5%88%99"><span class="toc-text">联系的转换规则</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1"><span class="toc-text">1:1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-n"><span class="toc-text">1:n</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#m-n%E7%9A%84%E8%81%94%E7%B3%BB"><span class="toc-text">m:n的联系</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#m-n-k%E5%A4%9A%E5%85%83%E8%81%94%E7%B3%BB%E7%9A%84%E8%BD%AC%E6%8D%A2%E6%96%B9%E6%B3%95"><span class="toc-text">m:n:k多元联系的转换方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E5%85%83%E8%81%94%E7%B3%BB-%E2%80%93-%E8%87%AA%E8%81%94%E7%B3%BB%E7%9A%84%E8%BD%AC%E6%8D%A2%E6%96%B9%E6%B3%95"><span class="toc-text">一元联系 – 自联系的转换方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E4%BB%A3%E6%95%B0"><span class="toc-text">关系代数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E4%BB%A3%E6%95%B0-1"><span class="toc-text">关系代数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9"><span class="toc-text">选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%95%E5%BD%B1"><span class="toc-text">投影</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E4%B8%8E%E6%8A%95%E5%BD%B1%E7%BB%93%E5%90%88"><span class="toc-text">选择与投影结合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C"><span class="toc-text">集合操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B6"><span class="toc-text">并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%A4"><span class="toc-text">交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%AE"><span class="toc-text">差</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF"><span class="toc-text">笛卡尔积</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BE%E5%90%8E%E4%B9%A0%E9%A2%98"><span class="toc-text">课后习题</span></a></li></ol></li></ol>
+    </div>
+</div>
+            
+        
+            
+        <div class="card-widget card-recent-post">
+    <div class="item-headline">
+        <i class="fas fa-list-ol"></i>
+        <span>最近发布</span>
+    </div>
+    <div class="aside-list">
+        
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/51917/" title="计算机组成原理">
+                    <img
+                        alt="计算机组成原理"
+                        src="/img/hello.png">
+                </a>
+                <div class="content">
+                    
+                    <a class="title" href="/posts/51917/" title="计算机组成原理">
+                        计算机组成原理
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/47871/" title="CSAPP笔记1">
+                    <img
+                        alt="CSAPP笔记1"
+                        src="/img/hello.png">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/posts/47871/">
+                            CSAPP
+                        </a>
+                    
+                    <a class="title" href="/posts/47871/" title="CSAPP笔记1">
+                        CSAPP笔记1
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/16107/" title="Hello World">
+                    <img
+                        alt="Hello World"
+                        src="https://bu.dusays.com/2023/01/23/63cdf7d46a962.webp">
+                </a>
+                <div class="content">
+                    
+                    <a class="title" href="/posts/16107/" title="Hello World">
+                        Hello World
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/1/" title="无标题">
+                    <img
+                        alt="无标题"
+                        src="/img/hello.png">
+                </a>
+                <div class="content">
+                    
+                    <a class="title" href="/posts/1/" title="无标题">
+                        无标题
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/65491/" title="Cpp虚基类">
+                    <img
+                        alt="Cpp虚基类"
+                        src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/010541-16814055413382.jpg">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/posts/65491/">
+                            大二课程
+                        </a>
+                    
+                        <a class="article-recent_post_categories" href="/posts/65491/">
+                            CPP
+                        </a>
+                    
+                    <a class="title" href="/posts/65491/" title="Cpp虚基类">
+                        Cpp虚基类
+                    </a>
+                </div>
+            </div>
+            
+    </div>
+</div>
+     
+        
+    </div>
+</div> 
+</main>
+                <footer id="footer">
+                    <div id="footer_deal">
+    
+    <img class="footer_mini_logo" src="/img/avatar1.webp"
+        title="返回顶部" onclick="acrylic.toTop()">
+    
+</div>
+<div id="heo-footer">
+    
+    
+</div>
+<div id="footer-banner">
+    <div class="footer-banner-links">
+        <div class="footer-banner-left">
+            <div id="footer-banner-tips">
+                <div class="copyright">©2022 - 2023 By
+                    <a class="footer-banner-link" href="/" rel="external nofollow">Ethereal</a>
+                    <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/%E5%8F%88%E6%8B%8D%E4%BA%91_logo5.png"align="absmiddle" width="59px" height="30px" /></a><span>提供加速服务</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-banner-right">
+            <a class="footer-banner-link" href="/rss/">订阅</a>
+            
+                <a class="footer-banner-link" target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index" rel="noopener external nofollow noreferrer noopener">
+                    鲁ICP备2023010775号
+                </a>
+            
+            <a class="footer-banner-link cc" target="_blank" href="https://creativecommons.org/licenses/by/4.0/" title="cc协议">
+                <i class="fa-solid fa-closed-captioning"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+                </footer>
+            </div>
+         
+        <div>
+    <script type="text/javascript" src="/js/utils.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    
+
+<script src="/lib/pjax.min.js"></script>
+
+
+
+<script src="/lib/snackbar.min.js"></script>
+
+
+    
+<script src="/lib/view-image.min.js"></script>
+
+
+
+<div id="js-pjax">
+    
+     
+</div>
+
+
+    
+<script src="/js/extend/covercolor/local.js"></script>
+
+        
+
+    <script>
+  let pjaxSelectors = [
+    'title',
+    '#body-wrap',
+    '#site-config',
+    'meta[name="description"]',
+    '#js-pjax'
+  ]
+  
+  const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+  })
+
+  document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+</script>
+    
+</div>
+        
+     
+        <div class="needEndHide" id="nav-music" onclick="acrylic.musicToggle()">
+    <div id="nav-music-hoverTips">音乐已暂停</div>
+    <meting-js id="1708664797" server="tencent" type="playlist" mutex="true"
+        preload="none" data-lrctype="0" order="random" theme="var(--heo-main)"></meting-js>
+</div>
+    
+    </body>
+</html>
+<script>const posts=["posts/51917/","posts/47871/","posts/16107/","posts/1/","posts/65491/","posts/1595/","posts/44121/","posts/44313/","posts/20098/","posts/60718/","posts/42970/","posts/62703/","posts/32224/","posts/10588/","posts/6212/","posts/18589/","posts/17325/","posts/33260/","posts/19428/","posts/62499/","posts/541/","posts/38447/","posts/59648/","posts/9231/","posts/37501/","posts/41655/","posts/49164/","posts/62824/"];function toRandomPost(){ window.pjax ? pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]) : window.open('/'+posts[Math.floor(Math.random()*posts.length)], "_self"); };</script>

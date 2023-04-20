@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>talk | Ethereal</title>
+<noscript>开启Javascript是必要的</noscript>
+<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+<link rel="apple-touch-icon" href="/img/favicon.ico">
+<meta name="apple-mobile-web-app-title" content="Ethereal">
+<link rel="bookmark" href="/img/favicon.ico">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/img/favicon.ico">
+<meta name="description" content="talk">
+<meta name="theme-color" content="#1C1C1F">
+<link rel="stylesheet" href="/css/var.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    
+
+<link rel="stylesheet" href="/lib/snackbar.min.css">
+
+
+<script src="/lib/qrcode.min.js"></script>
+
+
+    
+<script src="https://cdn.staticfile.org/twikoo/1.6.10/twikoo.all.min.js"></script>
+
+
+
+
+
+<script>var GLOBALCONFIG = {"root":"/","runtime":"2022-12-27 00:00:00","lazyload":{"enable":false,"error":"/img/acrylic.png"},"hightlight":{"enable":true,"limit":200},"lightbox":true,"randomlinks":false,"lang":{"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"recent":"最近","yesterday":"昨天","berforeyesterday":"前天","daybefore":"天前","runtime":"天"},"sayhello":{"morning":"早上好","noon":"中午好","afternoon":"下午好","night":"晚上好","goodnight":"晚安","iam":"!  我是"},"search":{"empty":"搜索结果为空","hit":"已为您找到 ${query} 条结果","placeholder":"输入关键词快速查找"}},"covercolor":true};</script><script id="site-config">var PAGECONFIG = {"is_home":false,"is_post":false,"is_page":true,"page":"default","toc":false,"comment":true};</script>
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body id="body">
+        
+        <div id="console" style="zoom: 1;" class="">
+    <div class="close-btn" onclick="acrylic.hideConsole()" href="javascript:void(0);">
+        <i class="fas fa-circle-xmark"></i>
+    </div>
+    <div class="button-group">
+        <div class="console-btn-item"> <a class="darkmode_switchbutton" onclick="acrylic.switchDarkMode()" title="显示模式切换"
+                href="javascript:void(0);" rel="external nofollow" data-pjax-state=""><i class="fas fa-moon"
+                    style="font-size: 1rem;"></i></a></div>
+        
+        <div class="console-btn-item" id="consoleFPS" onclick="acrylic.FPSToggle()" title="帧率显示开关"><a class="FPS-switch"
+                data-pjax-state=""><i class="fas fa-gauge"></i></a></div>
+    </div>
+    <div class="console-mask" onclick="acrylic.hideConsole()" href="javascript:void(0);" rel="external nofollow"></div>
+</div>
+        <div id="sidebar" style="zoom: 1;">
+    <div id="menu-mask" style="display: none;"></div>
+    <div id="sidebar-menus" class>
+        <span class="sidebar-menu-item-title">功能</span>
+        <div class="sidebar-menu-item">
+            <a class="darkmode_switchbutton menu-child" onclick="acrylic.switchDarkMode()" title="显示模式切换"
+                href="javascript:void(0);" rel="external nofollow">
+                <i class="fas fa-moon" style="font-size: 1rem;"></i>
+                <span>显示模式</span>
+            </a>
+        </div>
+        
+            <div class="back-menu-list-groups">
+    
+      
+      <div class="back-menu-list-group">
+        <div class="back-menu-list-title">
+          我的
+        </div>
+        <div class="back-menu-list">
+          
+            
+            <a class="back-menu-item" href="/" rel="external nofollow" title="博客">
+              <img class="back-menu-item-icon" src="/img/favicon.ico" loading="lazy">
+              <span class="back-menu-item-text">
+                博客
+              </span>
+            </a>
+          
+        </div>
+      </div>
+    
+  </div>
+  
+        
+        <div class="menus_items">
+    
+        <div class="menus_item">
+            
+                <a class="site-page" href="javascript:void(0);" rel="external nofollow">
+                    <span> 文库</span>
+                </a>
+                <ul class="menus_item_child">
+                    
+                        <li>
+                            <a class="site-page child" href="/archives/">
+                                <i class="fas fa-box-archive"></i>
+                                <span> 文章列表</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/categories/">
+                                <i class="fas fa-cube"></i>
+                                <span> 全部分类</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/tags/">
+                                <i class="fas fa-tags"></i>
+                                <span> 全部标签</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/talk" rel="external nofollow">
+                    <span> 即刻</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/list" rel="external nofollow">
+                    <span> 清单</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/links" rel="external nofollow">
+                    <span> 友人帐</span>
+                </a>
+             
+        </div>
+    
+</div>
+        <span class="sidebar-menu-item-title">标签</span>
+        <div class="card-widget card-tags card-archives card-webinfo card-allinfo">
+            <div class="item-headline">
+                <i class="fas fa-tags"></i>
+                <span>标签</span>
+            </div>
+            <div class="card-tag-cloud">
+                
+                    <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1em; color: #d3d3d3">算法
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%99%9A%E5%9F%BA%E7%B1%BB/" style="font-size: 1em; color: #d3d3d3">虚基类
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/CASPP/" style="font-size: 1em; color: #d3d3d3">CASPP
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1em; color: #d3d3d3">计算机组成原理
+                        <sup>3</sup>
+                    </a>
+                
+                    <a href="/tags/SRTP%E9%A1%B9%E7%9B%AE/" style="font-size: 1em; color: #d3d3d3">SRTP项目
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" style="font-size: 1em; color: #d3d3d3">C++基础学习
+                        <sup>4</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1em; color: #d3d3d3">数据结构
+                        <sup>3</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1em; color: #d3d3d3">操作系统
+                        <sup>2</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1em; color: #d3d3d3">数据库
+                        <sup>3</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B/" style="font-size: 1em; color: #d3d3d3">关系模型
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F/" style="font-size: 1em; color: #d3d3d3">完整性约束
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/SQL%E8%AF%AD%E8%A8%80/" style="font-size: 1em; color: #d3d3d3">SQL语言
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/" style="font-size: 1em; color: #d3d3d3">算法分析
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90%E5%AE%9E%E9%AA%8C/" style="font-size: 1em; color: #d3d3d3">算法设计与分析实验
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/C-%E4%BD%9C%E4%B8%9A/" style="font-size: 1em; color: #d3d3d3">C++作业
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86/" style="font-size: 1em; color: #d3d3d3">计算机存储原理
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%AD%97%E4%B8%8E%E5%AD%97%E8%8A%82/" style="font-size: 1em; color: #d3d3d3">字与字节
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%BB%A7%E6%89%BF%E4%B8%8E%E6%B4%BE%E7%94%9F/" style="font-size: 1em; color: #d3d3d3">继承与派生
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/" style="font-size: 1em; color: #d3d3d3">命名规则
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%BB%A7%E6%89%BF%E7%9A%84%E6%80%9D%E6%83%B3/" style="font-size: 1em; color: #d3d3d3">继承的思想
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" style="font-size: 1em; color: #d3d3d3">C++ 基础学习
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%AD%A6%E4%B9%A0/" style="font-size: 1em; color: #d3d3d3">面向对象学习
+                        <sup>2</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%B8%B8%E6%88%90%E5%91%98/" style="font-size: 1em; color: #d3d3d3">常成员
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E9%9D%99%E6%80%81%E6%88%90%E5%91%98/" style="font-size: 1em; color: #d3d3d3">静态成员
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%AF%B9%E8%B1%A1%E6%88%90%E5%91%98/" style="font-size: 1em; color: #d3d3d3">对象成员
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%8F%8B%E5%85%83/" style="font-size: 1em; color: #d3d3d3">友元
+                        <sup>1</sup>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</div>    
+        
+            <div class="page" id="body-wrap">
+                <header class="not-top-img" id="page-header">
+    <nav id="nav" class="show">
+    <div id="nav-group">
+        <div id="blog_name">
+            
+                <div class="back-home-button" tabindex="-1">
+                    <i class="back-home-button-icon fas fa-grip-vertical"></i>
+                    <div class="back-menu-list-groups">
+    
+      
+      <div class="back-menu-list-group">
+        <div class="back-menu-list-title">
+          我的
+        </div>
+        <div class="back-menu-list">
+          
+            
+            <a class="back-menu-item" href="/" rel="external nofollow" title="博客">
+              <img class="back-menu-item-icon" src="/img/favicon.ico" loading="lazy">
+              <span class="back-menu-item-text">
+                博客
+              </span>
+            </a>
+          
+        </div>
+      </div>
+    
+  </div>
+  
+                </div>
+            
+            <a id="site-name" href="/" title="返回博客主页">
+                    
+                        <span class="heoicon">Ethereal</span>
+                    
+            </a>
+        </div>
+        <div id="page-name-mask">
+            <div id="page-name">
+                <a id="page-name-text" onclick="acrylic.toTop()">talk</a>
+            </div>
+        </div>
+        <div id="menus">
+            <div class="menus_items">
+    
+        <div class="menus_item">
+            
+                <a class="site-page" href="javascript:void(0);" rel="external nofollow">
+                    <span> 文库</span>
+                </a>
+                <ul class="menus_item_child">
+                    
+                        <li>
+                            <a class="site-page child" href="/archives/">
+                                <i class="fas fa-box-archive"></i>
+                                <span> 文章列表</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/categories/">
+                                <i class="fas fa-cube"></i>
+                                <span> 全部分类</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/tags/">
+                                <i class="fas fa-tags"></i>
+                                <span> 全部标签</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/talk" rel="external nofollow">
+                    <span> 即刻</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/list" rel="external nofollow">
+                    <span> 清单</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/links" rel="external nofollow">
+                    <span> 友人帐</span>
+                </a>
+             
+        </div>
+    
+</div>
+        </div>
+        <!-- <div id="nav-left">
+            <div id="fps-group">
+                <div id="fps">145</div><span class="fpsText">FPS</span>
+            </div>
+        </div> -->
+        <div id="nav-right">
+            
+    <div class="nav-button only-home" id="travellings_button">
+        <a class="site-page"  target="_blank" rel="noopener external nofollow" href="https://www.travellings.cn/go.html" title="开往-友链接力"  width="120">
+            <i class="fa-solid fa-train-subway" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+
+    <div class="nav-button" id="randomPost_button">
+        <a class="site-page" onclick="toRandomPost()"
+            title="随机前往一个文章">
+            <i class="fas fa-shuffle" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+
+
+    <div class="nav-button" id="nav-console">
+        <a class="console_switchbutton" onclick="acrylic.showConsole()"
+        title="显示中控台" href="javascript:void(0);" rel="external nofollow">
+        <i class="fas fa-bars-progress" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+<div class="nav-button" id="nav-totop" onclick="acrylic.toTop()">
+    <a class="totopbtn">
+        <i class="fas fa-arrow-up"></i>
+        <span id="percent">0</span>
+    </a>
+</div>
+<div id="toggle-menu">
+    <a class="site-page">
+        <i class="fas fa-bars fa-fw" style="font-size: 1rem;"></i>
+    </a>
+</div>
+        </div>
+    </div>
+</nav>
+        
+</header>
+                <main class="layout hide-aside" id="content-inner">
+    <div id="page">
+        
+                <div id="article-container">
+    <!-- 顶部卡片 -->
+<div class="page-top-card" style="background-image: url(https://bu.dusays.com/2023/02/03/63dd135dd1b17.webp);">
+    <div class="content-item-tips">动态</div>
+    <span class="content-item-title">空间说说</span>
+    <div class="content-bottom">
+        <div class="tips">生活中的分享</div>
+        <a class="banner-button" href="/about">
+            <i class="fa-sharp fa-solid fa-gift"></i><span>关于我</span>
+        </a>
+    </div>
+</div>
+<style type="text/css">
+.page-top-card {
+    background-size: cover;
+    background-position: center;
+    height: 20rem;
+    padding: 10px 2.7rem;
+    border-radius: 20px;
+    color: #fff;
+    position: relative
+}
+span.content-item-title {
+    font-size: 2.3em;
+    font-weight: 700;
+    line-height: 1.2
+}
+.content-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    width: calc(100% - 5.4rem);
+    bottom: 1rem
+}
+a.banner-button {
+    cursor: pointer;
+    color: #fff !important;
+    backdrop-filter: saturate(180%) blur(20px);
+    background: rgb(120 120 120 / 30%);
+    padding: 5px 15px;
+    border-radius: 100px;
+    text-decoration: none !important
+}
+a.banner-button i {
+    margin-right: 5px
+}
+a.banner-button:hover {
+    background: var(--btn-bg);
+}
+[data-theme=dark] .page-top-card {
+    opacity: .7
+}
+@media screen and (max-width:900px) {
+    .page-top-card {
+        padding: 10px 1rem;
+        height: 12rem;
+        margin: 0 5px
+    }
+    .content-bottom {
+        width: calc(100% - 2rem)
+    }
+    a.banner-button span {
+        display: none
+    }
+    a.banner-button {
+        width: 50px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center
+    }
+    a.banner-button i {
+        margin: 0
+    }
+}
+h1.page-title{
+    display:none;
+}
+div#page-site-info {
+    display: none;
+}
+
+<p></style></p>
+<style>
+/* 页面初始化 */
+div#page {
+    background: none;
+    border: 0;
+    padding: 0;
+}
+
+[data-theme=dark] #twikoo .tk-content,
+#twikoo .tk-content {
+    padding: 0;
+    background: transparent;
+}
+
+.talk_item,
+.tk-expand,
+.tk-comments-container>.tk-comment,
+.tk-submit:nth-child(1){
+    background: var(--card-bg);
+    border: 1px solid #e0e3ed;
+    box-shadow: 0 5px 10px rgb(189 189 189 / 10%);
+    transition: all .3s ease-in-out;
+    border-radius: 12px;
+}
+.talk_item:hover,
+.tk-comments-container>.tk-comment:hover,
+.tk-submit:nth-child(1):hover {
+    border-color: #49b1f5;
+}
+
+.tk-submit {
+    padding: 20px 10px 0;
+}
+
+.tk-comments-container>.tk-comment {
+    padding: 15px;
+}
+
+/* 页面初始化结束 */
+
+#talk{
+    margin-top: 1rem;
+}
+
+#talk .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#talk .loading img {
+    width: 200px;
+}
+
+.talk_item {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.avatar {
+    margin: 0 !important;
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+}
+
+
+.talk_bottom,
+.talk_meta {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    line-height: 1.5;
+}
+.talk_bottom{
+    justify-content: space-between;
+}
+.info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+span.talk_nick {
+    color: #6dbdc3;
+    font-size: 1.2rem;
+}
+svg.is-badge.icon {
+    width: 15px;
+    margin-left: 5px;
+    padding-top: 3px;
+}
+span.talk_date {
+    opacity: .6;
+}
+
+.talk_content {
+    line-height: 1.5;
+    margin-top: 10px;
+}
+.zone_imgbox {
+    display: flex;
+    flex-wrap: wrap;
+    --w: calc(25% - 8px);
+    gap: 10px;
+    margin-top: 5px;
+}
+.zone_imgbox a {
+    display: block;
+    border-radius: 12px;
+    width: var(--w);
+    aspect-ratio: 1/1;
+    position: relative;
+}
+
+.zone_imgbox img {
+    width: 100%;
+    height: 100%;
+    margin: 0 !important;
+    object-fit: cover;
+}
+/* 底部 */
+
+.talk_bottom {
+    opacity: .9;
+}
+.talk_bottom .icon {
+    color: var(--font-color);
+    float: right;
+    transition: all .3s;
+}
+
+.talk_bottom .icon:hover {
+    color: #49b1f5;
+}
+
+span.talk_tag{
+    font-size: 14px;
+}
+.talk_content>a {
+    margin: 0 3px;
+    color: #ff7d73 !important;
+}
+.talk_content>a:hover{
+    text-decoration: none !important;
+    color: #ff5143 !important
+}
+
+/* 提醒 */
+
+.limit {
+    transition: all .3s ease-in-out;
+    color: rgba(76, 73, 72, 0.6);
+}
+
+[data-theme=dark] .limit {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.limit {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+    color: var(--font-color);
+}
+@media screen and (max-width: 900px) {
+    .zone_imgbox {
+        --w: calc(33% - 5px);
+    }
+    #talk{
+        margin: 10px 3px 0
+    }
+    #post-comment{
+        margin: 0 3px
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .zone_imgbox {
+        gap: 6px;
+    }
+    .zone_imgbox {
+        --w: calc(50% - 3px);
+    }
+    span.talk_date {
+        font-size: 14px;
+    }
+}
+</style>
+
+<div id="talk">
+<div class='loading'><img src="/img/loading.svg" alt="加载中..."></div>
+</div>
+
+<div class="limit">- 只展示最近30条说说 -</div>
+<script>
+pageTalk();
+// 页面说说
+function pageTalk() {
+    fetch('https://memos.itisn.cyou/api/memo?openId=a7590afa-3ec4-4004-ab6e-7d1737c2ba18&tag=说说&limit=30').then(res => res.json()).then(data => { // 注意修改域名
+        let items = [],
+            html = '',
+            icon = '<svg viewBox="0 0 512 512"xmlns="http://www.w3.org/2000/svg"class="is-badge icon"><path d="m512 268c0 17.9-4.3 34.5-12.9 49.7s-20.1 27.1-34.6 35.4c.4 2.7.6 6.9.6 12.6 0 27.1-9.1 50.1-27.1 69.1-18.1 19.1-39.9 28.6-65.4 28.6-11.4 0-22.3-2.1-32.6-6.3-8 16.4-19.5 29.6-34.6 39.7-15 10.2-31.5 15.2-49.4 15.2-18.3 0-34.9-4.9-49.7-14.9-14.9-9.9-26.3-23.2-34.3-40-10.3 4.2-21.1 6.3-32.6 6.3-25.5 0-47.4-9.5-65.7-28.6-18.3-19-27.4-42.1-27.4-69.1 0-3 .4-7.2 1.1-12.6-14.5-8.4-26-20.2-34.6-35.4-8.5-15.2-12.8-31.8-12.8-49.7 0-19 4.8-36.5 14.3-52.3s22.3-27.5 38.3-35.1c-4.2-11.4-6.3-22.9-6.3-34.3 0-27 9.1-50.1 27.4-69.1s40.2-28.6 65.7-28.6c11.4 0 22.3 2.1 32.6 6.3 8-16.4 19.5-29.6 34.6-39.7 15-10.1 31.5-15.2 49.4-15.2s34.4 5.1 49.4 15.1c15 10.1 26.6 23.3 34.6 39.7 10.3-4.2 21.1-6.3 32.6-6.3 25.5 0 47.3 9.5 65.4 28.6s27.1 42.1 27.1 69.1c0 12.6-1.9 24-5.7 34.3 16 7.6 28.8 19.3 38.3 35.1 9.5 15.9 14.3 33.4 14.3 52.4zm-266.9 77.1 105.7-158.3c2.7-4.2 3.5-8.8 2.6-13.7-1-4.9-3.5-8.8-7.7-11.4-4.2-2.7-8.8-3.6-13.7-2.9-5 .8-9 3.2-12 7.4l-93.1 140-42.9-42.8c-3.8-3.8-8.2-5.6-13.1-5.4-5 .2-9.3 2-13.1 5.4-3.4 3.4-5.1 7.7-5.1 12.9 0 5.1 1.7 9.4 5.1 12.9l58.9 58.9 2.9 2.3c3.4 2.3 6.9 3.4 10.3 3.4 6.7-.1 11.8-2.9 15.2-8.7z"fill="#1da1f2"></path></svg>';
+        data.data.forEach(item => { items.push(Format(item)) });
+        if (items.length == 30) document.querySelector('.limit').style.display = 'block';
+        items.forEach(item => {
+            html += `<div class="talk_item"><div class="talk_meta"><img class="no-lightbox avatar" src="https://q1.qlogo.cn/g?b=qq&nk=2848392597&s=5"><div class="info"><span class="talk_nick">Ethereal${icon}</span><span class="talk_date">${item.date}</span></div></div><div class="talk_content">${item.content}</div><div class="talk_bottom"><div><span class="talk_tag"># ${item.tag}</span></div><a href="javascript:;"onclick="goComment('${item.text}')"><span class="icon"><i class="fa-solid fa-message fa-fw"></i></span></a></div></div>` // 注意修改头像链接和名称
+        })
+        document.getElementById('talk').innerHTML = html
+    })
+}
+// 页面评论
+function goComment(e) {
+    var n = document.querySelector(".el-textarea__inner")
+    n.value = `> ${e}\n\n`;
+    n.focus();
+    btf.snackbarShow("无需删除空行，直接输入评论即可", !1, 2e3);
+}
+// 页面内容格式化
+function Format(item) {
+    let date = getTime(new Date(item.createdTs * 1000).toString()),
+        content = item.content,
+        tag = item.content.match(/(?<=\{)(.*?)(?=\})/g),
+        imgls = content.match(/(?<=!\[.*\]\()(.*?)(?=\))/g), // 2023-01-15更新
+        text = ''
+    text = content.replace(/#(.*?)\s/g, '').replace(/\!\[(.*?)\]\((.*?)\)/g, '').replace(/\{(.*?)\}/g, '')
+    content = text.replace(/(?<!!)\[(.*?)\]\((.*?)\)/g, `<a href="$2">@$1</a>`);
+    if (imgls) {
+        content += `<div class="zone_imgbox">`
+        imgls.forEach(e => content += `<a href="${e}" data-fancybox="gallery" class="fancybox" data-thumb="${e}"><img src="${e}"></a>`
+        )
+        content += '</div>'
+    }
+    return {
+        content: content,
+        tag: tag ? tag : '无标签',
+        date: date,
+        text: text.replace(/(?<!!)\[(.*?)\]\((.*?)\)/g, '[链接]' + `${imgls?'[图片]':''}`)
+    }
+}
+// 页面时间格式化
+function getTime(time) {
+    let d = new Date(time),
+        ls = [d.getFullYear(), d.getMonth() + 1, d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds()];
+    for (let i = 0; i < ls.length; i++) {
+        ls[i] = ls[i] <= 9 ? '0' + ls[i] : ls[i] + ''
+    }
+    if (new Date().getFullYear() == ls[0]) return ls[1] + '月' + ls[2] + '日 ' + ls[3] +':'+ ls[4]
+    else return ls[0] + '年' + ls[1] + '月' + ls[2] + '日 ' + ls[3] +':'+ ls[4]
+}
+</script>
+
+</div>
+             
+        
+            <div id="post-comment">
+    <div class="comment-head">
+        <div class="comment-headline">
+            <i class="fas fa-message fa-fw"></i>
+            <span> 评论</span>
+        </div>
+    </div>
+    <div class="comment-wrap">
+        <div id="comment"></div>
+        <script>
+    async function initComment(){
+        var initOptions = Object.assign(
+            {"envId":"https://twikoo.blogethereal.top/","path":"window.location.pathname"},
+            {
+                el: '#comment',
+                onCommentLoaded: function() {
+                    GLOBALCONFIG.lightbox && acrylic.lightbox('#article-container img, #twikoo .tk-content img:not(.tk-owo-emotion)') 
+                }
+            }
+        )
+        await twikoo.init(initOptions)
+             
+    }
+</script>
+    </div>
+</div>
+            
+    </div>
+       
+</main>     
+
+                <footer id="footer">
+                    <div id="footer_deal">
+    
+    <img class="footer_mini_logo" src="/img/avatar1.webp"
+        title="返回顶部" onclick="acrylic.toTop()">
+    
+</div>
+<div id="heo-footer">
+    
+    
+</div>
+<div id="footer-banner">
+    <div class="footer-banner-links">
+        <div class="footer-banner-left">
+            <div id="footer-banner-tips">
+                <div class="copyright">©2022 - 2023 By
+                    <a class="footer-banner-link" href="/" rel="external nofollow">Ethereal</a>
+                    <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/%E5%8F%88%E6%8B%8D%E4%BA%91_logo5.png"align="absmiddle" width="59px" height="30px" /></a><span>提供加速服务</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-banner-right">
+            <a class="footer-banner-link" href="/rss/">订阅</a>
+            
+                <a class="footer-banner-link" target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index" rel="noopener external nofollow noreferrer noopener">
+                    鲁ICP备2023010775号
+                </a>
+            
+            <a class="footer-banner-link cc" target="_blank" href="https://creativecommons.org/licenses/by/4.0/" title="cc协议">
+                <i class="fa-solid fa-closed-captioning"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+                </footer>
+            </div>
+         
+        <div>
+    <script type="text/javascript" src="/js/utils.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    
+
+<script src="/lib/pjax.min.js"></script>
+
+
+
+<script src="/lib/snackbar.min.js"></script>
+
+
+    
+<script src="/lib/view-image.min.js"></script>
+
+
+
+<div id="js-pjax">
+    
+     
+</div>
+
+
+    
+<script src="/js/extend/covercolor/local.js"></script>
+
+        
+
+    <script>
+  let pjaxSelectors = [
+    'title',
+    '#body-wrap',
+    '#site-config',
+    'meta[name="description"]',
+    '#js-pjax'
+  ]
+  
+  const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+  })
+
+  document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+</script>
+    
+</div>
+        
+     
+        <div class="needEndHide" id="nav-music" onclick="acrylic.musicToggle()">
+    <div id="nav-music-hoverTips">音乐已暂停</div>
+    <meting-js id="1708664797" server="tencent" type="playlist" mutex="true"
+        preload="none" data-lrctype="0" order="random" theme="var(--heo-main)"></meting-js>
+</div>
+    
+    </body>
+</html>
+<script>const posts=["posts/51917/","posts/47871/","posts/16107/","posts/1/","posts/65491/","posts/1595/","posts/44121/","posts/44313/","posts/20098/","posts/60718/","posts/42970/","posts/62703/","posts/32224/","posts/10588/","posts/6212/","posts/18589/","posts/17325/","posts/33260/","posts/19428/","posts/62499/","posts/541/","posts/38447/","posts/59648/","posts/9231/","posts/37501/","posts/41655/","posts/49164/","posts/62824/"];function toRandomPost(){ window.pjax ? pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]) : window.open('/'+posts[Math.floor(Math.random()*posts.length)], "_self"); };</script>

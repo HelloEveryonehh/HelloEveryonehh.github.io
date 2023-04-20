@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SRTP项目-基于深度时空网络的地铁客流预测 | Ethereal</title>
+<noscript>开启Javascript是必要的</noscript>
+<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+<link rel="apple-touch-icon" href="/img/favicon.ico">
+<meta name="apple-mobile-web-app-title" content="Ethereal">
+<link rel="bookmark" href="/img/favicon.ico">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/img/favicon.ico">
+<meta name="description" content="SRTP项目​     本文用来介绍团队的SRTP项目，以及后续的资源分享，项目总结都会持续地更新记录在该文章。项目介绍题目：基于深度时空网络的地铁客流预测项目简介   地铁作为居民绿色出行、缓解城市">
+<meta name="theme-color" content="#1C1C1F">
+<link rel="stylesheet" href="/css/var.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    
+
+<link rel="stylesheet" href="/lib/snackbar.min.css">
+
+
+<script src="/lib/qrcode.min.js"></script>
+
+
+    
+<script src="https://cdn.staticfile.org/twikoo/1.6.10/twikoo.all.min.js"></script>
+
+
+
+
+
+<script>var GLOBALCONFIG = {"root":"/","runtime":"2022-12-27 00:00:00","lazyload":{"enable":false,"error":"/img/acrylic.png"},"hightlight":{"enable":true,"limit":200},"lightbox":true,"randomlinks":false,"lang":{"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"recent":"最近","yesterday":"昨天","berforeyesterday":"前天","daybefore":"天前","runtime":"天"},"sayhello":{"morning":"早上好","noon":"中午好","afternoon":"下午好","night":"晚上好","goodnight":"晚安","iam":"!  我是"},"search":{"empty":"搜索结果为空","hit":"已为您找到 ${query} 条结果","placeholder":"输入关键词快速查找"}},"covercolor":true};</script><script id="site-config">var PAGECONFIG = {"is_home":false,"is_post":true,"is_page":false,"page":false,"toc":true,"comment":true};</script>
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body id="body">
+        
+        <div id="console" style="zoom: 1;" class="">
+    <div class="close-btn" onclick="acrylic.hideConsole()" href="javascript:void(0);">
+        <i class="fas fa-circle-xmark"></i>
+    </div>
+    <div class="button-group">
+        <div class="console-btn-item"> <a class="darkmode_switchbutton" onclick="acrylic.switchDarkMode()" title="显示模式切换"
+                href="javascript:void(0);" rel="external nofollow" data-pjax-state=""><i class="fas fa-moon"
+                    style="font-size: 1rem;"></i></a></div>
+        
+        <div class="console-btn-item" id="consoleFPS" onclick="acrylic.FPSToggle()" title="帧率显示开关"><a class="FPS-switch"
+                data-pjax-state=""><i class="fas fa-gauge"></i></a></div>
+    </div>
+    <div class="console-mask" onclick="acrylic.hideConsole()" href="javascript:void(0);" rel="external nofollow"></div>
+</div>
+        <div id="sidebar" style="zoom: 1;">
+    <div id="menu-mask" style="display: none;"></div>
+    <div id="sidebar-menus" class>
+        <span class="sidebar-menu-item-title">功能</span>
+        <div class="sidebar-menu-item">
+            <a class="darkmode_switchbutton menu-child" onclick="acrylic.switchDarkMode()" title="显示模式切换"
+                href="javascript:void(0);" rel="external nofollow">
+                <i class="fas fa-moon" style="font-size: 1rem;"></i>
+                <span>显示模式</span>
+            </a>
+        </div>
+        
+            <div class="back-menu-list-groups">
+    
+      
+      <div class="back-menu-list-group">
+        <div class="back-menu-list-title">
+          我的
+        </div>
+        <div class="back-menu-list">
+          
+            
+            <a class="back-menu-item" href="/" rel="external nofollow" title="博客">
+              <img class="back-menu-item-icon" src="/img/favicon.ico" loading="lazy">
+              <span class="back-menu-item-text">
+                博客
+              </span>
+            </a>
+          
+        </div>
+      </div>
+    
+  </div>
+  
+        
+        <div class="menus_items">
+    
+        <div class="menus_item">
+            
+                <a class="site-page" href="javascript:void(0);" rel="external nofollow">
+                    <span> 文库</span>
+                </a>
+                <ul class="menus_item_child">
+                    
+                        <li>
+                            <a class="site-page child" href="/archives/">
+                                <i class="fas fa-box-archive"></i>
+                                <span> 文章列表</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/categories/">
+                                <i class="fas fa-cube"></i>
+                                <span> 全部分类</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/tags/">
+                                <i class="fas fa-tags"></i>
+                                <span> 全部标签</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/talk" rel="external nofollow">
+                    <span> 即刻</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/list" rel="external nofollow">
+                    <span> 清单</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/links" rel="external nofollow">
+                    <span> 友人帐</span>
+                </a>
+             
+        </div>
+    
+</div>
+        <span class="sidebar-menu-item-title">标签</span>
+        <div class="card-widget card-tags card-archives card-webinfo card-allinfo">
+            <div class="item-headline">
+                <i class="fas fa-tags"></i>
+                <span>标签</span>
+            </div>
+            <div class="card-tag-cloud">
+                
+                    <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1em; color: #d3d3d3">算法
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%99%9A%E5%9F%BA%E7%B1%BB/" style="font-size: 1em; color: #d3d3d3">虚基类
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/CASPP/" style="font-size: 1em; color: #d3d3d3">CASPP
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1em; color: #d3d3d3">计算机组成原理
+                        <sup>3</sup>
+                    </a>
+                
+                    <a href="/tags/SRTP%E9%A1%B9%E7%9B%AE/" style="font-size: 1em; color: #d3d3d3">SRTP项目
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" style="font-size: 1em; color: #d3d3d3">C++基础学习
+                        <sup>4</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1em; color: #d3d3d3">数据结构
+                        <sup>3</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1em; color: #d3d3d3">操作系统
+                        <sup>2</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1em; color: #d3d3d3">数据库
+                        <sup>3</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B/" style="font-size: 1em; color: #d3d3d3">关系模型
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F/" style="font-size: 1em; color: #d3d3d3">完整性约束
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/SQL%E8%AF%AD%E8%A8%80/" style="font-size: 1em; color: #d3d3d3">SQL语言
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/" style="font-size: 1em; color: #d3d3d3">算法分析
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90%E5%AE%9E%E9%AA%8C/" style="font-size: 1em; color: #d3d3d3">算法设计与分析实验
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/C-%E4%BD%9C%E4%B8%9A/" style="font-size: 1em; color: #d3d3d3">C++作业
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86/" style="font-size: 1em; color: #d3d3d3">计算机存储原理
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%AD%97%E4%B8%8E%E5%AD%97%E8%8A%82/" style="font-size: 1em; color: #d3d3d3">字与字节
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%BB%A7%E6%89%BF%E4%B8%8E%E6%B4%BE%E7%94%9F/" style="font-size: 1em; color: #d3d3d3">继承与派生
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/" style="font-size: 1em; color: #d3d3d3">命名规则
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%BB%A7%E6%89%BF%E7%9A%84%E6%80%9D%E6%83%B3/" style="font-size: 1em; color: #d3d3d3">继承的思想
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" style="font-size: 1em; color: #d3d3d3">C++ 基础学习
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%AD%A6%E4%B9%A0/" style="font-size: 1em; color: #d3d3d3">面向对象学习
+                        <sup>2</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%B8%B8%E6%88%90%E5%91%98/" style="font-size: 1em; color: #d3d3d3">常成员
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E9%9D%99%E6%80%81%E6%88%90%E5%91%98/" style="font-size: 1em; color: #d3d3d3">静态成员
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%AF%B9%E8%B1%A1%E6%88%90%E5%91%98/" style="font-size: 1em; color: #d3d3d3">对象成员
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%8F%8B%E5%85%83/" style="font-size: 1em; color: #d3d3d3">友元
+                        <sup>1</sup>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</div>    
+        
+            <div class="post" id="body-wrap">
+                <header class="post-bg" id="page-header">
+    <nav id="nav" class="show">
+    <div id="nav-group">
+        <div id="blog_name">
+            
+                <div class="back-home-button" tabindex="-1">
+                    <i class="back-home-button-icon fas fa-grip-vertical"></i>
+                    <div class="back-menu-list-groups">
+    
+      
+      <div class="back-menu-list-group">
+        <div class="back-menu-list-title">
+          我的
+        </div>
+        <div class="back-menu-list">
+          
+            
+            <a class="back-menu-item" href="/" rel="external nofollow" title="博客">
+              <img class="back-menu-item-icon" src="/img/favicon.ico" loading="lazy">
+              <span class="back-menu-item-text">
+                博客
+              </span>
+            </a>
+          
+        </div>
+      </div>
+    
+  </div>
+  
+                </div>
+            
+            <a id="site-name" href="/" title="返回博客主页">
+                    
+                        <span class="heoicon">Ethereal</span>
+                    
+            </a>
+        </div>
+        <div id="page-name-mask">
+            <div id="page-name">
+                <a id="page-name-text" onclick="acrylic.toTop()">SRTP项目-基于深度时空网络的地铁客流预测</a>
+            </div>
+        </div>
+        <div id="menus">
+            <div class="menus_items">
+    
+        <div class="menus_item">
+            
+                <a class="site-page" href="javascript:void(0);" rel="external nofollow">
+                    <span> 文库</span>
+                </a>
+                <ul class="menus_item_child">
+                    
+                        <li>
+                            <a class="site-page child" href="/archives/">
+                                <i class="fas fa-box-archive"></i>
+                                <span> 文章列表</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/categories/">
+                                <i class="fas fa-cube"></i>
+                                <span> 全部分类</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/tags/">
+                                <i class="fas fa-tags"></i>
+                                <span> 全部标签</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/talk" rel="external nofollow">
+                    <span> 即刻</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/list" rel="external nofollow">
+                    <span> 清单</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/links" rel="external nofollow">
+                    <span> 友人帐</span>
+                </a>
+             
+        </div>
+    
+</div>
+        </div>
+        <!-- <div id="nav-left">
+            <div id="fps-group">
+                <div id="fps">145</div><span class="fpsText">FPS</span>
+            </div>
+        </div> -->
+        <div id="nav-right">
+            
+    <div class="nav-button only-home" id="travellings_button">
+        <a class="site-page"  target="_blank" rel="noopener external nofollow" href="https://www.travellings.cn/go.html" title="开往-友链接力"  width="120">
+            <i class="fa-solid fa-train-subway" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+
+    <div class="nav-button" id="randomPost_button">
+        <a class="site-page" onclick="toRandomPost()"
+            title="随机前往一个文章">
+            <i class="fas fa-shuffle" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+
+
+    <div class="nav-button" id="nav-console">
+        <a class="console_switchbutton" onclick="acrylic.showConsole()"
+        title="显示中控台" href="javascript:void(0);" rel="external nofollow">
+        <i class="fas fa-bars-progress" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+<div class="nav-button" id="nav-totop" onclick="acrylic.toTop()">
+    <a class="totopbtn">
+        <i class="fas fa-arrow-up"></i>
+        <span id="percent">0</span>
+    </a>
+</div>
+<div id="toggle-menu">
+    <a class="site-page">
+        <i class="fas fa-bars fa-fw" style="font-size: 1rem;"></i>
+    </a>
+</div>
+        </div>
+    </div>
+</nav>
+    
+        <div class="coverdiv" id="coverdiv">
+    <img id="post-cover" class="nolazyload" src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/320986.jpg" alt="cover">
+</div>
+<div id="post-info">
+    <div id="post-firstinfo">
+        <div class="meta-firstline">
+            <a class="post-meta-original" title="该文章为原创文章，注意版权协议">
+                原创
+            </a>
+            <span class="post-meta-categories">
+                
+                    <a class="post-meta-categories" href="/categories/%E7%A7%91%E5%88%9B%E9%A1%B9%E7%9B%AE/">科创项目</a>
+                
+            </span>
+            <div class="tag_share">
+                <div class="post-meta__tag-list">
+                    
+                        <a class="post-meta__tags" href="/tags/SRTP%E9%A1%B9%E7%9B%AE/">
+                            <span class="tags-punctuation">#</span>
+                            <span class="tags-name">SRTP项目</span>
+                        </a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1 class="post-title">SRTP项目-基于深度时空网络的地铁客流预测</h1>
+    <div id="post-meta">
+        <div class="meta-secondline">
+            <span class="post-meta-date" title="发布于">
+                <i class="post-meta-icon fa-fw fas fa-calendar"></i>
+                <time datetime="2023-03-24T20:43:31+08:00"></time>
+            </span>
+            
+            
+            
+                
+                    <span class="post-meta-wordcount">
+                        <i class="fas fa-file-word fa-fw post-meta-icon" title="文章字数"></i>
+                        <span class="word-count">727</span>
+                    </span>
+                
+                
+                    <span class="post-meta-time">
+                        <i class="fas fa-clock post-meta-icon" title="阅读耗时"></i>
+                        <span>2 min</span>
+                    </span>
+                
+            
+            
+                
+        </div>
+    </div>
+</div>
+<section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg"
+    xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+        <path id="gentle-wave"
+            d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path>
+    </defs>
+    <g class="parallax">
+        <use href="#gentle-wave" x="48" y="0"></use>
+        <use href="#gentle-wave" x="48" y="3"></use>
+        <use href="#gentle-wave" x="48" y="5"></use>
+        <use href="#gentle-wave" x="48" y="7"></use>
+    </g>
+</svg>
+</section>
+        
+</header>
+                <main class="layout" id="content-inner">
+    <div id="post">
+        <article class="post-content" id="article-container">
+            <h1 id="SRTP项目"><a href="#SRTP项目" class="headerlink" title="SRTP项目"></a>SRTP项目</h1><p>​     本文用来介绍团队的SRTP项目，以及后续的资源分享，项目总结都会持续地更新记录在该文章。</p>
+<h1 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h1><h2 id="题目：基于深度时空网络的地铁客流预测"><a href="#题目：基于深度时空网络的地铁客流预测" class="headerlink" title="题目：基于深度时空网络的地铁客流预测"></a>题目：基于深度时空网络的地铁客流预测</h2><h2 id="项目简介"><a href="#项目简介" class="headerlink" title="项目简介"></a>项目简介</h2><p>   地铁作为居民绿色出行、缓解城市道路拥堵的重要交通方式，其运营过程中产生了大量的客流<code>时空序列数据</code>。基于历史地铁客流数据准确地<code>预测</code>未来每个站点的乘客流量，是智能交通应用面临的关键技术需求。因此，本项目研究利用<code>深度时空网络模型</code>实现更为准确的地铁客流预测，从而对地铁<code>运营管理</code>和<code>线路调度</code>进行更合理的规划，促进智能交通系统的建设。</p>
+<h2 id="项目的解决方案"><a href="#项目的解决方案" class="headerlink" title="项目的解决方案"></a>项目的解决方案</h2><p> 1.首先对地铁客流数据进行收集与预处理，获得 地铁客流时空序列数据和站点信息数据 </p>
+<p> 2.其次构建深度时空网络模型提取地铁客流的复杂时空特征</p>
+<p> 3.最后基于提取的复杂特征  预测未来一段时间内每个站点的乘客流</p>
+<h3 id="项目共分为数据收集与预处理、模型学习和模型应用三个阶段"><a href="#项目共分为数据收集与预处理、模型学习和模型应用三个阶段" class="headerlink" title="项目共分为数据收集与预处理、模型学习和模型应用三个阶段"></a>项目共分为数据收集与预处理、模型学习和模型应用三个阶段</h3><h4 id="首先数据收集与预处理阶段"><a href="#首先数据收集与预处理阶段" class="headerlink" title="首先数据收集与预处理阶段"></a>首先数据收集与预处理阶段</h4><p>由于现实地铁客流相关数据量大且获取困难，因此寻找相关开放平台进行<code>源数据的采集</code>，包括<code>地铁客流数据</code>和<code>相关站点信息数据</code>，并对源数据进行<code>清理</code>、<code>转换</code>等<code>预处理</code>操作，使数据标准化。</p>
+<h4 id="其次模型学习阶段"><a href="#其次模型学习阶段" class="headerlink" title="其次模型学习阶段"></a>其次模型学习阶段</h4><p>利用<code>transformer</code>等<code>时序学习方法</code>提取<code>时间特征</code>，利用<code>图神经网络</code>提取<code>空间特征</code>，利用<code>时空注意力机制</code>等获取<code>时空融合特征</code>，基于以上特征预测未来一段时间内地铁客流。</p>
+<h4 id="最后模型应用阶段"><a href="#最后模型应用阶段" class="headerlink" title="最后模型应用阶段"></a>最后模型应用阶段</h4><p>基于以上成果，搭建一套<code>可视化平台</code>对预测结果进行展示，为交通智能化管理和用户出行指导提供更科学的建议。</p>
+<h2 id="项目的预期结果"><a href="#项目的预期结果" class="headerlink" title="项目的预期结果"></a>项目的预期结果</h2><p>基于深度时空网络的地铁客流预测算法上能有所创新和突破，若项目成功则期望将之推向实际运用。</p>
+<h1 id="项目开展"><a href="#项目开展" class="headerlink" title="项目开展"></a>项目开展</h1><h2 id="概念认知"><a href="#概念认知" class="headerlink" title="概念认知"></a>概念认知</h2><p>该SRTP项目难度较高，其中大部分概念是从未接触过的，所以记录下来，可以帮助快速理解项目内容</p>
+<h3 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h3><p>预备知识：先了解Attention</p>
+<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/Tink1995/article/details/105012972/owen0o0/getFavicon">详解,Attention</a> </p>
+<p>transformer 了解</p>
+<p> <a target="_blank" rel="noopener" href="https://blog.csdn.net/Tink1995/article/details/105080033?ops_request_misc=%7B%22request_id%22:%22167962561916800192212654%22,%22scm%22:%2220140713.130102334..%22%7D&request_id=167962561916800192212654&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-105080033-null-null.142%5Ev76%5Econtrol,201%5Ev4%5Eadd_ask,239%5Ev2%5Einsert_chatgpt&utm_term=transformer&spm=1018.2226.3001.4187/owen0o0/getFavicon">transformer 详解,transformer</a></p>
+<h2 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h2><h3 id="深度学习"><a href="#深度学习" class="headerlink" title="深度学习"></a>深度学习</h3><h2 id="资源分享"><a href="#资源分享" class="headerlink" title="资源分享"></a>资源分享</h2><h3 id="文章分享"><a href="#文章分享" class="headerlink" title="文章分享"></a>文章分享</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zuiyishihefang/article/details/126314015?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167966402516800192249691%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=167966402516800192249691&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-126314015-null-null.142%5Ev76%5Econtrol,201%5Ev4%5Eadd_ask,239%5Ev2%5Einsert_chatgpt&utm_term=%E6%97%B6%E7%A9%BAtransformer&spm=1018.2226.3001.4187/owen0o0/getFavicon">基于Transformer的时空融合网络地铁客流预测模型,transformer</a></p>
+<h3 id="公众号"><a href="#公众号" class="headerlink" title="公众号"></a>公众号</h3><p>微信公众号：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg4MTE4ODQ3MA==&mid=2247517459&idx=1&sn=ba06e40c9120f4a366f5c55e25ef1a48&chksm=cf6b0e0af81c871c72fc88e3b9d397ef8c58e963b4b5fe77f3c523283c35e96d0305b412bbc6&mpshare=1&scene=23&srcid=0324zkTCtFfkbwXgtkzI0WtH&sharer_sharetime=1679665379496&sharer_shareid=a2e4af05b63484b1e3ef4bb933127d4d#rd">当交通遇上机械学习</a></p>
+
+        </article>
+        <div class="post-tools" id="post-tools">
+            <div class="post-tools-left">
+                
+                <div class="share-link mobile">
+    <div class="share-qrcode">
+        <div class="share-button" title="使用手机访问这篇文章">
+            <i class="fas fa-qrcode"></i>
+        </div>
+        <div class="share-main">
+            <div class="share-main-all">
+                <div id="qrcode" title="https://www.blogethereal.top/posts/62703/">
+                </div>
+                <div class="reward-dec">使用手机访问这篇文章</div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            new QRCode(document.getElementById("qrcode"), "https://www.blogethereal.top/posts/62703/");
+        </script>
+    </div>
+</div>
+                <div class="share-link weibo"><a class="share-button" target="_blank"
+    href="https://service.weibo.com/share/share.php?title=SRTP项目-基于深度时空网络的地铁客流预测&amp;url=https://www.blogethereal.top/posts/62703/&amp;pic=https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/320986.jpg"
+    title="分享到微博" rel="noopener external nofollow noreferrer noopener">
+    <i class="fab fa-weibo" style="font-size:22px"></i>
+</a>
+</div>
+<div class="share-link copyurl">
+<div class="share-button" id="post-share-url" title="复制链接" onclick="acrylic.copyPageUrl()">
+    <i class="fas fa-link"></i>
+</div>
+</div>
+            </div>
+            <div class="post-tools-right">
+                <div class="tag_share">
+                    <div class="post-meta__tag-list">
+                        
+                            <a href="/tags/SRTP%E9%A1%B9%E7%9B%AE/" class="post-meta__tags">
+                                <span class="tags-punctuation">#</span>
+                                SRTP项目
+                                <span class="tagsPageCount">1</span>
+                            </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post-copyright">
+    <div class="post-copyright__author">
+        <a class="post-copyright__original" title="该文章为原创文章，注意版权协议">原创</a>
+        <a class="post-copyright-title" href="#">
+            <span>SRTP项目-基于深度时空网络的地铁客流预测</span>
+        </a>
+    </div>
+    <div class="post-copyright__type">
+        <span class="post-copyright-info" id="post-copyright-url">
+            <a href="/posts/62703/">https://www.blogethereal.top/posts/62703/</a>
+        </span>
+        <button class="post-copyright-copybtn" onclick="acrylic.copyPageUrl()">
+            <i class="fas fa-paste copy-btn"></i>
+        </button>
+    </div>
+    <div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用 <a
+                href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a> 协议，完整转载请注明来自 <a
+                href="/">Ethereal</a>
+            </span>
+        </div>
+</div>
+        <nav class="pagination-post" id="pagination">
+    
+        <div class="prev-post pull-left">
+            <a href="/posts/42970/">
+                <div class="pagination-info">
+                    <div class="label">上一篇</div>
+                    <div class="prev_info">面向对象-静态成员</div>
+                </div>
+            </a>
+        </div>
+        <div class="next-post pull-right">
+            <a href="/posts/32224/">
+                <div class="pagination-info">
+                    <div class="label">下一篇</div>
+                    <div class="next_info">数据库第二章内容梳理</div>
+                </div>
+            </a>
+        </div>
+    
+</nav>
+        
+            <div id="post-comment">
+    <div class="comment-head">
+        <div class="comment-headline">
+            <i class="fas fa-message fa-fw"></i>
+            <span> 评论</span>
+        </div>
+    </div>
+    <div class="comment-wrap">
+        <div id="comment"></div>
+        <script>
+    async function initComment(){
+        var initOptions = Object.assign(
+            {"envId":"https://twikoo.blogethereal.top/","path":"window.location.pathname"},
+            {
+                el: '#comment',
+                onCommentLoaded: function() {
+                    GLOBALCONFIG.lightbox && acrylic.lightbox('#article-container img, #twikoo .tk-content img:not(.tk-owo-emotion)') 
+                }
+            }
+        )
+        await twikoo.init(initOptions)
+             
+    }
+</script>
+    </div>
+</div>
+            
+    </div>
+    <div class="aside-content" id="aside-content">
+    
+    
+        
+        <div class="card-widget card-info">
+    <div class="card-content">
+        <div class="card-info-avatar is-center">
+            <div class="author-info__sayhi" id="author-info__sayhi">
+            </div>
+            <div class="author-info__name">
+                Ethereal
+            </div>
+            <div class="author-info__description">这里记录了我学习过程中的所思所想，生活的点点滴滴<br/>我希望把它们<b>分享</b>给你们，希望大家<b>共同进步</b></div>
+        </div>
+    </div>
+    <div class="banner-button-group">
+        <a class="banner-button" href="/">
+            <i class="fas fa-circle-chevron-right"></i>
+            <span class="banner-button-text">个人主页</span>
+        </a>
+    </div>
+    <div class="card-info-social-icons is-center">
+        
+            <a class="social-icon" target="_blank" rel="noopener" href="https://github.com/HelloEveryonehh" title="Github">
+                <i class="fa-brands fa-github"></i>
+            </a>
+        
+            <a class="social-icon" href="mailto:2848392597@qq.com" title="Mail">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+        
+    </div>
+</div>
+     
+    
+    <div class="sticky_layout">
+        
+            <div class="card-widget" id="card-toc">
+    <div class="item-headline">
+        <i class="fas fa-bars"></i>
+        <span>文章目录</span>
+    </div>
+    <div class="toc-content" id="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SRTP%E9%A1%B9%E7%9B%AE"><span class="toc-text">SRTP项目</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D"><span class="toc-text">项目介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%EF%BC%9A%E5%9F%BA%E4%BA%8E%E6%B7%B1%E5%BA%A6%E6%97%B6%E7%A9%BA%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9C%B0%E9%93%81%E5%AE%A2%E6%B5%81%E9%A2%84%E6%B5%8B"><span class="toc-text">题目：基于深度时空网络的地铁客流预测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B"><span class="toc-text">项目简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">项目的解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%85%B1%E5%88%86%E4%B8%BA%E6%95%B0%E6%8D%AE%E6%94%B6%E9%9B%86%E4%B8%8E%E9%A2%84%E5%A4%84%E7%90%86%E3%80%81%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E4%B8%89%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="toc-text">项目共分为数据收集与预处理、模型学习和模型应用三个阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A6%96%E5%85%88%E6%95%B0%E6%8D%AE%E6%94%B6%E9%9B%86%E4%B8%8E%E9%A2%84%E5%A4%84%E7%90%86%E9%98%B6%E6%AE%B5"><span class="toc-text">首先数据收集与预处理阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E6%AC%A1%E6%A8%A1%E5%9E%8B%E5%AD%A6%E4%B9%A0%E9%98%B6%E6%AE%B5"><span class="toc-text">其次模型学习阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E5%90%8E%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E9%98%B6%E6%AE%B5"><span class="toc-text">最后模型应用阶段</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%9A%84%E9%A2%84%E6%9C%9F%E7%BB%93%E6%9E%9C"><span class="toc-text">项目的预期结果</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%B1%95"><span class="toc-text">项目开展</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E8%AE%A4%E7%9F%A5"><span class="toc-text">概念认知</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Transformer"><span class="toc-text">Transformer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF"><span class="toc-text">学习路线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"><span class="toc-text">深度学习</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB"><span class="toc-text">资源分享</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E5%88%86%E4%BA%AB"><span class="toc-text">文章分享</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AC%E4%BC%97%E5%8F%B7"><span class="toc-text">公众号</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+            
+        
+            
+        <div class="card-widget card-recent-post">
+    <div class="item-headline">
+        <i class="fas fa-list-ol"></i>
+        <span>最近发布</span>
+    </div>
+    <div class="aside-list">
+        
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/51917/" title="计算机组成原理">
+                    <img
+                        alt="计算机组成原理"
+                        src="/img/hello.png">
+                </a>
+                <div class="content">
+                    
+                    <a class="title" href="/posts/51917/" title="计算机组成原理">
+                        计算机组成原理
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/47871/" title="CSAPP笔记1">
+                    <img
+                        alt="CSAPP笔记1"
+                        src="/img/hello.png">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/posts/47871/">
+                            CSAPP
+                        </a>
+                    
+                    <a class="title" href="/posts/47871/" title="CSAPP笔记1">
+                        CSAPP笔记1
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/16107/" title="Hello World">
+                    <img
+                        alt="Hello World"
+                        src="https://bu.dusays.com/2023/01/23/63cdf7d46a962.webp">
+                </a>
+                <div class="content">
+                    
+                    <a class="title" href="/posts/16107/" title="Hello World">
+                        Hello World
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/1/" title="无标题">
+                    <img
+                        alt="无标题"
+                        src="/img/hello.png">
+                </a>
+                <div class="content">
+                    
+                    <a class="title" href="/posts/1/" title="无标题">
+                        无标题
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/65491/" title="Cpp虚基类">
+                    <img
+                        alt="Cpp虚基类"
+                        src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/010541-16814055413382.jpg">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/posts/65491/">
+                            大二课程
+                        </a>
+                    
+                        <a class="article-recent_post_categories" href="/posts/65491/">
+                            CPP
+                        </a>
+                    
+                    <a class="title" href="/posts/65491/" title="Cpp虚基类">
+                        Cpp虚基类
+                    </a>
+                </div>
+            </div>
+            
+    </div>
+</div>
+     
+        
+    </div>
+</div> 
+</main>
+                <footer id="footer">
+                    <div id="footer_deal">
+    
+    <img class="footer_mini_logo" src="/img/avatar1.webp"
+        title="返回顶部" onclick="acrylic.toTop()">
+    
+</div>
+<div id="heo-footer">
+    
+    
+</div>
+<div id="footer-banner">
+    <div class="footer-banner-links">
+        <div class="footer-banner-left">
+            <div id="footer-banner-tips">
+                <div class="copyright">©2022 - 2023 By
+                    <a class="footer-banner-link" href="/" rel="external nofollow">Ethereal</a>
+                    <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/%E5%8F%88%E6%8B%8D%E4%BA%91_logo5.png"align="absmiddle" width="59px" height="30px" /></a><span>提供加速服务</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-banner-right">
+            <a class="footer-banner-link" href="/rss/">订阅</a>
+            
+                <a class="footer-banner-link" target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index" rel="noopener external nofollow noreferrer noopener">
+                    鲁ICP备2023010775号
+                </a>
+            
+            <a class="footer-banner-link cc" target="_blank" href="https://creativecommons.org/licenses/by/4.0/" title="cc协议">
+                <i class="fa-solid fa-closed-captioning"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+                </footer>
+            </div>
+         
+        <div>
+    <script type="text/javascript" src="/js/utils.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    
+
+<script src="/lib/pjax.min.js"></script>
+
+
+
+<script src="/lib/snackbar.min.js"></script>
+
+
+    
+<script src="/lib/view-image.min.js"></script>
+
+
+
+<div id="js-pjax">
+    
+     
+</div>
+
+
+    
+<script src="/js/extend/covercolor/local.js"></script>
+
+        
+
+    <script>
+  let pjaxSelectors = [
+    'title',
+    '#body-wrap',
+    '#site-config',
+    'meta[name="description"]',
+    '#js-pjax'
+  ]
+  
+  const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+  })
+
+  document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+</script>
+    
+</div>
+        
+     
+        <div class="needEndHide" id="nav-music" onclick="acrylic.musicToggle()">
+    <div id="nav-music-hoverTips">音乐已暂停</div>
+    <meting-js id="1708664797" server="tencent" type="playlist" mutex="true"
+        preload="none" data-lrctype="0" order="random" theme="var(--heo-main)"></meting-js>
+</div>
+    
+    </body>
+</html>
+<script>const posts=["posts/51917/","posts/47871/","posts/16107/","posts/1/","posts/65491/","posts/1595/","posts/44121/","posts/44313/","posts/20098/","posts/60718/","posts/42970/","posts/62703/","posts/32224/","posts/10588/","posts/6212/","posts/18589/","posts/17325/","posts/33260/","posts/19428/","posts/62499/","posts/541/","posts/38447/","posts/59648/","posts/9231/","posts/37501/","posts/41655/","posts/49164/","posts/62824/"];function toRandomPost(){ window.pjax ? pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]) : window.open('/'+posts[Math.floor(Math.random()*posts.length)], "_self"); };</script>

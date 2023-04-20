@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>继承与派生 | Ethereal</title>
+<noscript>开启Javascript是必要的</noscript>
+<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+<link rel="apple-touch-icon" href="/img/favicon.ico">
+<meta name="apple-mobile-web-app-title" content="Ethereal">
+<link rel="bookmark" href="/img/favicon.ico">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/img/favicon.ico">
+<meta name="description" content="C++的属性C++ 有三大属性封装继承多态封装的内容在前几节课已经讲过了，现在就来讲讲继承的概念程序代码每个文章对于知识点的讲解都是围绕着一个程序的展开，所以先给出程序代码12345678910111">
+<meta name="theme-color" content="#1C1C1F">
+<link rel="stylesheet" href="/css/var.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    
+
+<link rel="stylesheet" href="/lib/snackbar.min.css">
+
+
+<script src="/lib/qrcode.min.js"></script>
+
+
+    
+<script src="https://cdn.staticfile.org/twikoo/1.6.10/twikoo.all.min.js"></script>
+
+
+
+
+
+<script>var GLOBALCONFIG = {"root":"/","runtime":"2022-12-27 00:00:00","lazyload":{"enable":false,"error":"/img/acrylic.png"},"hightlight":{"enable":true,"limit":200},"lightbox":true,"randomlinks":false,"lang":{"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"recent":"最近","yesterday":"昨天","berforeyesterday":"前天","daybefore":"天前","runtime":"天"},"sayhello":{"morning":"早上好","noon":"中午好","afternoon":"下午好","night":"晚上好","goodnight":"晚安","iam":"!  我是"},"search":{"empty":"搜索结果为空","hit":"已为您找到 ${query} 条结果","placeholder":"输入关键词快速查找"}},"covercolor":true};</script><script id="site-config">var PAGECONFIG = {"is_home":false,"is_post":true,"is_page":false,"page":false,"toc":true,"comment":true};</script>
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body id="body">
+        
+        <div id="console" style="zoom: 1;" class="">
+    <div class="close-btn" onclick="acrylic.hideConsole()" href="javascript:void(0);">
+        <i class="fas fa-circle-xmark"></i>
+    </div>
+    <div class="button-group">
+        <div class="console-btn-item"> <a class="darkmode_switchbutton" onclick="acrylic.switchDarkMode()" title="显示模式切换"
+                href="javascript:void(0);" rel="external nofollow" data-pjax-state=""><i class="fas fa-moon"
+                    style="font-size: 1rem;"></i></a></div>
+        
+        <div class="console-btn-item" id="consoleFPS" onclick="acrylic.FPSToggle()" title="帧率显示开关"><a class="FPS-switch"
+                data-pjax-state=""><i class="fas fa-gauge"></i></a></div>
+    </div>
+    <div class="console-mask" onclick="acrylic.hideConsole()" href="javascript:void(0);" rel="external nofollow"></div>
+</div>
+        <div id="sidebar" style="zoom: 1;">
+    <div id="menu-mask" style="display: none;"></div>
+    <div id="sidebar-menus" class>
+        <span class="sidebar-menu-item-title">功能</span>
+        <div class="sidebar-menu-item">
+            <a class="darkmode_switchbutton menu-child" onclick="acrylic.switchDarkMode()" title="显示模式切换"
+                href="javascript:void(0);" rel="external nofollow">
+                <i class="fas fa-moon" style="font-size: 1rem;"></i>
+                <span>显示模式</span>
+            </a>
+        </div>
+        
+            <div class="back-menu-list-groups">
+    
+      
+      <div class="back-menu-list-group">
+        <div class="back-menu-list-title">
+          我的
+        </div>
+        <div class="back-menu-list">
+          
+            
+            <a class="back-menu-item" href="/" rel="external nofollow" title="博客">
+              <img class="back-menu-item-icon" src="/img/favicon.ico" loading="lazy">
+              <span class="back-menu-item-text">
+                博客
+              </span>
+            </a>
+          
+        </div>
+      </div>
+    
+  </div>
+  
+        
+        <div class="menus_items">
+    
+        <div class="menus_item">
+            
+                <a class="site-page" href="javascript:void(0);" rel="external nofollow">
+                    <span> 文库</span>
+                </a>
+                <ul class="menus_item_child">
+                    
+                        <li>
+                            <a class="site-page child" href="/archives/">
+                                <i class="fas fa-box-archive"></i>
+                                <span> 文章列表</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/categories/">
+                                <i class="fas fa-cube"></i>
+                                <span> 全部分类</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/tags/">
+                                <i class="fas fa-tags"></i>
+                                <span> 全部标签</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/talk" rel="external nofollow">
+                    <span> 即刻</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/list" rel="external nofollow">
+                    <span> 清单</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/links" rel="external nofollow">
+                    <span> 友人帐</span>
+                </a>
+             
+        </div>
+    
+</div>
+        <span class="sidebar-menu-item-title">标签</span>
+        <div class="card-widget card-tags card-archives card-webinfo card-allinfo">
+            <div class="item-headline">
+                <i class="fas fa-tags"></i>
+                <span>标签</span>
+            </div>
+            <div class="card-tag-cloud">
+                
+                    <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1em; color: #d3d3d3">算法
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%99%9A%E5%9F%BA%E7%B1%BB/" style="font-size: 1em; color: #d3d3d3">虚基类
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/CASPP/" style="font-size: 1em; color: #d3d3d3">CASPP
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1em; color: #d3d3d3">计算机组成原理
+                        <sup>3</sup>
+                    </a>
+                
+                    <a href="/tags/SRTP%E9%A1%B9%E7%9B%AE/" style="font-size: 1em; color: #d3d3d3">SRTP项目
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" style="font-size: 1em; color: #d3d3d3">C++基础学习
+                        <sup>4</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1em; color: #d3d3d3">数据结构
+                        <sup>3</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1em; color: #d3d3d3">操作系统
+                        <sup>2</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1em; color: #d3d3d3">数据库
+                        <sup>3</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B/" style="font-size: 1em; color: #d3d3d3">关系模型
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F/" style="font-size: 1em; color: #d3d3d3">完整性约束
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/SQL%E8%AF%AD%E8%A8%80/" style="font-size: 1em; color: #d3d3d3">SQL语言
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/" style="font-size: 1em; color: #d3d3d3">算法分析
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90%E5%AE%9E%E9%AA%8C/" style="font-size: 1em; color: #d3d3d3">算法设计与分析实验
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/C-%E4%BD%9C%E4%B8%9A/" style="font-size: 1em; color: #d3d3d3">C++作业
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86/" style="font-size: 1em; color: #d3d3d3">计算机存储原理
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%AD%97%E4%B8%8E%E5%AD%97%E8%8A%82/" style="font-size: 1em; color: #d3d3d3">字与字节
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%BB%A7%E6%89%BF%E4%B8%8E%E6%B4%BE%E7%94%9F/" style="font-size: 1em; color: #d3d3d3">继承与派生
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/" style="font-size: 1em; color: #d3d3d3">命名规则
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%BB%A7%E6%89%BF%E7%9A%84%E6%80%9D%E6%83%B3/" style="font-size: 1em; color: #d3d3d3">继承的思想
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" style="font-size: 1em; color: #d3d3d3">C++ 基础学习
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%AD%A6%E4%B9%A0/" style="font-size: 1em; color: #d3d3d3">面向对象学习
+                        <sup>2</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%B8%B8%E6%88%90%E5%91%98/" style="font-size: 1em; color: #d3d3d3">常成员
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E9%9D%99%E6%80%81%E6%88%90%E5%91%98/" style="font-size: 1em; color: #d3d3d3">静态成员
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%AF%B9%E8%B1%A1%E6%88%90%E5%91%98/" style="font-size: 1em; color: #d3d3d3">对象成员
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%8F%8B%E5%85%83/" style="font-size: 1em; color: #d3d3d3">友元
+                        <sup>1</sup>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</div>    
+        
+            <div class="post" id="body-wrap">
+                <header class="post-bg" id="page-header">
+    <nav id="nav" class="show">
+    <div id="nav-group">
+        <div id="blog_name">
+            
+                <div class="back-home-button" tabindex="-1">
+                    <i class="back-home-button-icon fas fa-grip-vertical"></i>
+                    <div class="back-menu-list-groups">
+    
+      
+      <div class="back-menu-list-group">
+        <div class="back-menu-list-title">
+          我的
+        </div>
+        <div class="back-menu-list">
+          
+            
+            <a class="back-menu-item" href="/" rel="external nofollow" title="博客">
+              <img class="back-menu-item-icon" src="/img/favicon.ico" loading="lazy">
+              <span class="back-menu-item-text">
+                博客
+              </span>
+            </a>
+          
+        </div>
+      </div>
+    
+  </div>
+  
+                </div>
+            
+            <a id="site-name" href="/" title="返回博客主页">
+                    
+                        <span class="heoicon">Ethereal</span>
+                    
+            </a>
+        </div>
+        <div id="page-name-mask">
+            <div id="page-name">
+                <a id="page-name-text" onclick="acrylic.toTop()">继承与派生</a>
+            </div>
+        </div>
+        <div id="menus">
+            <div class="menus_items">
+    
+        <div class="menus_item">
+            
+                <a class="site-page" href="javascript:void(0);" rel="external nofollow">
+                    <span> 文库</span>
+                </a>
+                <ul class="menus_item_child">
+                    
+                        <li>
+                            <a class="site-page child" href="/archives/">
+                                <i class="fas fa-box-archive"></i>
+                                <span> 文章列表</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/categories/">
+                                <i class="fas fa-cube"></i>
+                                <span> 全部分类</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/tags/">
+                                <i class="fas fa-tags"></i>
+                                <span> 全部标签</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/talk" rel="external nofollow">
+                    <span> 即刻</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/list" rel="external nofollow">
+                    <span> 清单</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/links" rel="external nofollow">
+                    <span> 友人帐</span>
+                </a>
+             
+        </div>
+    
+</div>
+        </div>
+        <!-- <div id="nav-left">
+            <div id="fps-group">
+                <div id="fps">145</div><span class="fpsText">FPS</span>
+            </div>
+        </div> -->
+        <div id="nav-right">
+            
+    <div class="nav-button only-home" id="travellings_button">
+        <a class="site-page"  target="_blank" rel="noopener external nofollow" href="https://www.travellings.cn/go.html" title="开往-友链接力"  width="120">
+            <i class="fa-solid fa-train-subway" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+
+    <div class="nav-button" id="randomPost_button">
+        <a class="site-page" onclick="toRandomPost()"
+            title="随机前往一个文章">
+            <i class="fas fa-shuffle" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+
+
+    <div class="nav-button" id="nav-console">
+        <a class="console_switchbutton" onclick="acrylic.showConsole()"
+        title="显示中控台" href="javascript:void(0);" rel="external nofollow">
+        <i class="fas fa-bars-progress" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+<div class="nav-button" id="nav-totop" onclick="acrylic.toTop()">
+    <a class="totopbtn">
+        <i class="fas fa-arrow-up"></i>
+        <span id="percent">0</span>
+    </a>
+</div>
+<div id="toggle-menu">
+    <a class="site-page">
+        <i class="fas fa-bars fa-fw" style="font-size: 1rem;"></i>
+    </a>
+</div>
+        </div>
+    </div>
+</nav>
+    
+        <div class="coverdiv" id="coverdiv">
+    <img id="post-cover" class="nolazyload" src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/20230331100001.png" alt="cover">
+</div>
+<div id="post-info">
+    <div id="post-firstinfo">
+        <div class="meta-firstline">
+            <a class="post-meta-original" title="该文章为原创文章，注意版权协议">
+                原创
+            </a>
+            <span class="post-meta-categories">
+                
+                    <a class="post-meta-categories" href="/categories/%E5%A4%A7%E4%BA%8C%E8%AF%BE%E7%A8%8B/">大二课程</a>
+                
+            </span>
+            <div class="tag_share">
+                <div class="post-meta__tag-list">
+                    
+                        <a class="post-meta__tags" href="/tags/%E7%BB%A7%E6%89%BF%E4%B8%8E%E6%B4%BE%E7%94%9F/">
+                            <span class="tags-punctuation">#</span>
+                            <span class="tags-name">继承与派生</span>
+                        </a>
+                    
+                        <a class="post-meta__tags" href="/tags/%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/">
+                            <span class="tags-punctuation">#</span>
+                            <span class="tags-name">命名规则</span>
+                        </a>
+                    
+                        <a class="post-meta__tags" href="/tags/%E7%BB%A7%E6%89%BF%E7%9A%84%E6%80%9D%E6%83%B3/">
+                            <span class="tags-punctuation">#</span>
+                            <span class="tags-name">继承的思想</span>
+                        </a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1 class="post-title">继承与派生</h1>
+    <div id="post-meta">
+        <div class="meta-secondline">
+            <span class="post-meta-date" title="发布于">
+                <i class="post-meta-icon fa-fw fas fa-calendar"></i>
+                <time datetime="2023-03-31T09:53:31+08:00"></time>
+            </span>
+            
+            
+            
+                
+                    <span class="post-meta-wordcount">
+                        <i class="fas fa-file-word fa-fw post-meta-icon" title="文章字数"></i>
+                        <span class="word-count">2.7k</span>
+                    </span>
+                
+                
+                    <span class="post-meta-time">
+                        <i class="fas fa-clock post-meta-icon" title="阅读耗时"></i>
+                        <span>10 min</span>
+                    </span>
+                
+            
+            
+                
+        </div>
+    </div>
+</div>
+<section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg"
+    xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+        <path id="gentle-wave"
+            d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path>
+    </defs>
+    <g class="parallax">
+        <use href="#gentle-wave" x="48" y="0"></use>
+        <use href="#gentle-wave" x="48" y="3"></use>
+        <use href="#gentle-wave" x="48" y="5"></use>
+        <use href="#gentle-wave" x="48" y="7"></use>
+    </g>
+</svg>
+</section>
+        
+</header>
+                <main class="layout" id="content-inner">
+    <div id="post">
+        <article class="post-content" id="article-container">
+            <h2 id="C-的属性"><a href="#C-的属性" class="headerlink" title="C++的属性"></a>C++的属性</h2><p>C++ 有三大属性</p>
+<ul>
+<li>封装</li>
+<li>继承</li>
+<li>多态</li>
+</ul>
+<p>封装的内容在前几节课已经讲过了，现在就来讲讲继承的概念</p>
+<h2 id="程序代码"><a href="#程序代码" class="headerlink" title="程序代码"></a>程序代码</h2><p>每个文章对于知识点的讲解都是围绕着一个程序的展开，所以先给出程序代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//继承与派生</span></span><br><span class="line"><span class="comment">//编写Display函数，输出学生数据</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>  _CRT_SECURE_NO_WARNINGS</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CMyDate</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> nYear;</span><br><span class="line">	<span class="type">int</span> nMonth;</span><br><span class="line">	<span class="type">int</span> nDay;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">CMyDate</span>(<span class="type">int</span> y, <span class="type">int</span> m, <span class="type">int</span> d) &#123;</span><br><span class="line">		<span class="built_in">setData</span>(y, m, d);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//设置数据的对外接口</span></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">setData</span><span class="params">(<span class="type">int</span> y, <span class="type">int</span> m, <span class="type">int</span> d)</span> </span>&#123;</span><br><span class="line">		nYear = y;</span><br><span class="line">		nMonth = m;</span><br><span class="line">		nDay = d;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">inputData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;输入出生日期:&quot;</span>;</span><br><span class="line">		cin &gt;&gt; nYear &gt;&gt; nMonth &gt;&gt; nDay;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CPerson</span> &#123;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">	CMyDate birthday;</span><br><span class="line">	<span class="type">char</span> sName[<span class="number">11</span>];</span><br><span class="line">	<span class="type">char</span> sSex[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">CPerson</span>(<span class="type">const</span> <span class="type">char</span>* sName, <span class="type">const</span> <span class="type">char</span>* sSex, <span class="type">int</span> y, <span class="type">int</span> m, <span class="type">int</span> d):<span class="built_in">birthday</span>(y, m, d)&#123;</span><br><span class="line">		<span class="keyword">if</span> (sName) &#123;</span><br><span class="line">			<span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;sName, sName);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;sName, <span class="string">&quot;无名字&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (sSex) &#123;</span><br><span class="line">			<span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;sSex, sSex);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;sSex, <span class="string">&quot;男&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">setData</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* sName, <span class="type">const</span> <span class="type">char</span>* sSex, <span class="type">int</span> y, <span class="type">int</span> m, <span class="type">int</span> d)</span> </span>&#123;</span><br><span class="line">		<span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;sName, sName?sName:<span class="string">&quot;无&quot;</span>);</span><br><span class="line">		<span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;sSex, sSex? sSex : <span class="string">&quot;无&quot;</span>);</span><br><span class="line">		birthday.<span class="built_in">setData</span>(y, m, d);<span class="comment">//成员对象</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">inputData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	       cout&lt;&lt; <span class="string">&quot;输入姓名，性别:&quot;</span> &lt;&lt; endl;</span><br><span class="line">		   cin &gt;&gt; sName &gt;&gt; sSex;</span><br><span class="line">		   birthday.<span class="built_in">inputData</span>();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//CStudent子类,父类的private子类不成功继承,所以protected</span></span><br><span class="line"><span class="comment">//子类sName覆盖</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CStudent</span> :<span class="keyword">public</span> CPerson &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> nId;</span><br><span class="line">	<span class="type">char</span> sClass[<span class="number">33</span>];</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">//(不存在默认构造函数)父类必须带参构造，先于子类</span></span><br><span class="line">	<span class="built_in">CStudent</span>(<span class="type">int</span> nId=<span class="number">1000000</span>, <span class="type">const</span> <span class="type">char</span>* sClass=<span class="string">&quot;未初始化&quot;</span>,</span><br><span class="line">		<span class="type">const</span> <span class="type">char</span>* sName=<span class="string">&quot;未初始化&quot;</span>, <span class="type">const</span> <span class="type">char</span>* sSex = <span class="string">&quot;男&quot;</span>, <span class="type">int</span> y = <span class="number">1900</span>, <span class="type">int</span> m = <span class="number">1</span>, <span class="type">int</span> d = <span class="number">1</span>)</span><br><span class="line">		:<span class="built_in">CPerson</span>(sName, sSex, y, m, d)&#123;                <span class="comment">//构造父类和构造成员对象类似,构造父类写类名</span></span><br><span class="line">		<span class="keyword">this</span>-&gt;nId = nId;</span><br><span class="line">		<span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;sClass,sClass ? sClass : <span class="string">&quot;无&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">setData</span><span class="params">(<span class="type">int</span> nId, <span class="type">const</span> <span class="type">char</span>* sClass,</span></span></span><br><span class="line"><span class="params"><span class="function">		<span class="type">const</span> <span class="type">char</span>* sName, <span class="type">const</span> <span class="type">char</span>* sSex, <span class="type">int</span> y, <span class="type">int</span> m, <span class="type">int</span> d)</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">		<span class="keyword">this</span>-&gt;nId = nId;</span><br><span class="line">		<span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;sClass, sClass ? sClass : <span class="string">&quot;无&quot;</span>);</span><br><span class="line">		<span class="comment">//setData1(sName, sSex, y, m, d);//继承的父类的setData1,在父类与子类名字不同的时候可以这么使用</span></span><br><span class="line">		CPerson::<span class="built_in">setData</span>(sName, sSex, y, m, d);<span class="comment">//子类和父类函数名字相同，想要使用父类的函数,进行域限定 ::  两个冒号，域限定符号</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">input</span><span class="params">()</span></span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;请输入学号和班级&quot;</span> &lt;&lt; endl;</span><br><span class="line">		cin &gt;&gt; nId &gt;&gt; sClass;</span><br><span class="line">		CPerson::<span class="built_in">inputData</span>();<span class="comment">//子类只负责子类的事情，其余的让父类来完成</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="function">CStudent <span class="title">stu1</span><span class="params">(<span class="number">2021114062</span>,<span class="string">&quot;计算机02&quot;</span>,<span class="string">&quot;Liu&quot;</span>,<span class="string">&quot;男&quot;</span>,<span class="number">2003</span>,<span class="number">6</span>,<span class="number">14</span>)</span></span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>什么是继承：继承允许我们依据另一个类来定义一个类。当创建一个类时，您不需要重新编写新的数据成员和成员函数，只需指定新建的类继承了一个已有的类的成员即可。这个已有的类称为<strong>基类</strong>，新建的类称为<strong>派生类</strong>。</p>
+<p>例如：在程序中，类CStudent继承了Cperson的类，我们称Cperson类为<code>基类</code>，CStudent类为<code>派生类</code>。但是经常称为<code>子类</code>和<code>父类</code>的关系</p>
+<p>我们下面将从多个角度来分析子类与父类</p>
+<h2 id="继承的命名规则"><a href="#继承的命名规则" class="headerlink" title="继承的命名规则"></a>继承的命名规则</h2><p>在程序中，子类继承父类类的命名规则是<strong>class CStudent :public CPerson</strong> </p>
+<p>为什么这个地方采用public呢，其实命名的形式是</p>
+<p><code>class derived-class: access-specifier base-class</code>,对于access-specifier,被称为<code>访问修饰符</code>,可以是 private,public,protected,的任意一种，如果不显示的表示出来，则默认的是private，在日常的使用和开发中，我们大部分情况下使用public,关于这三者的区别</p>
+<ul>
+<li><strong>公有继承（public）：</strong>当一个类派生自<strong>公有</strong>基类时，基类的<strong>公有</strong>成员也是派生类的<strong>公有</strong>成员，基类的<strong>保护</strong>成员也是派生类的<strong>保护</strong>成员，基类的<strong>私有</strong>成员不能直接被派生类访问，但是可以通过调用基类的<strong>公有</strong>和<strong>保护</strong>成员来访问。</li>
+<li><strong>保护继承（protected）：</strong> 当一个类派生自<strong>保护</strong>基类时，基类的<strong>公有</strong>和<strong>保护</strong>成员将成为派生类的<strong>保护</strong>成员。</li>
+<li><strong>私有继承（private）：</strong>当一个类派生自<strong>私有</strong>基类时，基类的<strong>公有</strong>和<strong>保护</strong>成员将成为派生类的<strong>私有</strong>成员。</li>
+</ul>
+<p>需要注意的是:</p>
+<p>一个派生类继承了所有的基类方法，但下列情况除外：</p>
+<ul>
+<li>基类的构造函数、析构函数和拷贝构造函数。</li>
+<li>基类的重载运算符。</li>
+<li>基类的友元函数。</li>
+</ul>
+<h2 id="protected"><a href="#protected" class="headerlink" title="protected"></a>protected</h2><p>在<code>CPerson</code>类中，我们发现，对于变量的定义不是在<code>private</code>下，而是换成了<code>protected</code>的范围内，所以，什么是protected呢，为什么要进行privated的限制呢？</p>
+<p><strong>protected</strong>:protected的正是为了继承而诞生了，假如父类的私有成员的访问权限是private，当子类继承了父类以后，子类的成员函数如果像对父类进行成员的访问，此时是访问不了的，因为private的封装性，保证了父类的私有函数只能由父类的成员函数来访问，此时我们把private换成protected，就可以使子类来访问父类中的私有函数。</p>
+<p>一个类, 如果希望, 它的成员, 可以被自己的子类(派生类)直接访问,但是, 又不想被外部访问那么就可以把这些成员, 定义为 protected访问权限</p>
+<h2 id="子类的构造函数"><a href="#子类的构造函数" class="headerlink" title="子类的构造函数"></a>子类的构造函数</h2><p>由于子类继承了父类，子类可以直接使用父类的成员函数，父类的私有变量等等，所以在构造函数的时候，不仅要为子类本身的私有变量赋值，并且要为父类的私有变量赋值，需要注意的是</p>
+<p>子类不存在默认的构造函数，必须显示的构造。并且父类必须带参构造，<strong>构造要先于子类</strong> </p>
+<p>我们看一下程序中是如何进行子类的构造函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CStudent</span>(<span class="type">int</span> nId=<span class="number">1000000</span>, <span class="type">const</span> <span class="type">char</span>* sClass=<span class="string">&quot;未初始化&quot;</span>,</span><br><span class="line">		<span class="type">const</span> <span class="type">char</span>* sName=<span class="string">&quot;未初始化&quot;</span>, <span class="type">const</span> <span class="type">char</span>* sSex = <span class="string">&quot;男&quot;</span>, <span class="type">int</span> y = <span class="number">1900</span>, <span class="type">int</span> m = <span class="number">1</span>, <span class="type">int</span> d = <span class="number">1</span>)</span><br><span class="line">		:<span class="built_in">CPerson</span>(sName, sSex, y, m, d)&#123;</span><br><span class="line">                <span class="keyword">this</span>-&gt;nId = nId;</span><br><span class="line">		<span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;sClass,sClass ? sClass : <span class="string">&quot;无&quot;</span>);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>具体分析一下这种构造形式：</p>
+<p>1.对于</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">（<span class="type">int</span> nId=<span class="number">1000000</span>, <span class="type">const</span> <span class="type">char</span>* sClass=<span class="string">&quot;未初始化&quot;</span>,<span class="type">const</span> <span class="type">char</span>* sName=<span class="string">&quot;未初始化&quot;</span>, <span class="type">const</span> <span class="type">char</span>* sSex = <span class="string">&quot;男&quot;</span>, <span class="type">int</span> y = <span class="number">1900</span>, <span class="type">int</span> m = <span class="number">1</span>, <span class="type">int</span> d = <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这一部分，是当在主函数调用构造函数时，如果没有参数，则默认参数如上。 其中nId和sClass都是CSstudent中的变量，sName，sSex,以及y，m，d都是CPerson中的变量。需要注意的是，CPerson中有<code>对象成员</code>CMyDate birthday,所以y,m,d其实是CMyDate对象的私有变量。上文中强调，对于父类的构造，需要先于子类的构造，这个与上文讲过的对象成员的构造一模一样，由于子类的构造是在构造函数的函数体内，所以如果我们想要父类的构造先于子类，那么只能在函数体外构造，所以程序中用了这样的形式</p>
+<p><code>CPerson(sName,sSex,y,m,d)</code>其实，这是调用了父类的构造函数，我们看父类的构造函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CPerson</span>(<span class="type">const</span> <span class="type">char</span>* sName, <span class="type">const</span> <span class="type">char</span>* sSex, <span class="type">int</span> y, <span class="type">int</span> m, <span class="type">int</span> d):<span class="built_in">birthday</span>(y, m, d)&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于birthday是对象成员，所以必须在CPerson 对象的构造之前完成。与上一篇文章不同的地方是，在上一篇文章中，在形参列表中没有y,m,d这些变量，而是直接采用了birthday(2003,06,14)这种形式，只不过用参数来表示的形式更加的灵活，可以自定义birthday中的值，而不是采取默认值</p>
+<ol start="2">
+<li></li>
+</ol>
+<p>我们发现，在子类函数的构造函数中，实际上是通过<strong>（调用父类构造函数+自身私有变量的赋值）</strong>这种形式来进行构造的，通过这个例子，我们应该明确一种思想，就是子类继承了父类，但是子类的构造只需要把只属于子类的变量进行初始化即可，继承自父类的变量仍然由父类自身初始化。这种思想在后面的setData函数和inputData函数中仍有体现</p>
+<h2 id="函数接口"><a href="#函数接口" class="headerlink" title="函数接口"></a>函数接口</h2><p>从上面的的析构函数中容易看出子类在对其成员初始化的时候，是非常麻烦的，所以我们应当为每个类都设置一个函数接口就是<code>inputData</code>和<code>setData</code>这两个函数，其中input 函数是输入数据，用于初始化的时候使用，而setData函数则是设置数据，用于设置的时候使用，这样就方便了我们对类的成员的设定。但是这样也会出现很多问题需要解决</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p><code>  CPerson</code>类中由对象成员CMyDate birthday,由于birthday既是成员又是一个类，所以在CPerson的setData和inputData函数里面，我们可以直接调用CMyDate中的函数来使用，</p>
+<p>正如程序中使用的那样直接使用**birthday.setData(y, m, d)<strong>和</strong>birthday.inputData()**即可，但是在CStudent中没有CPerson的对象成员，所以无法像birthday那样调用。由于CSstudent是CPerson的子类，所以可以直接调用CPerson中的inputData和setData函数来使用。</p>
+<p><strong>BUT</strong> 此时出现了一个问题，就是在CSstudent中有自己的setData函数，那么（<strong>当父类函数与子类函数重名的时候，父类函数会被覆盖</strong>），从而无法调用父类函数来对父类的私有成员进行赋值，所以我们需要使用域限定！</p>
+<h3 id="域限定"><a href="#域限定" class="headerlink" title="域限定"></a>域限定</h3><p>为了解决父类函数和子类函数重名的问题，引出了域限定这个概念</p>
+<p>什么是域限定：</p>
+<p>关键字:<code>::</code></p>
+<p>使用方式：正如程序中所示<code>CPerson::setData(sName, sSex, y, m, d)</code>在子函数中使用那样，域限定的使用可以显示的说明一个函数到底是子类的函数还是父类的函数</p>
+<p>域限定并不少见，无论是上一篇文章的静态成员的类外初始化，还是 成员函数在类外的定义，都是需要域限定来显示标明范围</p>
+<h2 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h2><p>   通过上面的函数接口，我们就很容易的想到，子类继承父类，但是在子类的成员设置或者函数的初始化，都要求子类只对专属于自己的私有成员进行初始化，属于父类的成员需要调用父类的函数来初始化。</p>
+
+        </article>
+        <div class="post-tools" id="post-tools">
+            <div class="post-tools-left">
+                
+                <div class="share-link mobile">
+    <div class="share-qrcode">
+        <div class="share-button" title="使用手机访问这篇文章">
+            <i class="fas fa-qrcode"></i>
+        </div>
+        <div class="share-main">
+            <div class="share-main-all">
+                <div id="qrcode" title="https://www.blogethereal.top/posts/60718/">
+                </div>
+                <div class="reward-dec">使用手机访问这篇文章</div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            new QRCode(document.getElementById("qrcode"), "https://www.blogethereal.top/posts/60718/");
+        </script>
+    </div>
+</div>
+                <div class="share-link weibo"><a class="share-button" target="_blank"
+    href="https://service.weibo.com/share/share.php?title=继承与派生&amp;url=https://www.blogethereal.top/posts/60718/&amp;pic=https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/20230331100001.png"
+    title="分享到微博" rel="noopener external nofollow noreferrer noopener">
+    <i class="fab fa-weibo" style="font-size:22px"></i>
+</a>
+</div>
+<div class="share-link copyurl">
+<div class="share-button" id="post-share-url" title="复制链接" onclick="acrylic.copyPageUrl()">
+    <i class="fas fa-link"></i>
+</div>
+</div>
+            </div>
+            <div class="post-tools-right">
+                <div class="tag_share">
+                    <div class="post-meta__tag-list">
+                        
+                            <a href="/tags/%E7%BB%A7%E6%89%BF%E4%B8%8E%E6%B4%BE%E7%94%9F/" class="post-meta__tags">
+                                <span class="tags-punctuation">#</span>
+                                继承与派生
+                                <span class="tagsPageCount">1</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/" class="post-meta__tags">
+                                <span class="tags-punctuation">#</span>
+                                命名规则
+                                <span class="tagsPageCount">1</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%BB%A7%E6%89%BF%E7%9A%84%E6%80%9D%E6%83%B3/" class="post-meta__tags">
+                                <span class="tags-punctuation">#</span>
+                                继承的思想
+                                <span class="tagsPageCount">1</span>
+                            </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post-copyright">
+    <div class="post-copyright__author">
+        <a class="post-copyright__original" title="该文章为原创文章，注意版权协议">原创</a>
+        <a class="post-copyright-title" href="#">
+            <span>继承与派生</span>
+        </a>
+    </div>
+    <div class="post-copyright__type">
+        <span class="post-copyright-info" id="post-copyright-url">
+            <a href="/posts/60718/">https://www.blogethereal.top/posts/60718/</a>
+        </span>
+        <button class="post-copyright-copybtn" onclick="acrylic.copyPageUrl()">
+            <i class="fas fa-paste copy-btn"></i>
+        </button>
+    </div>
+    <div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用 <a
+                href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a> 协议，完整转载请注明来自 <a
+                href="/">Ethereal</a>
+            </span>
+        </div>
+</div>
+        <nav class="pagination-post" id="pagination">
+    
+        <div class="prev-post pull-left">
+            <a href="/posts/20098/">
+                <div class="pagination-info">
+                    <div class="label">上一篇</div>
+                    <div class="prev_info">数据库第三章内容梳理</div>
+                </div>
+            </a>
+        </div>
+        <div class="next-post pull-right">
+            <a href="/posts/42970/">
+                <div class="pagination-info">
+                    <div class="label">下一篇</div>
+                    <div class="next_info">面向对象-静态成员</div>
+                </div>
+            </a>
+        </div>
+    
+</nav>
+        
+            <div id="post-comment">
+    <div class="comment-head">
+        <div class="comment-headline">
+            <i class="fas fa-message fa-fw"></i>
+            <span> 评论</span>
+        </div>
+    </div>
+    <div class="comment-wrap">
+        <div id="comment"></div>
+        <script>
+    async function initComment(){
+        var initOptions = Object.assign(
+            {"envId":"https://twikoo.blogethereal.top/","path":"window.location.pathname"},
+            {
+                el: '#comment',
+                onCommentLoaded: function() {
+                    GLOBALCONFIG.lightbox && acrylic.lightbox('#article-container img, #twikoo .tk-content img:not(.tk-owo-emotion)') 
+                }
+            }
+        )
+        await twikoo.init(initOptions)
+             
+    }
+</script>
+    </div>
+</div>
+            
+    </div>
+    <div class="aside-content" id="aside-content">
+    
+    
+        
+        <div class="card-widget card-info">
+    <div class="card-content">
+        <div class="card-info-avatar is-center">
+            <div class="author-info__sayhi" id="author-info__sayhi">
+            </div>
+            <div class="author-info__name">
+                Ethereal
+            </div>
+            <div class="author-info__description">这里记录了我学习过程中的所思所想，生活的点点滴滴<br/>我希望把它们<b>分享</b>给你们，希望大家<b>共同进步</b></div>
+        </div>
+    </div>
+    <div class="banner-button-group">
+        <a class="banner-button" href="/">
+            <i class="fas fa-circle-chevron-right"></i>
+            <span class="banner-button-text">个人主页</span>
+        </a>
+    </div>
+    <div class="card-info-social-icons is-center">
+        
+            <a class="social-icon" target="_blank" rel="noopener" href="https://github.com/HelloEveryonehh" title="Github">
+                <i class="fa-brands fa-github"></i>
+            </a>
+        
+            <a class="social-icon" href="mailto:2848392597@qq.com" title="Mail">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+        
+    </div>
+</div>
+     
+    
+    <div class="sticky_layout">
+        
+            <div class="card-widget" id="card-toc">
+    <div class="item-headline">
+        <i class="fas fa-bars"></i>
+        <span>文章目录</span>
+    </div>
+    <div class="toc-content" id="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-text">C++的属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E4%BB%A3%E7%A0%81"><span class="toc-text">程序代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF"><span class="toc-text">继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF%E7%9A%84%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="toc-text">继承的命名规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#protected"><span class="toc-text">protected</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E7%B1%BB%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-text">子类的构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%8E%A5%E5%8F%A3"><span class="toc-text">函数接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-text">问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%9F%E9%99%90%E5%AE%9A"><span class="toc-text">域限定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E6%83%B3"><span class="toc-text">思想</span></a></li></ol>
+    </div>
+</div>
+            
+        
+            
+        <div class="card-widget card-recent-post">
+    <div class="item-headline">
+        <i class="fas fa-list-ol"></i>
+        <span>最近发布</span>
+    </div>
+    <div class="aside-list">
+        
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/51917/" title="计算机组成原理">
+                    <img
+                        alt="计算机组成原理"
+                        src="/img/hello.png">
+                </a>
+                <div class="content">
+                    
+                    <a class="title" href="/posts/51917/" title="计算机组成原理">
+                        计算机组成原理
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/47871/" title="CSAPP笔记1">
+                    <img
+                        alt="CSAPP笔记1"
+                        src="/img/hello.png">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/posts/47871/">
+                            CSAPP
+                        </a>
+                    
+                    <a class="title" href="/posts/47871/" title="CSAPP笔记1">
+                        CSAPP笔记1
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/16107/" title="Hello World">
+                    <img
+                        alt="Hello World"
+                        src="https://bu.dusays.com/2023/01/23/63cdf7d46a962.webp">
+                </a>
+                <div class="content">
+                    
+                    <a class="title" href="/posts/16107/" title="Hello World">
+                        Hello World
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/1/" title="无标题">
+                    <img
+                        alt="无标题"
+                        src="/img/hello.png">
+                </a>
+                <div class="content">
+                    
+                    <a class="title" href="/posts/1/" title="无标题">
+                        无标题
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/65491/" title="Cpp虚基类">
+                    <img
+                        alt="Cpp虚基类"
+                        src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/010541-16814055413382.jpg">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/posts/65491/">
+                            大二课程
+                        </a>
+                    
+                        <a class="article-recent_post_categories" href="/posts/65491/">
+                            CPP
+                        </a>
+                    
+                    <a class="title" href="/posts/65491/" title="Cpp虚基类">
+                        Cpp虚基类
+                    </a>
+                </div>
+            </div>
+            
+    </div>
+</div>
+     
+        
+    </div>
+</div> 
+</main>
+                <footer id="footer">
+                    <div id="footer_deal">
+    
+    <img class="footer_mini_logo" src="/img/avatar1.webp"
+        title="返回顶部" onclick="acrylic.toTop()">
+    
+</div>
+<div id="heo-footer">
+    
+    
+</div>
+<div id="footer-banner">
+    <div class="footer-banner-links">
+        <div class="footer-banner-left">
+            <div id="footer-banner-tips">
+                <div class="copyright">©2022 - 2023 By
+                    <a class="footer-banner-link" href="/" rel="external nofollow">Ethereal</a>
+                    <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/%E5%8F%88%E6%8B%8D%E4%BA%91_logo5.png"align="absmiddle" width="59px" height="30px" /></a><span>提供加速服务</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-banner-right">
+            <a class="footer-banner-link" href="/rss/">订阅</a>
+            
+                <a class="footer-banner-link" target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index" rel="noopener external nofollow noreferrer noopener">
+                    鲁ICP备2023010775号
+                </a>
+            
+            <a class="footer-banner-link cc" target="_blank" href="https://creativecommons.org/licenses/by/4.0/" title="cc协议">
+                <i class="fa-solid fa-closed-captioning"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+                </footer>
+            </div>
+         
+        <div>
+    <script type="text/javascript" src="/js/utils.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    
+
+<script src="/lib/pjax.min.js"></script>
+
+
+
+<script src="/lib/snackbar.min.js"></script>
+
+
+    
+<script src="/lib/view-image.min.js"></script>
+
+
+
+<div id="js-pjax">
+    
+     
+</div>
+
+
+    
+<script src="/js/extend/covercolor/local.js"></script>
+
+        
+
+    <script>
+  let pjaxSelectors = [
+    'title',
+    '#body-wrap',
+    '#site-config',
+    'meta[name="description"]',
+    '#js-pjax'
+  ]
+  
+  const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+  })
+
+  document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+</script>
+    
+</div>
+        
+     
+        <div class="needEndHide" id="nav-music" onclick="acrylic.musicToggle()">
+    <div id="nav-music-hoverTips">音乐已暂停</div>
+    <meting-js id="1708664797" server="tencent" type="playlist" mutex="true"
+        preload="none" data-lrctype="0" order="random" theme="var(--heo-main)"></meting-js>
+</div>
+    
+    </body>
+</html>
+<script>const posts=["posts/51917/","posts/47871/","posts/16107/","posts/1/","posts/65491/","posts/1595/","posts/44121/","posts/44313/","posts/20098/","posts/60718/","posts/42970/","posts/62703/","posts/32224/","posts/10588/","posts/6212/","posts/18589/","posts/17325/","posts/33260/","posts/19428/","posts/62499/","posts/541/","posts/38447/","posts/59648/","posts/9231/","posts/37501/","posts/41655/","posts/49164/","posts/62824/"];function toRandomPost(){ window.pjax ? pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]) : window.open('/'+posts[Math.floor(Math.random()*posts.length)], "_self"); };</script>

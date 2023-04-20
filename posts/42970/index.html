@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>面向对象-静态成员 | Ethereal</title>
+<noscript>开启Javascript是必要的</noscript>
+<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+<link rel="apple-touch-icon" href="/img/favicon.ico">
+<meta name="apple-mobile-web-app-title" content="Ethereal">
+<link rel="bookmark" href="/img/favicon.ico">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/img/favicon.ico">
+<meta name="description" content="静态成员、友元、常成员、对象成员   今天刚刚结束了C++的第五周课程，老师讲的非常的好，本人收获颇丰，故此记录，以备复习之用。本文主要的内容就是围绕着静态成员，友元，常成员和成员对象展开的。类每一讲">
+<meta name="theme-color" content="#1C1C1F">
+<link rel="stylesheet" href="/css/var.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    
+
+<link rel="stylesheet" href="/lib/snackbar.min.css">
+
+
+<script src="/lib/qrcode.min.js"></script>
+
+
+    
+<script src="https://cdn.staticfile.org/twikoo/1.6.10/twikoo.all.min.js"></script>
+
+
+
+
+
+<script>var GLOBALCONFIG = {"root":"/","runtime":"2022-12-27 00:00:00","lazyload":{"enable":false,"error":"/img/acrylic.png"},"hightlight":{"enable":true,"limit":200},"lightbox":true,"randomlinks":false,"lang":{"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"recent":"最近","yesterday":"昨天","berforeyesterday":"前天","daybefore":"天前","runtime":"天"},"sayhello":{"morning":"早上好","noon":"中午好","afternoon":"下午好","night":"晚上好","goodnight":"晚安","iam":"!  我是"},"search":{"empty":"搜索结果为空","hit":"已为您找到 ${query} 条结果","placeholder":"输入关键词快速查找"}},"covercolor":true};</script><script id="site-config">var PAGECONFIG = {"is_home":false,"is_post":true,"is_page":false,"page":false,"toc":true,"comment":true};</script>
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body id="body">
+        
+        <div id="console" style="zoom: 1;" class="">
+    <div class="close-btn" onclick="acrylic.hideConsole()" href="javascript:void(0);">
+        <i class="fas fa-circle-xmark"></i>
+    </div>
+    <div class="button-group">
+        <div class="console-btn-item"> <a class="darkmode_switchbutton" onclick="acrylic.switchDarkMode()" title="显示模式切换"
+                href="javascript:void(0);" rel="external nofollow" data-pjax-state=""><i class="fas fa-moon"
+                    style="font-size: 1rem;"></i></a></div>
+        
+        <div class="console-btn-item" id="consoleFPS" onclick="acrylic.FPSToggle()" title="帧率显示开关"><a class="FPS-switch"
+                data-pjax-state=""><i class="fas fa-gauge"></i></a></div>
+    </div>
+    <div class="console-mask" onclick="acrylic.hideConsole()" href="javascript:void(0);" rel="external nofollow"></div>
+</div>
+        <div id="sidebar" style="zoom: 1;">
+    <div id="menu-mask" style="display: none;"></div>
+    <div id="sidebar-menus" class>
+        <span class="sidebar-menu-item-title">功能</span>
+        <div class="sidebar-menu-item">
+            <a class="darkmode_switchbutton menu-child" onclick="acrylic.switchDarkMode()" title="显示模式切换"
+                href="javascript:void(0);" rel="external nofollow">
+                <i class="fas fa-moon" style="font-size: 1rem;"></i>
+                <span>显示模式</span>
+            </a>
+        </div>
+        
+            <div class="back-menu-list-groups">
+    
+      
+      <div class="back-menu-list-group">
+        <div class="back-menu-list-title">
+          我的
+        </div>
+        <div class="back-menu-list">
+          
+            
+            <a class="back-menu-item" href="/" rel="external nofollow" title="博客">
+              <img class="back-menu-item-icon" src="/img/favicon.ico" loading="lazy">
+              <span class="back-menu-item-text">
+                博客
+              </span>
+            </a>
+          
+        </div>
+      </div>
+    
+  </div>
+  
+        
+        <div class="menus_items">
+    
+        <div class="menus_item">
+            
+                <a class="site-page" href="javascript:void(0);" rel="external nofollow">
+                    <span> 文库</span>
+                </a>
+                <ul class="menus_item_child">
+                    
+                        <li>
+                            <a class="site-page child" href="/archives/">
+                                <i class="fas fa-box-archive"></i>
+                                <span> 文章列表</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/categories/">
+                                <i class="fas fa-cube"></i>
+                                <span> 全部分类</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/tags/">
+                                <i class="fas fa-tags"></i>
+                                <span> 全部标签</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/talk" rel="external nofollow">
+                    <span> 即刻</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/list" rel="external nofollow">
+                    <span> 清单</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/links" rel="external nofollow">
+                    <span> 友人帐</span>
+                </a>
+             
+        </div>
+    
+</div>
+        <span class="sidebar-menu-item-title">标签</span>
+        <div class="card-widget card-tags card-archives card-webinfo card-allinfo">
+            <div class="item-headline">
+                <i class="fas fa-tags"></i>
+                <span>标签</span>
+            </div>
+            <div class="card-tag-cloud">
+                
+                    <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1em; color: #d3d3d3">算法
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%99%9A%E5%9F%BA%E7%B1%BB/" style="font-size: 1em; color: #d3d3d3">虚基类
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/CASPP/" style="font-size: 1em; color: #d3d3d3">CASPP
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1em; color: #d3d3d3">计算机组成原理
+                        <sup>3</sup>
+                    </a>
+                
+                    <a href="/tags/SRTP%E9%A1%B9%E7%9B%AE/" style="font-size: 1em; color: #d3d3d3">SRTP项目
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" style="font-size: 1em; color: #d3d3d3">C++基础学习
+                        <sup>4</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1em; color: #d3d3d3">数据结构
+                        <sup>3</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1em; color: #d3d3d3">操作系统
+                        <sup>2</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1em; color: #d3d3d3">数据库
+                        <sup>3</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B/" style="font-size: 1em; color: #d3d3d3">关系模型
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F/" style="font-size: 1em; color: #d3d3d3">完整性约束
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/SQL%E8%AF%AD%E8%A8%80/" style="font-size: 1em; color: #d3d3d3">SQL语言
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/" style="font-size: 1em; color: #d3d3d3">算法分析
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90%E5%AE%9E%E9%AA%8C/" style="font-size: 1em; color: #d3d3d3">算法设计与分析实验
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/C-%E4%BD%9C%E4%B8%9A/" style="font-size: 1em; color: #d3d3d3">C++作业
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86/" style="font-size: 1em; color: #d3d3d3">计算机存储原理
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%AD%97%E4%B8%8E%E5%AD%97%E8%8A%82/" style="font-size: 1em; color: #d3d3d3">字与字节
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%BB%A7%E6%89%BF%E4%B8%8E%E6%B4%BE%E7%94%9F/" style="font-size: 1em; color: #d3d3d3">继承与派生
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/" style="font-size: 1em; color: #d3d3d3">命名规则
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%BB%A7%E6%89%BF%E7%9A%84%E6%80%9D%E6%83%B3/" style="font-size: 1em; color: #d3d3d3">继承的思想
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" style="font-size: 1em; color: #d3d3d3">C++ 基础学习
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%AD%A6%E4%B9%A0/" style="font-size: 1em; color: #d3d3d3">面向对象学习
+                        <sup>2</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%B8%B8%E6%88%90%E5%91%98/" style="font-size: 1em; color: #d3d3d3">常成员
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E9%9D%99%E6%80%81%E6%88%90%E5%91%98/" style="font-size: 1em; color: #d3d3d3">静态成员
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%AF%B9%E8%B1%A1%E6%88%90%E5%91%98/" style="font-size: 1em; color: #d3d3d3">对象成员
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%8F%8B%E5%85%83/" style="font-size: 1em; color: #d3d3d3">友元
+                        <sup>1</sup>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</div>    
+        
+            <div class="post" id="body-wrap">
+                <header class="post-bg" id="page-header">
+    <nav id="nav" class="show">
+    <div id="nav-group">
+        <div id="blog_name">
+            
+                <div class="back-home-button" tabindex="-1">
+                    <i class="back-home-button-icon fas fa-grip-vertical"></i>
+                    <div class="back-menu-list-groups">
+    
+      
+      <div class="back-menu-list-group">
+        <div class="back-menu-list-title">
+          我的
+        </div>
+        <div class="back-menu-list">
+          
+            
+            <a class="back-menu-item" href="/" rel="external nofollow" title="博客">
+              <img class="back-menu-item-icon" src="/img/favicon.ico" loading="lazy">
+              <span class="back-menu-item-text">
+                博客
+              </span>
+            </a>
+          
+        </div>
+      </div>
+    
+  </div>
+  
+                </div>
+            
+            <a id="site-name" href="/" title="返回博客主页">
+                    
+                        <span class="heoicon">Ethereal</span>
+                    
+            </a>
+        </div>
+        <div id="page-name-mask">
+            <div id="page-name">
+                <a id="page-name-text" onclick="acrylic.toTop()">面向对象-静态成员</a>
+            </div>
+        </div>
+        <div id="menus">
+            <div class="menus_items">
+    
+        <div class="menus_item">
+            
+                <a class="site-page" href="javascript:void(0);" rel="external nofollow">
+                    <span> 文库</span>
+                </a>
+                <ul class="menus_item_child">
+                    
+                        <li>
+                            <a class="site-page child" href="/archives/">
+                                <i class="fas fa-box-archive"></i>
+                                <span> 文章列表</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/categories/">
+                                <i class="fas fa-cube"></i>
+                                <span> 全部分类</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/tags/">
+                                <i class="fas fa-tags"></i>
+                                <span> 全部标签</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/talk" rel="external nofollow">
+                    <span> 即刻</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/list" rel="external nofollow">
+                    <span> 清单</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/links" rel="external nofollow">
+                    <span> 友人帐</span>
+                </a>
+             
+        </div>
+    
+</div>
+        </div>
+        <!-- <div id="nav-left">
+            <div id="fps-group">
+                <div id="fps">145</div><span class="fpsText">FPS</span>
+            </div>
+        </div> -->
+        <div id="nav-right">
+            
+    <div class="nav-button only-home" id="travellings_button">
+        <a class="site-page"  target="_blank" rel="noopener external nofollow" href="https://www.travellings.cn/go.html" title="开往-友链接力"  width="120">
+            <i class="fa-solid fa-train-subway" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+
+    <div class="nav-button" id="randomPost_button">
+        <a class="site-page" onclick="toRandomPost()"
+            title="随机前往一个文章">
+            <i class="fas fa-shuffle" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+
+
+    <div class="nav-button" id="nav-console">
+        <a class="console_switchbutton" onclick="acrylic.showConsole()"
+        title="显示中控台" href="javascript:void(0);" rel="external nofollow">
+        <i class="fas fa-bars-progress" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+<div class="nav-button" id="nav-totop" onclick="acrylic.toTop()">
+    <a class="totopbtn">
+        <i class="fas fa-arrow-up"></i>
+        <span id="percent">0</span>
+    </a>
+</div>
+<div id="toggle-menu">
+    <a class="site-page">
+        <i class="fas fa-bars fa-fw" style="font-size: 1rem;"></i>
+    </a>
+</div>
+        </div>
+    </div>
+</nav>
+    
+        <div class="coverdiv" id="coverdiv">
+    <img id="post-cover" class="nolazyload" src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/230206-16775101265e7e.jpg" alt="cover">
+</div>
+<div id="post-info">
+    <div id="post-firstinfo">
+        <div class="meta-firstline">
+            <a class="post-meta-original" title="该文章为原创文章，注意版权协议">
+                原创
+            </a>
+            <span class="post-meta-categories">
+                
+                    <a class="post-meta-categories" href="/categories/%E5%A4%A7%E4%BA%8C%E8%AF%BE%E7%A8%8B/">大二课程</a>
+                
+            </span>
+            <div class="tag_share">
+                <div class="post-meta__tag-list">
+                    
+                        <a class="post-meta__tags" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%AD%A6%E4%B9%A0/">
+                            <span class="tags-punctuation">#</span>
+                            <span class="tags-name">面向对象学习</span>
+                        </a>
+                    
+                        <a class="post-meta__tags" href="/tags/%E5%B8%B8%E6%88%90%E5%91%98/">
+                            <span class="tags-punctuation">#</span>
+                            <span class="tags-name">常成员</span>
+                        </a>
+                    
+                        <a class="post-meta__tags" href="/tags/%E9%9D%99%E6%80%81%E6%88%90%E5%91%98/">
+                            <span class="tags-punctuation">#</span>
+                            <span class="tags-name">静态成员</span>
+                        </a>
+                    
+                        <a class="post-meta__tags" href="/tags/%E5%AF%B9%E8%B1%A1%E6%88%90%E5%91%98/">
+                            <span class="tags-punctuation">#</span>
+                            <span class="tags-name">对象成员</span>
+                        </a>
+                    
+                        <a class="post-meta__tags" href="/tags/%E5%8F%8B%E5%85%83/">
+                            <span class="tags-punctuation">#</span>
+                            <span class="tags-name">友元</span>
+                        </a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1 class="post-title">面向对象-静态成员</h1>
+    <div id="post-meta">
+        <div class="meta-secondline">
+            <span class="post-meta-date" title="发布于">
+                <i class="post-meta-icon fa-fw fas fa-calendar"></i>
+                <time datetime="2023-03-30T15:48:16+08:00"></time>
+            </span>
+            
+            
+            
+                
+                    <span class="post-meta-wordcount">
+                        <i class="fas fa-file-word fa-fw post-meta-icon" title="文章字数"></i>
+                        <span class="word-count">1.9k</span>
+                    </span>
+                
+                
+                    <span class="post-meta-time">
+                        <i class="fas fa-clock post-meta-icon" title="阅读耗时"></i>
+                        <span>7 min</span>
+                    </span>
+                
+            
+            
+                
+        </div>
+    </div>
+</div>
+<section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg"
+    xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+        <path id="gentle-wave"
+            d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path>
+    </defs>
+    <g class="parallax">
+        <use href="#gentle-wave" x="48" y="0"></use>
+        <use href="#gentle-wave" x="48" y="3"></use>
+        <use href="#gentle-wave" x="48" y="5"></use>
+        <use href="#gentle-wave" x="48" y="7"></use>
+    </g>
+</svg>
+</section>
+        
+</header>
+                <main class="layout" id="content-inner">
+    <div id="post">
+        <article class="post-content" id="article-container">
+            <h1 id="静态成员、友元、常成员、对象成员"><a href="#静态成员、友元、常成员、对象成员" class="headerlink" title="静态成员、友元、常成员、对象成员"></a>静态成员、友元、常成员、对象成员</h1><p>   今天刚刚结束了C++的第五周课程，老师讲的非常的好，本人收获颇丰，故此记录，以备复习之用。本文主要的内容就是围绕着静态成员，友元，常成员和成员对象展开的。</p>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><p>每一讲课的知识点，老师都是用一个程序为例子来讲解的，所以开篇点题，先把需要用到的类拿出来使用</p>
+<p>第一个是<code>CMyDate</code>的类</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CMyDate</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">int</span> nYear;</span><br><span class="line">	<span class="type">int</span> nMonth;</span><br><span class="line">	<span class="type">int</span> nDay;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">CMyDate</span>(<span class="type">int</span> nYear, <span class="type">int</span> nMonth, <span class="type">int</span> nDay) :<span class="built_in">nYear</span>(nYear),<span class="built_in">nMonth</span>(nMonth),<span class="built_in">nDay</span>(nDay)&#123;&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">Display</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		cout &lt;&lt; nYear &lt;&lt;<span class="string">&quot;-&quot;</span>&lt;&lt; nMonth &lt;&lt;<span class="string">&quot;-&quot;</span>&lt;&lt; nDay;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>第二个是<code>CPlayer</code>的类</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CPlayer</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="comment">//常数据成员,必须在对象创建时初始化</span></span><br><span class="line">	<span class="type">const</span> <span class="type">int</span> NameSize;<span class="comment">//姓名长度</span></span><br><span class="line">	<span class="type">int</span> nId;</span><br><span class="line">	<span class="type">char</span> sName[<span class="number">11</span>];</span><br><span class="line">	CMyDate birthday;<span class="comment">//对象成员,若该成员必须【带参构造】，则必须在对象创建时实施</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">CPlayer</span>(<span class="type">int</span> nIld = <span class="number">0</span>, <span class="type">const</span> <span class="type">char</span>* name = <span class="literal">NULL</span>);<span class="comment">//构造函数</span></span><br><span class="line">	~<span class="built_in">CPlayer</span>();</span><br><span class="line">	<span class="comment">//当进入到构造函数&#123;&#125;里面，表示对象构造完毕</span></span><br><span class="line">	<span class="comment">//故：常数据成员不能在&#123;&#125;里面初始化</span></span><br><span class="line">	<span class="built_in">CPlayer</span>(<span class="type">const</span> CPlayer&amp; p):<span class="built_in">NameSize</span>(<span class="number">11</span>),<span class="built_in">birthday</span>(<span class="number">2003</span> ,<span class="number">06</span> ,<span class="number">14</span>)&#123;</span><br><span class="line">		<span class="keyword">this</span>-&gt;nId = p.nId;</span><br><span class="line">		<span class="built_in">strcpy</span>(<span class="keyword">this</span>-&gt;sName, p.sName);</span><br><span class="line">		<span class="keyword">this</span>-&gt;nObjNum++;<span class="comment">//如果不考虑计数，只需要浅拷贝就行了</span></span><br><span class="line">		<span class="comment">//若不需要【深拷贝】，则可以直接对象赋值</span></span><br><span class="line">		<span class="comment">//*this = p;//this 指向当前对象的指针，*this就是当前对象,省去了上面的步骤</span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="comment">//静态成员不属于对象,而是属于类,它必须进行【类外定义】</span></span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> nObjNum;<span class="comment">//此处仅仅是个声明,需要去外部定义</span></span><br><span class="line"><span class="keyword">public</span>:	</span><br><span class="line">	<span class="comment">//提供访问nObjNum的对外接口</span></span><br><span class="line">	<span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">getObjNum</span><span class="params">()</span> </span>&#123;<span class="comment">//只读 如果想要可读可写，应该是static int&amp; getObjNum();</span></span><br><span class="line">		<span class="keyword">return</span> nObjNum;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//声明友元函数，则该函数可访问private，protected中的成员</span></span><br><span class="line">	<span class="comment">//友元机制破坏了封装机制，一般不要使用</span></span><br><span class="line">	<span class="comment">//新兴语言例如java取消了友元机制</span></span><br><span class="line">	<span class="comment">//友元时单方面的给予，而不是相互的</span></span><br><span class="line">	<span class="function"><span class="keyword">friend</span> <span class="type">void</span> <span class="title">showPlayerNum</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>主程序与函数定义</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//静态数据成员定义与初始化</span></span><br><span class="line"><span class="type">int</span> CPlayer::nObjNum = <span class="number">0</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">在外部定义成员函数：</span></span><br><span class="line"><span class="comment">          1.域限定: CPlay::</span></span><br><span class="line"><span class="comment">	  2.不要写参数默认值</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">CPlayer::<span class="built_in">CPlayer</span>(<span class="type">int</span> nId, <span class="type">const</span> <span class="type">char</span>* name):<span class="built_in">NameSize</span>(<span class="number">11</span>), <span class="built_in">birthday</span>(<span class="number">2003</span>, <span class="number">06</span>, <span class="number">14</span>) &#123;<span class="comment">//表示NameSize在对象创建时初始化</span></span><br><span class="line">	nObjNum++;</span><br><span class="line">	<span class="keyword">this</span>-&gt;nId = nId;</span><br><span class="line">	<span class="keyword">if</span> (name) &#123;</span><br><span class="line">		<span class="built_in">strcpy</span>(sName, name);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="built_in">strcpy</span>(sName, <span class="string">&quot;未命名&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">CPlayer::~<span class="built_in">CPlayer</span>() &#123;</span><br><span class="line">	nObjNum--;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">showPlayerNum</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;玩家人数&quot;</span> &lt;&lt; CPlayer::<span class="built_in">getObjNum</span>() &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">void</span>)</span> </span>&#123;</span><br><span class="line">	CPlayer p1, p2;</span><br><span class="line">	CPlayer* p = <span class="keyword">new</span> <span class="built_in">CPlayer</span>(<span class="number">10086</span>,<span class="string">&quot;张三&quot;</span>);</span><br><span class="line">	<span class="function">CPlayer <span class="title">p3</span><span class="params">(p1)</span></span>;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;玩家人数&quot;</span> &lt;&lt; CPlayer::<span class="built_in">getObjNum</span>() &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">delete</span> p;</span><br><span class="line">	p = <span class="keyword">new</span> CPlayer[<span class="number">100</span>];</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;玩家人数&quot;</span> &lt;&lt; CPlayer::<span class="built_in">getObjNum</span>() &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">delete</span>[] p;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;玩家人数&quot;</span> &lt;&lt; CPlayer::<span class="built_in">getObjNum</span>() &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实大部分的知识点都在注释里面了，但是需要剖丝抽茧的把他细细讲解一下，从而可以更加的清楚</p>
+<h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><p>什么是静态成员:在C++中，我们用<code>static</code>关键字来表示静态成员，例如在<code>Cplayer</code>类中定义了<strong>static int nObjNum;</strong></p>
+<p>存储位置:与C语言相似，静态成员与类的对象不在同一个存储位置，而是当类中声明静态成员的时候，就会自动为该成员分配一块空间</p>
+<p>​        静态成员存储在<code>全局数据区</code>，这也是一个类不同的对象都<code>共享</code>这一个变量的原因。</p>
+<blockquote>
+<p>静态成员的变量不属于对象，而是属于类，所以他必须进行<code>类外定义</code></p>
+</blockquote>
+<p>实际上，并不需要像程序中那样，专门的进行**int CPlayer::nObjNum &#x3D; 0;**的初始化，不赋值则默认的初始化是0</p>
+<p>（补充知识点）一个完整程序的内存分布如下</p>
+<ol>
+<li>代码区：存放函数体的二进制代码，由操作系统进行管理的</li>
+<li>全局数据区：存放静态数据（即使是函数内部的静态局部变量）和全局变量，全局数据区的数据<code>不会因为函数的退出而释放空间</code></li>
+<li>栈区：存放程序内部定义的局部变量，由系统控制，随着程序的退出自动释放空间</li>
+<li>堆区：存放函数内部<code>new</code>出来的动态数据</li>
+</ol>
+<p>参考资料</p>
+<p> <a target="_blank" rel="noopener" href="https://www.runoob.com/cplusplus/cpp-static-members.html">类的静态成员,菜鸟教程</a></p>
+<h2 id="常成员"><a href="#常成员" class="headerlink" title="常成员"></a>常成员</h2><p>​    什么是常成员:用<code>const</code>来修饰的成员，我们称之为常成员。在该程序中我们用<strong>const int NameSize</strong>来构造了一个常成员的函数用来修饰姓名长度。需要注意的地方时，在构造函数的时候，对于常成员函数的初始化，必须要在<code>对象构造</code>之前初始化，那什么时候是对象构造之前呢？我们知道，每个对象的初始化都是由析构函数来进行构造的，而且析构函数在函数体中， 将我们想要初始化的值，赋值给对象的<code>private变量</code>，那么我们要求在对象构造之前初始化，实际上就是要求在还没有进入构造函数的函数体的时候就初始化，更简单的来说，就是在{}之前进行初始化。所以，对于常成员的初始化，我们可以采用如下的形式：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CPlayer::<span class="built_in">CPlayer</span>(<span class="type">int</span> nId, <span class="type">const</span> <span class="type">char</span>* name):<span class="built_in">NameSize</span>(<span class="number">11</span>), <span class="built_in">birthday</span>(<span class="number">2003</span>, <span class="number">06</span>, <span class="number">14</span>)</span><br></pre></td></tr></table></figure>
+
+<p>此外，不仅仅是在构造函数中要求常成员提前初始化，事实上，只要涉及到对象中常成员的变化，就必须使得常成员初始化。</p>
+<p>说明，对于NameSize(11),就是带参构造，其中括号内11就是给NameSize赋值11的意思。</p>
+<h2 id="对象成员"><a href="#对象成员" class="headerlink" title="对象成员"></a>对象成员</h2><p>什么是对象成员：还是先看程序，在本程序中，我们首先定义了一个<code>CMyDate</code>的类，然后再<code>CPlayer</code>这个类中定义了一个<strong>CMyDate birthday</strong>，那么这个成员我们就称之为对象成员。</p>
+<p>对象成员的构造：和常成员一样，对象成员必须在对象构造之间带参构造，具体代码和常成员相同。</p>
+<h2 id="构造同时赋值"><a href="#构造同时赋值" class="headerlink" title="构造同时赋值"></a>构造同时赋值</h2><p>事实上，不仅仅是常成员和对象成员可以在函数构造的同时赋值，对于任何一个成员来说，都可以在函数构造的同时赋值，具体的例子在程序中也有所展示</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CMyDate</span>(<span class="type">int</span> nYear, <span class="type">int</span> nMonth, <span class="type">int</span> nDay) :<span class="built_in">nYear</span>(nYear),<span class="built_in">nMonth</span>(nMonth),<span class="built_in">nDay</span>(nDay)&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在CMyDate中构造函数就可以实现带参赋值，这里有一点需要注意的是</p>
+<p>不可以使用例如this-&gt;nYear(nYear)在函数构造同时赋值</p>
+<p>原因是：this指针就是指向对象的指针，但是当我们在函数体外边赋值的时候，对象还<strong>没有构造完成</strong>，此时this指针并没有相应的指向，所以this-&gt;nYear会报错！！</p>
+<h2 id="友元函数"><a href="#友元函数" class="headerlink" title="友元函数"></a>友元函数</h2><p>最后一个是友元函数，其实友元函数并不是一个好的机制，它并不是类的成员函数，要求声明在类中，但是定义要在类的外部。</p>
+<p>为什么称它为友元，因为它不是类的成员函数，但是却可以直接访问类的私有成员变量</p>
+<p>关键字：<code>friend</code></p>
+<h2 id="友元类"><a href="#友元类" class="headerlink" title="友元类"></a>友元类</h2><p>这部分是拓展内容，详情请见</p>
+<p> <a target="_blank" rel="noopener" href="https://www.runoob.com/cplusplus/cpp-friend-functions.html">友元类,菜鸟教程</a> </p>
+
+        </article>
+        <div class="post-tools" id="post-tools">
+            <div class="post-tools-left">
+                
+                <div class="share-link mobile">
+    <div class="share-qrcode">
+        <div class="share-button" title="使用手机访问这篇文章">
+            <i class="fas fa-qrcode"></i>
+        </div>
+        <div class="share-main">
+            <div class="share-main-all">
+                <div id="qrcode" title="https://www.blogethereal.top/posts/42970/">
+                </div>
+                <div class="reward-dec">使用手机访问这篇文章</div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            new QRCode(document.getElementById("qrcode"), "https://www.blogethereal.top/posts/42970/");
+        </script>
+    </div>
+</div>
+                <div class="share-link weibo"><a class="share-button" target="_blank"
+    href="https://service.weibo.com/share/share.php?title=面向对象-静态成员&amp;url=https://www.blogethereal.top/posts/42970/&amp;pic=https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/230206-16775101265e7e.jpg"
+    title="分享到微博" rel="noopener external nofollow noreferrer noopener">
+    <i class="fab fa-weibo" style="font-size:22px"></i>
+</a>
+</div>
+<div class="share-link copyurl">
+<div class="share-button" id="post-share-url" title="复制链接" onclick="acrylic.copyPageUrl()">
+    <i class="fas fa-link"></i>
+</div>
+</div>
+            </div>
+            <div class="post-tools-right">
+                <div class="tag_share">
+                    <div class="post-meta__tag-list">
+                        
+                            <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%AD%A6%E4%B9%A0/" class="post-meta__tags">
+                                <span class="tags-punctuation">#</span>
+                                面向对象学习
+                                <span class="tagsPageCount">2</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%B8%B8%E6%88%90%E5%91%98/" class="post-meta__tags">
+                                <span class="tags-punctuation">#</span>
+                                常成员
+                                <span class="tagsPageCount">1</span>
+                            </a>
+                        
+                            <a href="/tags/%E9%9D%99%E6%80%81%E6%88%90%E5%91%98/" class="post-meta__tags">
+                                <span class="tags-punctuation">#</span>
+                                静态成员
+                                <span class="tagsPageCount">1</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%AF%B9%E8%B1%A1%E6%88%90%E5%91%98/" class="post-meta__tags">
+                                <span class="tags-punctuation">#</span>
+                                对象成员
+                                <span class="tagsPageCount">1</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%8F%8B%E5%85%83/" class="post-meta__tags">
+                                <span class="tags-punctuation">#</span>
+                                友元
+                                <span class="tagsPageCount">1</span>
+                            </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post-copyright">
+    <div class="post-copyright__author">
+        <a class="post-copyright__original" title="该文章为原创文章，注意版权协议">原创</a>
+        <a class="post-copyright-title" href="#">
+            <span>面向对象-静态成员</span>
+        </a>
+    </div>
+    <div class="post-copyright__type">
+        <span class="post-copyright-info" id="post-copyright-url">
+            <a href="/posts/42970/">https://www.blogethereal.top/posts/42970/</a>
+        </span>
+        <button class="post-copyright-copybtn" onclick="acrylic.copyPageUrl()">
+            <i class="fas fa-paste copy-btn"></i>
+        </button>
+    </div>
+    <div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用 <a
+                href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a> 协议，完整转载请注明来自 <a
+                href="/">Ethereal</a>
+            </span>
+        </div>
+</div>
+        <nav class="pagination-post" id="pagination">
+    
+        <div class="prev-post pull-left">
+            <a href="/posts/60718/">
+                <div class="pagination-info">
+                    <div class="label">上一篇</div>
+                    <div class="prev_info">继承与派生</div>
+                </div>
+            </a>
+        </div>
+        <div class="next-post pull-right">
+            <a href="/posts/62703/">
+                <div class="pagination-info">
+                    <div class="label">下一篇</div>
+                    <div class="next_info">SRTP项目-基于深度时空网络的地铁客流预测</div>
+                </div>
+            </a>
+        </div>
+    
+</nav>
+        
+            <div id="post-comment">
+    <div class="comment-head">
+        <div class="comment-headline">
+            <i class="fas fa-message fa-fw"></i>
+            <span> 评论</span>
+        </div>
+    </div>
+    <div class="comment-wrap">
+        <div id="comment"></div>
+        <script>
+    async function initComment(){
+        var initOptions = Object.assign(
+            {"envId":"https://twikoo.blogethereal.top/","path":"window.location.pathname"},
+            {
+                el: '#comment',
+                onCommentLoaded: function() {
+                    GLOBALCONFIG.lightbox && acrylic.lightbox('#article-container img, #twikoo .tk-content img:not(.tk-owo-emotion)') 
+                }
+            }
+        )
+        await twikoo.init(initOptions)
+             
+    }
+</script>
+    </div>
+</div>
+            
+    </div>
+    <div class="aside-content" id="aside-content">
+    
+    
+        
+        <div class="card-widget card-info">
+    <div class="card-content">
+        <div class="card-info-avatar is-center">
+            <div class="author-info__sayhi" id="author-info__sayhi">
+            </div>
+            <div class="author-info__name">
+                Ethereal
+            </div>
+            <div class="author-info__description">这里记录了我学习过程中的所思所想，生活的点点滴滴<br/>我希望把它们<b>分享</b>给你们，希望大家<b>共同进步</b></div>
+        </div>
+    </div>
+    <div class="banner-button-group">
+        <a class="banner-button" href="/">
+            <i class="fas fa-circle-chevron-right"></i>
+            <span class="banner-button-text">个人主页</span>
+        </a>
+    </div>
+    <div class="card-info-social-icons is-center">
+        
+            <a class="social-icon" target="_blank" rel="noopener" href="https://github.com/HelloEveryonehh" title="Github">
+                <i class="fa-brands fa-github"></i>
+            </a>
+        
+            <a class="social-icon" href="mailto:2848392597@qq.com" title="Mail">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+        
+    </div>
+</div>
+     
+    
+    <div class="sticky_layout">
+        
+            <div class="card-widget" id="card-toc">
+    <div class="item-headline">
+        <i class="fas fa-bars"></i>
+        <span>文章目录</span>
+    </div>
+    <div class="toc-content" id="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E3%80%81%E5%8F%8B%E5%85%83%E3%80%81%E5%B8%B8%E6%88%90%E5%91%98%E3%80%81%E5%AF%B9%E8%B1%A1%E6%88%90%E5%91%98"><span class="toc-text">静态成员、友元、常成员、对象成员</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB"><span class="toc-text">类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98"><span class="toc-text">静态成员</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E6%88%90%E5%91%98"><span class="toc-text">常成员</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E6%88%90%E5%91%98"><span class="toc-text">对象成员</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%90%8C%E6%97%B6%E8%B5%8B%E5%80%BC"><span class="toc-text">构造同时赋值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0"><span class="toc-text">友元函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8B%E5%85%83%E7%B1%BB"><span class="toc-text">友元类</span></a></li></ol></li></ol>
+    </div>
+</div>
+            
+        
+            
+        <div class="card-widget card-recent-post">
+    <div class="item-headline">
+        <i class="fas fa-list-ol"></i>
+        <span>最近发布</span>
+    </div>
+    <div class="aside-list">
+        
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/51917/" title="计算机组成原理">
+                    <img
+                        alt="计算机组成原理"
+                        src="/img/hello.png">
+                </a>
+                <div class="content">
+                    
+                    <a class="title" href="/posts/51917/" title="计算机组成原理">
+                        计算机组成原理
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/47871/" title="CSAPP笔记1">
+                    <img
+                        alt="CSAPP笔记1"
+                        src="/img/hello.png">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/posts/47871/">
+                            CSAPP
+                        </a>
+                    
+                    <a class="title" href="/posts/47871/" title="CSAPP笔记1">
+                        CSAPP笔记1
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/16107/" title="Hello World">
+                    <img
+                        alt="Hello World"
+                        src="https://bu.dusays.com/2023/01/23/63cdf7d46a962.webp">
+                </a>
+                <div class="content">
+                    
+                    <a class="title" href="/posts/16107/" title="Hello World">
+                        Hello World
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/1/" title="无标题">
+                    <img
+                        alt="无标题"
+                        src="/img/hello.png">
+                </a>
+                <div class="content">
+                    
+                    <a class="title" href="/posts/1/" title="无标题">
+                        无标题
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/65491/" title="Cpp虚基类">
+                    <img
+                        alt="Cpp虚基类"
+                        src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/010541-16814055413382.jpg">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/posts/65491/">
+                            大二课程
+                        </a>
+                    
+                        <a class="article-recent_post_categories" href="/posts/65491/">
+                            CPP
+                        </a>
+                    
+                    <a class="title" href="/posts/65491/" title="Cpp虚基类">
+                        Cpp虚基类
+                    </a>
+                </div>
+            </div>
+            
+    </div>
+</div>
+     
+        
+    </div>
+</div> 
+</main>
+                <footer id="footer">
+                    <div id="footer_deal">
+    
+    <img class="footer_mini_logo" src="/img/avatar1.webp"
+        title="返回顶部" onclick="acrylic.toTop()">
+    
+</div>
+<div id="heo-footer">
+    
+    
+</div>
+<div id="footer-banner">
+    <div class="footer-banner-links">
+        <div class="footer-banner-left">
+            <div id="footer-banner-tips">
+                <div class="copyright">©2022 - 2023 By
+                    <a class="footer-banner-link" href="/" rel="external nofollow">Ethereal</a>
+                    <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/%E5%8F%88%E6%8B%8D%E4%BA%91_logo5.png"align="absmiddle" width="59px" height="30px" /></a><span>提供加速服务</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-banner-right">
+            <a class="footer-banner-link" href="/rss/">订阅</a>
+            
+                <a class="footer-banner-link" target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index" rel="noopener external nofollow noreferrer noopener">
+                    鲁ICP备2023010775号
+                </a>
+            
+            <a class="footer-banner-link cc" target="_blank" href="https://creativecommons.org/licenses/by/4.0/" title="cc协议">
+                <i class="fa-solid fa-closed-captioning"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+                </footer>
+            </div>
+         
+        <div>
+    <script type="text/javascript" src="/js/utils.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    
+
+<script src="/lib/pjax.min.js"></script>
+
+
+
+<script src="/lib/snackbar.min.js"></script>
+
+
+    
+<script src="/lib/view-image.min.js"></script>
+
+
+
+<div id="js-pjax">
+    
+     
+</div>
+
+
+    
+<script src="/js/extend/covercolor/local.js"></script>
+
+        
+
+    <script>
+  let pjaxSelectors = [
+    'title',
+    '#body-wrap',
+    '#site-config',
+    'meta[name="description"]',
+    '#js-pjax'
+  ]
+  
+  const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+  })
+
+  document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+</script>
+    
+</div>
+        
+     
+        <div class="needEndHide" id="nav-music" onclick="acrylic.musicToggle()">
+    <div id="nav-music-hoverTips">音乐已暂停</div>
+    <meting-js id="1708664797" server="tencent" type="playlist" mutex="true"
+        preload="none" data-lrctype="0" order="random" theme="var(--heo-main)"></meting-js>
+</div>
+    
+    </body>
+</html>
+<script>const posts=["posts/51917/","posts/47871/","posts/16107/","posts/1/","posts/65491/","posts/1595/","posts/44121/","posts/44313/","posts/20098/","posts/60718/","posts/42970/","posts/62703/","posts/32224/","posts/10588/","posts/6212/","posts/18589/","posts/17325/","posts/33260/","posts/19428/","posts/62499/","posts/541/","posts/38447/","posts/59648/","posts/9231/","posts/37501/","posts/41655/","posts/49164/","posts/62824/"];function toRandomPost(){ window.pjax ? pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]) : window.open('/'+posts[Math.floor(Math.random()*posts.length)], "_self"); };</script>
