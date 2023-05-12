@@ -4,14 +4,14 @@
         <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>数据库第四章内容梳理 | Ethereal</title>
+<title>操作系统笔记9 | Ethereal</title>
 <noscript>开启Javascript是必要的</noscript>
 <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
 <link rel="apple-touch-icon" href="/img/favicon.ico">
 <meta name="apple-mobile-web-app-title" content="Ethereal">
 <link rel="bookmark" href="/img/favicon.ico">
 <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/img/favicon.ico">
-<meta name="description" content="保持热爱">
+<meta name="description" content="思维总览知识总览信号量机制实现进程互斥信号量的数据结构1234typedef struct &amp;#123;    int value;    struct process *L;&amp;#125;semaph">
 <meta name="theme-color" content="#1C1C1F">
 <link rel="stylesheet" href="/css/var.css">
 <link rel="stylesheet" href="/css/main.css">
@@ -400,7 +400,7 @@
         </div>
         <div id="page-name-mask">
             <div id="page-name">
-                <a id="page-name-text" onclick="acrylic.toTop()">数据库第四章内容梳理</a>
+                <a id="page-name-text" onclick="acrylic.toTop()">操作系统笔记9</a>
             </div>
         </div>
         <div id="menus">
@@ -510,7 +510,7 @@
 </nav>
     
         <div class="coverdiv" id="coverdiv">
-    <img id="post-cover" class="nolazyload" src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/c8049b9b880411ebb6edd017c2d2eca2.jpg" alt="cover">
+    <img id="post-cover" class="nolazyload" src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/cb6a04e0c76f42828ab173cf0555a6a4.jpg" alt="cover">
 </div>
 <div id="post-info">
     <div id="post-firstinfo">
@@ -520,32 +520,42 @@
             </a>
             <span class="post-meta-categories">
                 
-                    <a class="post-meta-categories" href="/categories/%E5%A4%A7%E4%BA%8C%E8%AF%BE%E7%A8%8B/">大二课程</a>
+                    <a class="post-meta-categories" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
                 
             </span>
             <div class="tag_share">
                 <div class="post-meta__tag-list">
                     
-                        <a class="post-meta__tags" href="/tags/SQL/">
+                        <a class="post-meta__tags" href="/tags/%E8%BF%9B%E7%A8%8B%E4%BA%92%E6%96%A5/">
                             <span class="tags-punctuation">#</span>
-                            <span class="tags-name">SQL</span>
+                            <span class="tags-name">进程互斥</span>
                         </a>
                     
-                        <a class="post-meta__tags" href="/tags/DDL/">
+                        <a class="post-meta__tags" href="/tags/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5/">
                             <span class="tags-punctuation">#</span>
-                            <span class="tags-name">DDL</span>
+                            <span class="tags-name">进程同步</span>
+                        </a>
+                    
+                        <a class="post-meta__tags" href="/tags/%E5%89%8D%E9%A9%B1%E5%85%B3%E7%B3%BB/">
+                            <span class="tags-punctuation">#</span>
+                            <span class="tags-name">前驱关系</span>
+                        </a>
+                    
+                        <a class="post-meta__tags" href="/tags/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98/">
+                            <span class="tags-punctuation">#</span>
+                            <span class="tags-name">生产者消费者问题</span>
                         </a>
                     
                 </div>
             </div>
         </div>
     </div>
-    <h1 class="post-title">数据库第四章内容梳理</h1>
+    <h1 class="post-title">操作系统笔记9</h1>
     <div id="post-meta">
         <div class="meta-secondline">
             <span class="post-meta-date" title="发布于">
                 <i class="post-meta-icon fa-fw fas fa-calendar"></i>
-                <time datetime="2023-05-03T08:52:52+08:00"></time>
+                <time datetime="2023-05-11T16:29:22+08:00"></time>
             </span>
             
             
@@ -553,13 +563,13 @@
                 
                     <span class="post-meta-wordcount">
                         <i class="fas fa-file-word fa-fw post-meta-icon" title="文章字数"></i>
-                        <span class="word-count">0</span>
+                        <span class="word-count">846</span>
                     </span>
                 
                 
                     <span class="post-meta-time">
                         <i class="fas fa-clock post-meta-icon" title="阅读耗时"></i>
-                        <span>1 min</span>
+                        <span>3 min</span>
                     </span>
                 
             
@@ -587,7 +597,64 @@
                 <main class="layout" id="content-inner">
     <div id="post">
         <article class="post-content" id="article-container">
-            
+            <h2 id="思维总览"><a href="#思维总览" class="headerlink" title="思维总览"></a>思维总览</h2><h2 id="知识总览"><a href="#知识总览" class="headerlink" title="知识总览"></a>知识总览</h2><p><img src="https://bu.dusays.com/2023/05/11/645ca830c03eb.png" alt="在这里插入图片描述"></p>
+<h2 id="信号量机制实现进程互斥"><a href="#信号量机制实现进程互斥" class="headerlink" title="信号量机制实现进程互斥"></a>信号量机制实现进程互斥</h2><p><img src="https://bu.dusays.com/2023/05/11/645ca91b6d754.png"></p>
+<p>信号量的数据结构</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> value;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">process</span> *<span class="title">L</span>;</span></span><br><span class="line">&#125;semaphore;</span><br></pre></td></tr></table></figure>
+
+<h2 id="信号量机制实现进程同步"><a href="#信号量机制实现进程同步" class="headerlink" title="信号量机制实现进程同步"></a>信号量机制实现进程同步</h2><p>**进程同步:**让各个并发的进程按要求有序的进行</p>
+<p>**进程同步问题:**让本来异步并发的进程互相配合，有序推进</p>
+<p><img src="https://bu.dusays.com/2023/05/11/645caa24a9150.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p> <strong>核心：前V后P</strong></p>
+</blockquote>
+<h2 id="信号量机制和前驱关系"><a href="#信号量机制和前驱关系" class="headerlink" title="信号量机制和前驱关系"></a>信号量机制和前驱关系</h2><p><img src="https://bu.dusays.com/2023/05/11/645cabc3b21e5.png" alt="在这里插入图片描述"></p>
+<p><strong>需要认识到，每一对前驱关系都是一个进程同步问题</strong></p>
+<h2 id="生产者消费者问题"><a href="#生产者消费者问题" class="headerlink" title="生产者消费者问题"></a>生产者消费者问题</h2><blockquote>
+<ul>
+<li>系统中有<code>一组生产者进程</code>和<code>一组消费者进程</code>，生产者进程每次<code>生产一个</code>产品放入缓冲区，消费者进程每次从缓冲区中<code>取出一个</code>产品并使用。(注: 这里的”产品”理解为某种数据)</li>
+<li>生产者、消费者<code>共享</code>一个初始为空、大小为n的<code>缓冲区</code>。</li>
+<li>只有缓冲区<code>没满</code>时，<code>生产者</code>才能把产品<code>放入</code>缓冲区，否则必须等待。</li>
+<li>只有缓冲区<code>不空</code>时，<code>消费者</code>才能从中<code>取出</code>产品，否则必须等待。</li>
+<li>缓冲区是临界资源，各进程必须<code>互斥</code>地访问。</li>
+</ul>
+</blockquote>
+<p><strong>缓冲区是临界资源，各个进程必须互斥的访问：防止两个生产者想同一块缓冲区放入资源或者防止两个消费者同时消费同一块缓冲区的资源</strong></p>
+<p><img src="https://bu.dusays.com/2023/05/11/645caf3c2bd85.png" alt="在这里插入图片描述"></p>
+<p><img src="https://bu.dusays.com/2023/05/11/645caf9079b70.png" alt="image-20230511170415418"></p>
+<h3 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">semaphore mutex=<span class="number">1</span> ; <span class="comment">//互斥信号量;</span></span><br><span class="line">semaphore empty =n; <span class="comment">// 同步信号量，表示空闲缓冲区的数量</span></span><br><span class="line">semaphore full =<span class="number">0</span>; <span class="comment">// 同步信号量，表示产品的数量，即非空缓冲区的数量</span></span><br></pre></td></tr></table></figure>
+
+<p>生产者</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">producer()&#123;</span><br><span class="line">   <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">       <span class="comment">//生产一个产品</span></span><br><span class="line">       P(empty);</span><br><span class="line">       P(mutex);</span><br><span class="line">       <span class="comment">// 把产品放入缓冲区</span></span><br><span class="line">       V(mutex);</span><br><span class="line">       V(full);</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>消费者</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">consumer()&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="comment">//消耗一个产品</span></span><br><span class="line">        P(full);</span><br><span class="line">        P(mutex);</span><br><span class="line">        <span class="comment">//从缓冲区取出一个产品</span></span><br><span class="line">        V(mutex);</span><br><span class="line">        V(empty);</span><br><span class="line">        <span class="comment">//使用产品</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面两端代码有如下的特点:</p>
+<ol>
+<li><p>full 和 empty 的 P, V 操作是在两个不同的进程中实现的，生产者 <code>P(empty)</code></p>
+<p>和 <code> V(full)</code> 消费者则相反</p>
+</li>
+<li><p>对进程互斥的访问的代码是在同一个进程中实现的</p>
+</li>
+</ol>
+<p><strong>思考:能否改变相邻P，V 操作的顺序? 就是先进行互斥信号量的操作，再进行同步信号量的操作</strong></p>
+<p>改变顺序后的代码如下</p>
+<p><img src="https://bu.dusays.com/2023/05/11/645cb334ebea7.png" alt="在这里插入图片描述"></p>
+<p><strong>因此，实现互斥的P操作一定要在实现同步的P操作之后</strong></p>
+<p><strong>V操作不会导致进程阻塞，因此两个V操作可以交换</strong></p>
+<h2 id="多生产多消费者问题"><a href="#多生产多消费者问题" class="headerlink" title="多生产多消费者问题"></a>多生产多消费者问题</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p><img src="https://bu.dusays.com/2023/05/11/645cb546cd02f.png" alt="在这里插入图片描述"></p>
+<p><strong>多：多类的消费者和生产者</strong></p>
+<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p><img src="https://bu.dusays.com/2023/05/11/645cb5cfa7a6f.png" alt="在这里插入图片描述"></p>
+<h3 id="如何实现-1"><a href="#如何实现-1" class="headerlink" title="如何实现"></a>如何实现</h3><p><strong>有mutex的情况</strong><img src="https://bu.dusays.com/2023/05/11/645cb75d9e5ab.png" alt="在这里插入图片描述"></p>
+<p><strong>无mutex的情况</strong></p>
+<p><img src="https://bu.dusays.com/2023/05/11/645cb7d5eae85.png" alt="在这里插入图片描述"></p>
+<p><strong>为什么可以无mutex</strong></p>
+<p>原因在于:本题中的缓冲区大小为1，在任何时刻，apple、 orange、 plate 三个同步信号量中最多只有一个是1。因此在任何时刻，最多只有一个进程的P操作不会被阻塞，并顺利地进入临界区</p>
+<p><strong>总结：</strong></p>
+<p>在生产者_消费者问题中，如果缓冲区大小为1，那么有可能不需要设置互斥信号量就可以实现互斥访问缓冲区的功能。当然，<code>这不是绝对的</code>，要具体问题具体分析。（建议加上mutex肯定不会错）</p>
+<p><img src="https://bu.dusays.com/2023/05/11/645cb9f841abb.png" alt="image-20230511174838441"></p>
+
         </article>
         <div class="post-tools" id="post-tools">
             <div class="post-tools-left">
@@ -599,18 +666,18 @@
         </div>
         <div class="share-main">
             <div class="share-main-all">
-                <div id="qrcode" title="https://www.blogethereal.top/posts/9654/">
+                <div id="qrcode" title="https://www.blogethereal.top/posts/27416/">
                 </div>
                 <div class="reward-dec">使用手机访问这篇文章</div>
             </div>
         </div>
         <script type="text/javascript">
-            new QRCode(document.getElementById("qrcode"), "https://www.blogethereal.top/posts/9654/");
+            new QRCode(document.getElementById("qrcode"), "https://www.blogethereal.top/posts/27416/");
         </script>
     </div>
 </div>
                 <div class="share-link weibo"><a class="share-button" target="_blank"
-    href="https://service.weibo.com/share/share.php?title=数据库第四章内容梳理&amp;url=https://www.blogethereal.top/posts/9654/&amp;pic=https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/c8049b9b880411ebb6edd017c2d2eca2.jpg"
+    href="https://service.weibo.com/share/share.php?title=操作系统笔记9&amp;url=https://www.blogethereal.top/posts/27416/&amp;pic=https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/cb6a04e0c76f42828ab173cf0555a6a4.jpg"
     title="分享到微博" rel="noopener external nofollow noreferrer noopener">
     <i class="fab fa-weibo" style="font-size:22px"></i>
 </a>
@@ -625,15 +692,27 @@
                 <div class="tag_share">
                     <div class="post-meta__tag-list">
                         
-                            <a href="/tags/SQL/" class="post-meta__tags">
+                            <a href="/tags/%E8%BF%9B%E7%A8%8B%E4%BA%92%E6%96%A5/" class="post-meta__tags">
                                 <span class="tags-punctuation">#</span>
-                                SQL
+                                进程互斥
+                                <span class="tagsPageCount">2</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5/" class="post-meta__tags">
+                                <span class="tags-punctuation">#</span>
+                                进程同步
+                                <span class="tagsPageCount">2</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%89%8D%E9%A9%B1%E5%85%B3%E7%B3%BB/" class="post-meta__tags">
+                                <span class="tags-punctuation">#</span>
+                                前驱关系
                                 <span class="tagsPageCount">1</span>
                             </a>
                         
-                            <a href="/tags/DDL/" class="post-meta__tags">
+                            <a href="/tags/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98/" class="post-meta__tags">
                                 <span class="tags-punctuation">#</span>
-                                DDL
+                                生产者消费者问题
                                 <span class="tagsPageCount">1</span>
                             </a>
                         
@@ -645,12 +724,12 @@
     <div class="post-copyright__author">
         <a class="post-copyright__original" title="该文章为原创文章，注意版权协议">原创</a>
         <a class="post-copyright-title" href="#">
-            <span>数据库第四章内容梳理</span>
+            <span>操作系统笔记9</span>
         </a>
     </div>
     <div class="post-copyright__type">
         <span class="post-copyright-info" id="post-copyright-url">
-            <a href="/posts/9654/">https://www.blogethereal.top/posts/9654/</a>
+            <a href="/posts/27416/">https://www.blogethereal.top/posts/27416/</a>
         </span>
         <button class="post-copyright-copybtn" onclick="acrylic.copyPageUrl()">
             <i class="fas fa-paste copy-btn"></i>
@@ -664,22 +743,17 @@
 </div>
         <nav class="pagination-post" id="pagination">
     
-        <div class="prev-post pull-left">
-            <a href="/posts/44761/">
-                <div class="pagination-info">
-                    <div class="label">上一篇</div>
-                    <div class="prev_info">操作系统笔记4</div>
-                </div>
-            </a>
-        </div>
-        <div class="next-post pull-right">
-            <a href="/posts/27800/">
-                <div class="pagination-info">
-                    <div class="label">下一篇</div>
-                    <div class="next_info">操作系统笔记3</div>
-                </div>
-            </a>
-        </div>
+        
+            <div class="next-post pull-full">
+                <a href="/posts/51259/">
+                    <div class="pagination-info">
+                        <div class="label">下一篇</div>
+                        <div class="next_info">C++ 模板编程</div>
+                    </div>
+                </a>
+            </div>
+                
+        
     
 </nav>
         
@@ -754,7 +828,7 @@
         <span>文章目录</span>
     </div>
     <div class="toc-content" id="toc-content">
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E7%BB%B4%E6%80%BB%E8%A7%88"><span class="toc-text">思维总览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E6%80%BB%E8%A7%88"><span class="toc-text">知识总览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E9%87%8F%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E8%BF%9B%E7%A8%8B%E4%BA%92%E6%96%A5"><span class="toc-text">信号量机制实现进程互斥</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E9%87%8F%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5"><span class="toc-text">信号量机制实现进程同步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E9%87%8F%E6%9C%BA%E5%88%B6%E5%92%8C%E5%89%8D%E9%A9%B1%E5%85%B3%E7%B3%BB"><span class="toc-text">信号量机制和前驱关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98"><span class="toc-text">生产者消费者问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0"><span class="toc-text">如何实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%94%9F%E4%BA%A7%E5%A4%9A%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98"><span class="toc-text">多生产多消费者问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90"><span class="toc-text">问题分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0-1"><span class="toc-text">如何实现</span></a></li></ol></li></ol>
     </div>
 </div>
             
