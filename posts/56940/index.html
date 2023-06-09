@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>操作系统笔记10 | Ethereal</title>
+<noscript>开启Javascript是必要的</noscript>
+<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+<link rel="apple-touch-icon" href="/img/favicon.ico">
+<meta name="apple-mobile-web-app-title" content="Ethereal">
+<link rel="bookmark" href="/img/favicon.ico">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/img/favicon.ico">
+<meta name="description" content="思维导图文件的属性一个文件有哪些属性？文件名：由创建文件的用户决定文件名，主要是为了方便用户找到文件，同一目录下不允许有重名文件。标识符：一个系统内的各文件标识符唯一，对用户来说毫无可读性，因此标识符">
+<meta name="theme-color" content="#1C1C1F">
+<link rel="stylesheet" href="/css/var.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+<link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css">
+    
+
+<link rel="stylesheet" href="/lib/snackbar.min.css">
+
+
+<script src="/lib/qrcode.min.js"></script>
+
+
+    
+<script src="https://cdn.staticfile.org/twikoo/1.6.10/twikoo.all.min.js"></script>
+
+
+
+
+
+<script>var GLOBALCONFIG = {"root":"/","runtime":"2022-12-27 00:00:00","lazyload":{"enable":false,"error":"/img/acrylic.png"},"hightlight":{"enable":true,"limit":200},"lightbox":true,"randomlinks":false,"lang":{"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"recent":"最近","yesterday":"昨天","berforeyesterday":"前天","daybefore":"天前","runtime":"天"},"sayhello":{"morning":"早上好","noon":"中午好","afternoon":"下午好","night":"晚上好","goodnight":"晚安","iam":"!  我是"},"search":{"empty":"搜索结果为空","hit":"已为您找到 ${query} 条结果","placeholder":"输入关键词快速查找"}},"covercolor":true};</script><script id="site-config">var PAGECONFIG = {"is_home":false,"is_post":true,"is_page":false,"page":false,"toc":true,"comment":true};</script>
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body id="body">
+        
+        <div id="console" style="zoom: 1;" class="">
+    <div class="close-btn" onclick="acrylic.hideConsole()" href="javascript:void(0);">
+        <i class="fas fa-circle-xmark"></i>
+    </div>
+    <div class="button-group">
+        <div class="console-btn-item"> <a class="darkmode_switchbutton" onclick="acrylic.switchDarkMode()" title="显示模式切换"
+                href="javascript:void(0);" rel="external nofollow" data-pjax-state=""><i class="fas fa-moon"
+                    style="font-size: 1rem;"></i></a></div>
+        
+        <div class="console-btn-item" id="consoleFPS" onclick="acrylic.FPSToggle()" title="帧率显示开关"><a class="FPS-switch"
+                data-pjax-state=""><i class="fas fa-gauge"></i></a></div>
+    </div>
+    <div class="console-mask" onclick="acrylic.hideConsole()" href="javascript:void(0);" rel="external nofollow"></div>
+</div>
+        <div id="sidebar" style="zoom: 1;">
+    <div id="menu-mask" style="display: none;"></div>
+    <div id="sidebar-menus" class>
+        <span class="sidebar-menu-item-title">功能</span>
+        <div class="sidebar-menu-item">
+            <a class="darkmode_switchbutton menu-child" onclick="acrylic.switchDarkMode()" title="显示模式切换"
+                href="javascript:void(0);" rel="external nofollow">
+                <i class="fas fa-moon" style="font-size: 1rem;"></i>
+                <span>显示模式</span>
+            </a>
+        </div>
+        
+            <div class="back-menu-list-groups">
+    
+      
+      <div class="back-menu-list-group">
+        <div class="back-menu-list-title">
+          我的
+        </div>
+        <div class="back-menu-list">
+          
+            
+            <a class="back-menu-item" href="/" rel="external nofollow" title="博客">
+              <img class="back-menu-item-icon" src="/img/favicon.ico" loading="lazy">
+              <span class="back-menu-item-text">
+                博客
+              </span>
+            </a>
+          
+        </div>
+      </div>
+    
+  </div>
+  
+        
+        <div class="menus_items">
+    
+        <div class="menus_item">
+            
+                <a class="site-page" href="javascript:void(0);" rel="external nofollow">
+                    <span> 文库</span>
+                </a>
+                <ul class="menus_item_child">
+                    
+                        <li>
+                            <a class="site-page child" href="/archives/">
+                                <i class="fas fa-box-archive"></i>
+                                <span> 文章列表</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/categories/">
+                                <i class="fas fa-cube"></i>
+                                <span> 全部分类</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/tags/">
+                                <i class="fas fa-tags"></i>
+                                <span> 全部标签</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/talk" rel="external nofollow">
+                    <span> 即刻</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/list" rel="external nofollow">
+                    <span> 清单</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/links" rel="external nofollow">
+                    <span> 友人帐</span>
+                </a>
+             
+        </div>
+    
+</div>
+        <span class="sidebar-menu-item-title">标签</span>
+        <div class="card-widget card-tags card-archives card-webinfo card-allinfo">
+            <div class="item-headline">
+                <i class="fas fa-tags"></i>
+                <span>标签</span>
+            </div>
+            <div class="card-tag-cloud">
+                
+                    <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1em; color: #d3d3d3">算法
+                        <sup>2</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%99%9A%E5%9F%BA%E7%B1%BB/" style="font-size: 1em; color: #d3d3d3">虚基类
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/SRTP%E9%A1%B9%E7%9B%AE/" style="font-size: 1em; color: #d3d3d3">SRTP项目
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" style="font-size: 1em; color: #d3d3d3">面向对象
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%A8%A1%E6%9D%BF%E7%BC%96%E7%A8%8B/" style="font-size: 1em; color: #d3d3d3">模板编程
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/" style="font-size: 1em; color: #d3d3d3">泛型编程
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/C/" style="font-size: 1em; color: #d3d3d3">C++
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/Attention%E6%9C%BA%E5%88%B6/" style="font-size: 1em; color: #d3d3d3">Attention机制
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/Transformer/" style="font-size: 1em; color: #d3d3d3">Transformer
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/CASPP/" style="font-size: 1em; color: #d3d3d3">CASPP
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1em; color: #d3d3d3">计算机组成原理
+                        <sup>3</sup>
+                    </a>
+                
+                    <a href="/tags/transformer/" style="font-size: 1em; color: #d3d3d3">transformer
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 1em; color: #d3d3d3">深度学习
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1em; color: #d3d3d3">操作系统
+                        <sup>2</sup>
+                    </a>
+                
+                    <a href="/tags/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" style="font-size: 1em; color: #d3d3d3">C++基础学习
+                        <sup>4</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1em; color: #d3d3d3">数据结构
+                        <sup>3</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0/" style="font-size: 1em; color: #d3d3d3">操作系统笔记
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/" style="font-size: 1em; color: #d3d3d3">线程，多线程模型
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%B0%83%E5%BA%A6%E6%A6%82%E5%BF%B5/" style="font-size: 1em; color: #d3d3d3">调度概念
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/" style="font-size: 1em; color: #d3d3d3">调度算法
+                        <sup>2</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%B0%83%E5%BA%A6%E5%99%A8/" style="font-size: 1em; color: #d3d3d3">调度器
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E9%97%B2%E9%80%9B%E8%BF%9B%E7%A8%8B/" style="font-size: 1em; color: #d3d3d3">闲逛进程
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%A6%82%E5%BF%B5/" style="font-size: 1em; color: #d3d3d3">线程的概念
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/" style="font-size: 1em; color: #d3d3d3">线程的实现方式
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 1em; color: #d3d3d3">多线程
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E4%BF%A1%E5%8F%B7%E9%87%8F%E6%9C%BA%E5%88%B6/" style="font-size: 1em; color: #d3d3d3">信号量机制
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%BF%9B%E7%A8%8B%E4%BA%92%E6%96%A5/" style="font-size: 1em; color: #d3d3d3">进程互斥
+                        <sup>2</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5/" style="font-size: 1em; color: #d3d3d3">进程同步
+                        <sup>2</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%89%8D%E9%A9%B1%E5%85%B3%E7%B3%BB/" style="font-size: 1em; color: #d3d3d3">前驱关系
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98/" style="font-size: 1em; color: #d3d3d3">生产者消费者问题
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/IO%E6%93%8D%E4%BD%9C/" style="font-size: 1em; color: #d3d3d3">IO操作
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" style="font-size: 1em; color: #d3d3d3">文件管理
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1em; color: #d3d3d3">数据库
+                        <sup>3</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B/" style="font-size: 1em; color: #d3d3d3">关系模型
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F/" style="font-size: 1em; color: #d3d3d3">完整性约束
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/SQL%E8%AF%AD%E8%A8%80/" style="font-size: 1em; color: #d3d3d3">SQL语言
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E6%97%B6%E9%97%B4%E7%89%87%E8%BD%AE%E8%BD%AC%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/" style="font-size: 1em; color: #d3d3d3">时间片轮转调度算法
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E4%BC%98%E5%85%88%E7%BA%A7%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/" style="font-size: 1em; color: #d3d3d3">优先级调度算法
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%A4%9A%E7%BA%A7%E5%8F%8D%E9%A6%88%E9%98%9F%E5%88%97%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95/" style="font-size: 1em; color: #d3d3d3">多级反馈队列调度算法
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/SQL/" style="font-size: 1em; color: #d3d3d3">SQL
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/DDL/" style="font-size: 1em; color: #d3d3d3">DDL
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/DML/" style="font-size: 1em; color: #d3d3d3">DML
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/" style="font-size: 1em; color: #d3d3d3">算法分析
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90%E5%AE%9E%E9%AA%8C/" style="font-size: 1em; color: #d3d3d3">算法设计与分析实验
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/C-%E4%BD%9C%E4%B8%9A/" style="font-size: 1em; color: #d3d3d3">C++作业
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/01%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" style="font-size: 1em; color: #d3d3d3">01背包问题
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%A4%9A%E9%87%8D%E8%83%8C%E5%8C%85/" style="font-size: 1em; color: #d3d3d3">多重背包
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%BB%A7%E6%89%BF%E4%B8%8E%E6%B4%BE%E7%94%9F/" style="font-size: 1em; color: #d3d3d3">继承与派生
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/" style="font-size: 1em; color: #d3d3d3">命名规则
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E7%BB%A7%E6%89%BF%E7%9A%84%E6%80%9D%E6%83%B3/" style="font-size: 1em; color: #d3d3d3">继承的思想
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/C-%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" style="font-size: 1em; color: #d3d3d3">C++ 基础学习
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86/" style="font-size: 1em; color: #d3d3d3">计算机存储原理
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%AD%97%E4%B8%8E%E5%AD%97%E8%8A%82/" style="font-size: 1em; color: #d3d3d3">字与字节
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%AD%A6%E4%B9%A0/" style="font-size: 1em; color: #d3d3d3">面向对象学习
+                        <sup>2</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%B8%B8%E6%88%90%E5%91%98/" style="font-size: 1em; color: #d3d3d3">常成员
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E9%9D%99%E6%80%81%E6%88%90%E5%91%98/" style="font-size: 1em; color: #d3d3d3">静态成员
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%AF%B9%E8%B1%A1%E6%88%90%E5%91%98/" style="font-size: 1em; color: #d3d3d3">对象成员
+                        <sup>1</sup>
+                    </a>
+                
+                    <a href="/tags/%E5%8F%8B%E5%85%83/" style="font-size: 1em; color: #d3d3d3">友元
+                        <sup>1</sup>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</div>    
+        
+            <div class="post" id="body-wrap">
+                <header class="post-bg" id="page-header">
+    <nav id="nav" class="show">
+    <div id="nav-group">
+        <div id="blog_name">
+            
+                <div class="back-home-button" tabindex="-1">
+                    <i class="back-home-button-icon fas fa-grip-vertical"></i>
+                    <div class="back-menu-list-groups">
+    
+      
+      <div class="back-menu-list-group">
+        <div class="back-menu-list-title">
+          我的
+        </div>
+        <div class="back-menu-list">
+          
+            
+            <a class="back-menu-item" href="/" rel="external nofollow" title="博客">
+              <img class="back-menu-item-icon" src="/img/favicon.ico" loading="lazy">
+              <span class="back-menu-item-text">
+                博客
+              </span>
+            </a>
+          
+        </div>
+      </div>
+    
+  </div>
+  
+                </div>
+            
+            <a id="site-name" href="/" title="返回博客主页">
+                    
+                        <span class="heoicon">Ethereal</span>
+                    
+            </a>
+        </div>
+        <div id="page-name-mask">
+            <div id="page-name">
+                <a id="page-name-text" onclick="acrylic.toTop()">操作系统笔记10</a>
+            </div>
+        </div>
+        <div id="menus">
+            <div class="menus_items">
+    
+        <div class="menus_item">
+            
+                <a class="site-page" href="javascript:void(0);" rel="external nofollow">
+                    <span> 文库</span>
+                </a>
+                <ul class="menus_item_child">
+                    
+                        <li>
+                            <a class="site-page child" href="/archives/">
+                                <i class="fas fa-box-archive"></i>
+                                <span> 文章列表</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/categories/">
+                                <i class="fas fa-cube"></i>
+                                <span> 全部分类</span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="site-page child" href="/tags/">
+                                <i class="fas fa-tags"></i>
+                                <span> 全部标签</span>
+                            </a>
+                        </li>
+                    
+                </ul>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/talk" rel="external nofollow">
+                    <span> 即刻</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/list" rel="external nofollow">
+                    <span> 清单</span>
+                </a>
+             
+        </div>
+    
+        <div class="menus_item">
+            
+                <a class="site-page not-child" href="/links" rel="external nofollow">
+                    <span> 友人帐</span>
+                </a>
+             
+        </div>
+    
+</div>
+        </div>
+        <!-- <div id="nav-left">
+            <div id="fps-group">
+                <div id="fps">145</div><span class="fpsText">FPS</span>
+            </div>
+        </div> -->
+        <div id="nav-right">
+            
+    <div class="nav-button only-home" id="travellings_button">
+        <a class="site-page"  target="_blank" rel="noopener external nofollow" href="https://www.travellings.cn/go.html" title="开往-友链接力"  width="120">
+            <i class="fa-solid fa-train-subway" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+
+    <div class="nav-button" id="randomPost_button">
+        <a class="site-page" onclick="toRandomPost()"
+            title="随机前往一个文章">
+            <i class="fas fa-shuffle" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+
+
+    <div class="nav-button" id="nav-console">
+        <a class="console_switchbutton" onclick="acrylic.showConsole()"
+        title="显示中控台" href="javascript:void(0);" rel="external nofollow">
+        <i class="fas fa-bars-progress" style="font-size: 1rem;"></i>
+        </a>
+    </div>
+
+<div class="nav-button" id="nav-totop" onclick="acrylic.toTop()">
+    <a class="totopbtn">
+        <i class="fas fa-arrow-up"></i>
+        <span id="percent">0</span>
+    </a>
+</div>
+<div id="toggle-menu">
+    <a class="site-page">
+        <i class="fas fa-bars fa-fw" style="font-size: 1rem;"></i>
+    </a>
+</div>
+        </div>
+    </div>
+</nav>
+    
+        <div class="coverdiv" id="coverdiv">
+    <img id="post-cover" class="nolazyload" src="/img/hello.png" alt="cover">
+</div>
+<div id="post-info">
+    <div id="post-firstinfo">
+        <div class="meta-firstline">
+            <a class="post-meta-original" title="该文章为原创文章，注意版权协议">
+                原创
+            </a>
+            <span class="post-meta-categories">
+                
+                    <a class="post-meta-categories" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+                
+            </span>
+            <div class="tag_share">
+                <div class="post-meta__tag-list">
+                    
+                        <a class="post-meta__tags" href="/tags/IO%E6%93%8D%E4%BD%9C/">
+                            <span class="tags-punctuation">#</span>
+                            <span class="tags-name">IO操作</span>
+                        </a>
+                    
+                        <a class="post-meta__tags" href="/tags/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">
+                            <span class="tags-punctuation">#</span>
+                            <span class="tags-name">文件管理</span>
+                        </a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1 class="post-title">操作系统笔记10</h1>
+    <div id="post-meta">
+        <div class="meta-secondline">
+            <span class="post-meta-date" title="发布于">
+                <i class="post-meta-icon fa-fw fas fa-calendar"></i>
+                <time datetime="2023-06-08T18:56:53+08:00"></time>
+            </span>
+            
+            
+            
+                
+                    <span class="post-meta-wordcount">
+                        <i class="fas fa-file-word fa-fw post-meta-icon" title="文章字数"></i>
+                        <span class="word-count">1.6k</span>
+                    </span>
+                
+                
+                    <span class="post-meta-time">
+                        <i class="fas fa-clock post-meta-icon" title="阅读耗时"></i>
+                        <span>5 min</span>
+                    </span>
+                
+            
+            
+                
+        </div>
+    </div>
+</div>
+<section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg"
+    xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+        <path id="gentle-wave"
+            d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path>
+    </defs>
+    <g class="parallax">
+        <use href="#gentle-wave" x="48" y="0"></use>
+        <use href="#gentle-wave" x="48" y="3"></use>
+        <use href="#gentle-wave" x="48" y="5"></use>
+        <use href="#gentle-wave" x="48" y="7"></use>
+    </g>
+</svg>
+</section>
+        
+</header>
+                <main class="layout" id="content-inner">
+    <div id="post">
+        <article class="post-content" id="article-container">
+            <h2 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h2><p><img src="https://bu.dusays.com/2023/06/08/6481b6e4594f1.png" alt="在这里插入图片描述"></p>
+<p><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/20200522115003361.png" alt="在这里插入图片描述"></p>
+<h2 id="文件的属性"><a href="#文件的属性" class="headerlink" title="文件的属性"></a>文件的属性</h2><p>一个文件有哪些属性？<br><strong>文件名：</strong>由创建文件的用户决定文件名，主要是为了方便用户找到文件，同一目录下不允许有重名文件。<br><strong>标识符</strong>：一个系统内的各文件标识符唯一，对用户来说毫无可读性，因此标识符只是操作系统用于区分各个文件的一种内部名称。<br><strong>类型：</strong>指明文件的类型<br><strong>位置：</strong>文件存放的路径（让用户使用)、在外存中的地址（操作系统使用，对用户不可见)<br><strong>大小</strong>：指明文件大小<br><strong>创建时间、上次修改时间</strong><br><strong>文件所有者信息</strong><br><strong>保护信息</strong>：对文件进行保护的访问控制信息	</p>
+<h2 id="文件内部的数据如何组织起来？"><a href="#文件内部的数据如何组织起来？" class="headerlink" title="文件内部的数据如何组织起来？"></a>文件内部的数据如何组织起来？</h2><p><img src="https://bu.dusays.com/2023/06/08/6481b8f388687.png" alt="在这里插入图片描述"></p>
+<p><img src="https://bu.dusays.com/2023/06/08/6481b91af05f7.png" alt="在这里插入图片描述"></p>
+<h2 id="文件之间应该如何组织起来"><a href="#文件之间应该如何组织起来" class="headerlink" title="文件之间应该如何组织起来"></a>文件之间应该如何组织起来</h2><p><img src="https://bu.dusays.com/2023/06/08/6481b9642641c.png" alt="在这里插入图片描述"></p>
+<h2 id="操作系统应该向上提供哪些功能"><a href="#操作系统应该向上提供哪些功能" class="headerlink" title="操作系统应该向上提供哪些功能"></a>操作系统应该向上提供哪些功能</h2><p><img src="https://bu.dusays.com/2023/06/08/6481b9e20d1b4.png" alt="在这里插入图片描述"></p>
+<p><img src="https://bu.dusays.com/2023/06/08/6481b9ce76fe4.png" alt="image-20230608192146583"></p>
+<h2 id="从上往下看，文件应该如何存放在外存？"><a href="#从上往下看，文件应该如何存放在外存？" class="headerlink" title="从上往下看，文件应该如何存放在外存？"></a>从上往下看，文件应该如何存放在外存？</h2><p><img src="https://bu.dusays.com/2023/06/08/6481baed3158d.png" alt="在这里插入图片描述"></p>
+<p><img src="https://bu.dusays.com/2023/06/08/6481bb064de42.png" alt="在这里插入图片描述"></p>
+<h2 id="文件的逻辑结构"><a href="#文件的逻辑结构" class="headerlink" title="文件的逻辑结构"></a>文件的逻辑结构</h2><p><img src="https://bu.dusays.com/2023/06/08/6481bc7fd7bc6.png" alt="在这里插入图片描述"></p>
+<p><strong>无结构文件</strong>：就是由一系列二进制或者字符流组成，又称流式文件</p>
+<p><strong>有结构文件</strong>：由一组相似的记录组成，又称记录式文件，每条记录由若干<strong>数据项</strong>组成，一般来说，每条记录有一个数据项作为关键字，根据各条记录的长度是否相等，又可以分为<strong>定长记录</strong>和<strong>可变记录</strong>两种</p>
+<h3 id="定长记录"><a href="#定长记录" class="headerlink" title="定长记录"></a>定长记录</h3><p><img src="https://bu.dusays.com/2023/06/08/6481bd37332e7.png" alt="在这里插入图片描述"></p>
+<h3 id="不定长记录"><a href="#不定长记录" class="headerlink" title="不定长记录"></a>不定长记录</h3><p><img src="https://bu.dusays.com/2023/06/08/6481bd38b79df.png" alt="在这里插入图片描述"></p>
+<h3 id="有结构文件的逻辑结构"><a href="#有结构文件的逻辑结构" class="headerlink" title="有结构文件的逻辑结构"></a>有结构文件的逻辑结构</h3><p><img src="https://bu.dusays.com/2023/06/08/6481bd6bbd513.png" alt="在这里插入图片描述"></p>
+<h4 id="顺序文件"><a href="#顺序文件" class="headerlink" title="顺序文件"></a>顺序文件</h4><p><img src="https://bu.dusays.com/2023/06/08/6481bdea4c123.png" alt="在这里插入图片描述"></p>
+<p><img src="https://bu.dusays.com/2023/06/08/6481bdf9a1c5d.png" alt="在这里插入图片描述"></p>
+<h4 id="索引文件"><a href="#索引文件" class="headerlink" title="索引文件"></a>索引文件</h4><p><img src="https://bu.dusays.com/2023/06/08/6481c04076172.png" alt="在这里插入图片描述"></p>
+<h4 id="索引顺序文件"><a href="#索引顺序文件" class="headerlink" title="索引顺序文件"></a>索引顺序文件</h4><p><strong>核心是分组索引！</strong></p>
+<p><img src="https://bu.dusays.com/2023/06/08/6481c0ae622df.png" alt="在这里插入图片描述"></p>
+<p><img src="https://bu.dusays.com/2023/06/08/6481c20a3f079.png" alt="在这里插入图片描述"></p>
+<h4 id="多级索引顺序文件"><a href="#多级索引顺序文件" class="headerlink" title="多级索引顺序文件"></a>多级索引顺序文件</h4><p><img src="https://bu.dusays.com/2023/06/08/6481c2913160d.png" alt="在这里插入图片描述"></p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p><img src="https://bu.dusays.com/2023/06/08/6481c3360a968.png" alt="image-20230608200154683"></p>
+<h2 id="文件目录"><a href="#文件目录" class="headerlink" title="文件目录"></a>文件目录</h2><h3 id="思维导图-1"><a href="#思维导图-1" class="headerlink" title="思维导图"></a>思维导图</h3><p><img src="https://bu.dusays.com/2023/06/08/6481c35fe2364.png" alt="在这里插入图片描述"></p>
+<p><img src="https://bu.dusays.com/2023/06/08/6481c378ceda1.png" alt="在这里插入图片描述"></p>
+<h3 id="文件控制块"><a href="#文件控制块" class="headerlink" title="文件控制块"></a>文件控制块</h3><p>用一个目录表来表示这个目录，目录文件中一条记录就是一个文件控制块FCB</p>
+<p><img src="https://bu.dusays.com/2023/06/08/6481c3cf4ee2c.png" alt="在这里插入图片描述"></p>
+<p><img src="https://bu.dusays.com/2023/06/08/6481c4670a63b.png" alt="在这里插入图片描述"></p>
+<h3 id="对文件目录的操作"><a href="#对文件目录的操作" class="headerlink" title="对文件目录的操作"></a>对文件目录的操作</h3><p><img src="https://bu.dusays.com/2023/06/08/6481c4c03cb10.png" alt="在这里插入图片描述"></p>
+<h3 id="单级目录结构"><a href="#单级目录结构" class="headerlink" title="单级目录结构"></a>单级目录结构</h3><p><img src="https://bu.dusays.com/2023/06/08/6481c5536ceb1.png" alt="在这里插入图片描述"></p>
+<h3 id="两级目录结构"><a href="#两级目录结构" class="headerlink" title="两级目录结构"></a>两级目录结构</h3><p><img src="https://bu.dusays.com/2023/06/08/6481c586d8973.png" alt="在这里插入图片描述"></p>
+<h3 id="多级目录结构-树形目录结构"><a href="#多级目录结构-树形目录结构" class="headerlink" title="多级目录结构(树形目录结构)"></a>多级目录结构(树形目录结构)</h3><p><img src="https://bu.dusays.com/2023/06/08/6481c5fcd4409.png" alt="在这里插入图片描述"></p>
+<p>当前目录：</p>
+<p>一个”当前日录”。例如，此时已经打开了”照片”的目录文件，也就是说，这张目录表己调入内存，那么可以把它设置为”当前日录”。当用户想要访问某<br>个文件时，可以使用从当前目录出发的”相对路径”。<br>在Linux巾，”.”表示当前日录，因此如果”照片”是当前日录，则”自拍jpg”的相对路径为：<br>“&#x2F;2015-08&#x2F;自拍.jpg”.</p>
+<p>树形目录结构可以很方便的对文件进行分类，层次结构清晰，也能够有效地进行文件的管理和保护，但是树形结构<strong>不便于实现文件的共享</strong>，为此提出了<strong>无环图目录结构</strong></p>
+<h3 id="无环图目录结构"><a href="#无环图目录结构" class="headerlink" title="无环图目录结构"></a>无环图目录结构</h3><p><img src="https://bu.dusays.com/2023/06/08/6481c8341c1bf.png" alt="在这里插入图片描述"></p>
+<p>只有共享计数器的减为0的时候才会删除结点。</p>
+<p>注意：共享文件不同于赋值文件，再共享文件中由于各个用户指向同一个文件，因此只要其中一个用户修改了文件数据，所有用户就可以看到文件数据的变化</p>
+<h3 id="索引结点FCB改进"><a href="#索引结点FCB改进" class="headerlink" title="索引结点FCB改进"></a>索引结点FCB改进</h3><p><img src="https://bu.dusays.com/2023/06/08/6481c8e0bd16b.png" alt="在这里插入图片描述"></p>
+<p>当找到文件名对应的目录项时，才需要将索引结点调入内存，索引结点中记录了文件的各种信息，包括文件在外存中的存放位置，根据“存放位置”即可找到文件。<br>存放在<strong>外存中</strong>的索引结点称为“<strong>磁盘索引结点</strong>”，当索引结点<strong>放入内存</strong>后称为<strong>内存索引结点</strong><br>相比之下<strong>内存索引结点中需要增加一些信息</strong>，比如：文件是否被修改、此时有几个进程正在访间该文件等。</p>
+<h2 id="文件的物理结构"><a href="#文件的物理结构" class="headerlink" title="文件的物理结构"></a>文件的物理结构</h2><h3 id="思维导图-2"><a href="#思维导图-2" class="headerlink" title="思维导图"></a>思维导图</h3><p><img src="https://bu.dusays.com/2023/06/08/6481cb325cfab.png" alt="在这里插入图片描述"></p>
+<p><img src="https://bu.dusays.com/2023/06/08/6481cb37baaf5.png" alt="在这里插入图片描述"></p>
+<h3 id="文件块和磁盘块"><a href="#文件块和磁盘块" class="headerlink" title="文件块和磁盘块"></a>文件块和磁盘块</h3><p><strong>物理地址：</strong></p>
+<p><img src="https://bu.dusays.com/2023/06/08/6481cb971a560.png" alt="在这里插入图片描述"></p>
+<p><strong>逻辑地址：</strong></p>
+<p><img src="https://bu.dusays.com/2023/06/08/6481cc0ce277c.png" alt="在这里插入图片描述"></p>
+<h3 id="连续分配方式"><a href="#连续分配方式" class="headerlink" title="连续分配方式"></a>连续分配方式</h3><p><img src="https://bu.dusays.com/2023/06/08/6481cc9ed1692.png" alt="在这里插入图片描述"></p>
+<p>物理块号&#x3D;起始块号+逻辑块号，则逻辑块号是2起始块号是4，物理块号是6</p>
+<p>顺序访问：要访问逻辑块号2，必须从1开始</p>
+<p>直接访问：可以直接访问逻辑块号2</p>
+<p><img src="https://bu.dusays.com/2023/06/08/6481cccd54dd8.png" alt="在这里插入图片描述"></p>
+<p>对于黄色的块，由于是连续分配的，顺序读写速度最快</p>
+<p>对于紫色的块，由于不是顺序分配的，读写速度要慢</p>
+<h3 id="连续分配方式缺点"><a href="#连续分配方式缺点" class="headerlink" title="连续分配方式缺点"></a>连续分配方式缺点</h3><p><img src="https://bu.dusays.com/2023/06/08/6481ce188b70f.png" alt="在这里插入图片描述"></p>
+<p><img src="https://bu.dusays.com/2023/06/08/6481ce31a38d2.png" alt="在这里插入图片描述"></p>
+<p>由于无法分配足够的内存空间，这些绿色的块都表示为磁盘碎片</p>
+<p><img src="https://bu.dusays.com/2023/06/08/6481cee4e24d7.png" alt="img"></p>
+<h3 id="文件分配方式-链接分配"><a href="#文件分配方式-链接分配" class="headerlink" title="文件分配方式-链接分配"></a>文件分配方式-链接分配</h3><p><strong>隐式链接方式：</strong> </p>
+<p><img src="https://bu.dusays.com/2023/06/08/6481cf442ebd5.png" alt="在这里插入图片描述"></p>
+<p>用户给出要访问的逻辑块号i，操作系统找到该文件对应的目录项(FCB)<br>从目录项中找到起始块号（即0号块），将0号逻辑块读入内存，由此知道1号逻辑块存<br>放的物理块号，于是读入1号逻辑块，再找到2号逻辑块的存放位置…以此类推。<br>因此，读入i号逻辑块，总共需要i+1次磁盘。<br>结论</p>
+<p>缺点：采用<strong>链式分配（隐式链接）</strong>方式的文件，只支持顺序访问，不支持随机访问，查找效率低。另外，指向下一个盘块的指针也需要耗费少量的存储空间。</p>
+<p>优点：采用隐式链接的链接分配方式，很方便文件拓展。另外，所有的空闲磁盘块都可以被利用，不会有碎片问题，外存利用率高。</p>
+<p><strong>显示链接方式：</strong></p>
+<p><img src="https://bu.dusays.com/2023/06/08/6481d09ec1a80.png" alt="在这里插入图片描述"></p>
+<p><strong>如何实现文件逻辑块号到物理快号的转变？</strong></p>
+<p>用户给出要访问的逻辑块号，操作系统找到该文件对应的目录项(FCB)…<br>从目录项中找到<strong>起始块号</strong>，若i&gt;0，则查询内存中的文件分配表FAT,<br>往后找到i号逻辑块对应的物理块号。逻辑块号转换成物理块号的过程不需要读磁盘操作。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><img src="https://bu.dusays.com/2023/06/08/6481d2452f75a.png" alt="在这里插入图片描述"></p>
+<h3 id="索引分配"><a href="#索引分配" class="headerlink" title="索引分配"></a>索引分配</h3><p><img src="https://bu.dusays.com/2023/06/08/6481d4fe56a8f.png" alt="在这里插入图片描述"></p>
+<p><img src="https://bu.dusays.com/2023/06/08/6481d665dc72a.png" alt="在这里插入图片描述"></p>
+<p>数据太大怎么办，索引表装不下了</p>
+<p><img src="https://bu.dusays.com/2023/06/08/6481d791cf1e2.png" alt="在这里插入图片描述"></p>
+<p>三种解决方案：链接方案，多层索引，混合索引</p>
+<h3 id="链接方案"><a href="#链接方案" class="headerlink" title="链接方案"></a>链接方案</h3><p><img src="https://bu.dusays.com/2023/06/08/6481d7bbef7fb.png" alt="在这里插入图片描述"></p>
+<h3 id="多层索引"><a href="#多层索引" class="headerlink" title="多层索引"></a>多层索引</h3><p><img src="https://bu.dusays.com/2023/06/08/6481d95775d49.png" alt="在这里插入图片描述"></p>
+<p> 采用K层索引结构，且顶级索引表未调入内存，则访问一个数据只需要K+1次读磁盘的操作</p>
+<h3 id="混合索引"><a href="#混合索引" class="headerlink" title="混合索引"></a>混合索引</h3><p><img src="https://bu.dusays.com/2023/06/08/6481dc8e033a6.png" alt="在这里插入图片描述"></p>
+<h3 id="索引总结"><a href="#索引总结" class="headerlink" title="索引总结"></a>索引总结</h3><p><img src="https://bu.dusays.com/2023/06/08/6481dd516377f.png" alt="在这里插入图片描述"></p>
+<p><img src="https://bu.dusays.com/2023/06/08/6481ddf6e1b40.png" alt="在这里插入图片描述"></p>
+
+        </article>
+        <div class="post-tools" id="post-tools">
+            <div class="post-tools-left">
+                
+                <div class="share-link mobile">
+    <div class="share-qrcode">
+        <div class="share-button" title="使用手机访问这篇文章">
+            <i class="fas fa-qrcode"></i>
+        </div>
+        <div class="share-main">
+            <div class="share-main-all">
+                <div id="qrcode" title="https://www.blogethereal.top/posts/56940/">
+                </div>
+                <div class="reward-dec">使用手机访问这篇文章</div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            new QRCode(document.getElementById("qrcode"), "https://www.blogethereal.top/posts/56940/");
+        </script>
+    </div>
+</div>
+                <div class="share-link weibo"><a class="share-button" target="_blank"
+    href="https://service.weibo.com/share/share.php?title=操作系统笔记10&amp;url=https://www.blogethereal.top/posts/56940/&amp;pic=/img/hello.png"
+    title="分享到微博" rel="noopener external nofollow noreferrer noopener">
+    <i class="fab fa-weibo" style="font-size:22px"></i>
+</a>
+</div>
+<div class="share-link copyurl">
+<div class="share-button" id="post-share-url" title="复制链接" onclick="acrylic.copyPageUrl()">
+    <i class="fas fa-link"></i>
+</div>
+</div>
+            </div>
+            <div class="post-tools-right">
+                <div class="tag_share">
+                    <div class="post-meta__tag-list">
+                        
+                            <a href="/tags/IO%E6%93%8D%E4%BD%9C/" class="post-meta__tags">
+                                <span class="tags-punctuation">#</span>
+                                IO操作
+                                <span class="tagsPageCount">1</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" class="post-meta__tags">
+                                <span class="tags-punctuation">#</span>
+                                文件管理
+                                <span class="tagsPageCount">1</span>
+                            </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post-copyright">
+    <div class="post-copyright__author">
+        <a class="post-copyright__original" title="该文章为原创文章，注意版权协议">原创</a>
+        <a class="post-copyright-title" href="#">
+            <span>操作系统笔记10</span>
+        </a>
+    </div>
+    <div class="post-copyright__type">
+        <span class="post-copyright-info" id="post-copyright-url">
+            <a href="/posts/56940/">https://www.blogethereal.top/posts/56940/</a>
+        </span>
+        <button class="post-copyright-copybtn" onclick="acrylic.copyPageUrl()">
+            <i class="fas fa-paste copy-btn"></i>
+        </button>
+    </div>
+    <div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用 <a
+                href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a> 协议，完整转载请注明来自 <a
+                href="/">Ethereal</a>
+            </span>
+        </div>
+</div>
+        <nav class="pagination-post" id="pagination">
+    
+        
+            <div class="next-post pull-full">
+                <a href="/posts/30698/">
+                    <div class="pagination-info">
+                        <div class="label">下一篇</div>
+                        <div class="next_info">数据库第五章内容梳理</div>
+                    </div>
+                </a>
+            </div>
+                
+        
+    
+</nav>
+        
+            <div id="post-comment">
+    <div class="comment-head">
+        <div class="comment-headline">
+            <i class="fas fa-message fa-fw"></i>
+            <span> 评论</span>
+        </div>
+    </div>
+    <div class="comment-wrap">
+        <div id="comment"></div>
+        <script>
+    async function initComment(){
+        var initOptions = Object.assign(
+            {"envId":"https://twikoo.blogethereal.top/","path":"window.location.pathname"},
+            {
+                el: '#comment',
+                onCommentLoaded: function() {
+                    GLOBALCONFIG.lightbox && acrylic.lightbox('#article-container img, #twikoo .tk-content img:not(.tk-owo-emotion)') 
+                }
+            }
+        )
+        await twikoo.init(initOptions)
+             
+    }
+</script>
+    </div>
+</div>
+            
+    </div>
+    <div class="aside-content" id="aside-content">
+    
+    
+        
+        <div class="card-widget card-info">
+    <div class="card-content">
+        <div class="card-info-avatar is-center">
+            <div class="author-info__sayhi" id="author-info__sayhi">
+            </div>
+            <div class="author-info__name">
+                Ethereal
+            </div>
+            <div class="author-info__description">这里记录了我学习过程中的所思所想，生活的点点滴滴<br/>我希望把它们<b>分享</b>给你们，希望大家<b>共同进步</b></div>
+        </div>
+    </div>
+    <div class="banner-button-group">
+        <a class="banner-button" href="/">
+            <i class="fas fa-circle-chevron-right"></i>
+            <span class="banner-button-text">个人主页</span>
+        </a>
+    </div>
+    <div class="card-info-social-icons is-center">
+        
+            <a class="social-icon" target="_blank" rel="noopener" href="https://github.com/HelloEveryonehh" title="Github">
+                <i class="fa-brands fa-github"></i>
+            </a>
+        
+            <a class="social-icon" href="mailto:2848392597@qq.com" title="Mail">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+        
+    </div>
+</div>
+     
+    
+    <div class="sticky_layout">
+        
+            <div class="card-widget" id="card-toc">
+    <div class="item-headline">
+        <i class="fas fa-bars"></i>
+        <span>文章目录</span>
+    </div>
+    <div class="toc-content" id="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE"><span class="toc-text">思维导图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-text">文件的属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%86%85%E9%83%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E5%A6%82%E4%BD%95%E7%BB%84%E7%BB%87%E8%B5%B7%E6%9D%A5%EF%BC%9F"><span class="toc-text">文件内部的数据如何组织起来？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B9%8B%E9%97%B4%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95%E7%BB%84%E7%BB%87%E8%B5%B7%E6%9D%A5"><span class="toc-text">文件之间应该如何组织起来</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%BA%94%E8%AF%A5%E5%90%91%E4%B8%8A%E6%8F%90%E4%BE%9B%E5%93%AA%E4%BA%9B%E5%8A%9F%E8%83%BD"><span class="toc-text">操作系统应该向上提供哪些功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E4%B8%8A%E5%BE%80%E4%B8%8B%E7%9C%8B%EF%BC%8C%E6%96%87%E4%BB%B6%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95%E5%AD%98%E6%94%BE%E5%9C%A8%E5%A4%96%E5%AD%98%EF%BC%9F"><span class="toc-text">从上往下看，文件应该如何存放在外存？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E9%80%BB%E8%BE%91%E7%BB%93%E6%9E%84"><span class="toc-text">文件的逻辑结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E9%95%BF%E8%AE%B0%E5%BD%95"><span class="toc-text">定长记录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%AE%9A%E9%95%BF%E8%AE%B0%E5%BD%95"><span class="toc-text">不定长记录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E7%BB%93%E6%9E%84%E6%96%87%E4%BB%B6%E7%9A%84%E9%80%BB%E8%BE%91%E7%BB%93%E6%9E%84"><span class="toc-text">有结构文件的逻辑结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E6%96%87%E4%BB%B6"><span class="toc-text">顺序文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E6%96%87%E4%BB%B6"><span class="toc-text">索引文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E9%A1%BA%E5%BA%8F%E6%96%87%E4%BB%B6"><span class="toc-text">索引顺序文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E7%BA%A7%E7%B4%A2%E5%BC%95%E9%A1%BA%E5%BA%8F%E6%96%87%E4%BB%B6"><span class="toc-text">多级索引顺序文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="toc-text">文件目录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE-1"><span class="toc-text">思维导图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%8E%A7%E5%88%B6%E5%9D%97"><span class="toc-text">文件控制块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-text">对文件目录的操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-text">单级目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-text">两级目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84-%E6%A0%91%E5%BD%A2%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-text">多级目录结构(树形目录结构)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E7%8E%AF%E5%9B%BE%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-text">无环图目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E7%BB%93%E7%82%B9FCB%E6%94%B9%E8%BF%9B"><span class="toc-text">索引结点FCB改进</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E7%89%A9%E7%90%86%E7%BB%93%E6%9E%84"><span class="toc-text">文件的物理结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE-2"><span class="toc-text">思维导图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%9D%97%E5%92%8C%E7%A3%81%E7%9B%98%E5%9D%97"><span class="toc-text">文件块和磁盘块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E5%88%86%E9%85%8D%E6%96%B9%E5%BC%8F"><span class="toc-text">连续分配方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E5%88%86%E9%85%8D%E6%96%B9%E5%BC%8F%E7%BC%BA%E7%82%B9"><span class="toc-text">连续分配方式缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%88%86%E9%85%8D%E6%96%B9%E5%BC%8F-%E9%93%BE%E6%8E%A5%E5%88%86%E9%85%8D"><span class="toc-text">文件分配方式-链接分配</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E5%88%86%E9%85%8D"><span class="toc-text">索引分配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E6%8E%A5%E6%96%B9%E6%A1%88"><span class="toc-text">链接方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%B1%82%E7%B4%A2%E5%BC%95"><span class="toc-text">多层索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B7%E5%90%88%E7%B4%A2%E5%BC%95"><span class="toc-text">混合索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E6%80%BB%E7%BB%93"><span class="toc-text">索引总结</span></a></li></ol></li></ol>
+    </div>
+</div>
+            
+        
+            
+        <div class="card-widget card-recent-post">
+    <div class="item-headline">
+        <i class="fas fa-list-ol"></i>
+        <span>最近发布</span>
+    </div>
+    <div class="aside-list">
+        
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/56940/" title="操作系统笔记10">
+                    <img
+                        alt="操作系统笔记10"
+                        src="/img/hello.png">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/posts/56940/">
+                            操作系统
+                        </a>
+                    
+                    <a class="title" href="/posts/56940/" title="操作系统笔记10">
+                        操作系统笔记10
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/30698/" title="数据库第五章内容梳理">
+                    <img
+                        alt="数据库第五章内容梳理"
+                        src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/20230521193451.png">
+                </a>
+                <div class="content">
+                    
+                    <a class="title" href="/posts/30698/" title="数据库第五章内容梳理">
+                        数据库第五章内容梳理
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/35045/" title="算法分析与设计作业5">
+                    <img
+                        alt="算法分析与设计作业5"
+                        src="/img/hello.png">
+                </a>
+                <div class="content">
+                    
+                    <a class="title" href="/posts/35045/" title="算法分析与设计作业5">
+                        算法分析与设计作业5
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/4871/" title="Attention is all you need">
+                    <img
+                        alt="Attention is all you need"
+                        src="/img/hello.png">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/posts/4871/">
+                            科创项目
+                        </a>
+                    
+                    <a class="title" href="/posts/4871/" title="Attention is all you need">
+                        Attention is all you need
+                    </a>
+                </div>
+            </div>
+                
+        
+            <div class="aside-list-item">
+                <a class="thumbnail" href="/posts/65152/" title="transformer">
+                    <img
+                        alt="transformer"
+                        src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/20230513091456.png">
+                </a>
+                <div class="content">
+                    
+                        <a class="article-recent_post_categories" href="/posts/65152/">
+                            科创项目
+                        </a>
+                    
+                    <a class="title" href="/posts/65152/" title="transformer">
+                        transformer
+                    </a>
+                </div>
+            </div>
+            
+    </div>
+</div>
+     
+        
+    </div>
+</div> 
+</main>
+                <footer id="footer">
+                    <div id="footer_deal">
+    
+    <img class="footer_mini_logo" src="/img/avatar1.webp"
+        title="返回顶部" onclick="acrylic.toTop()">
+    
+</div>
+<div id="heo-footer">
+    
+    
+</div>
+<div id="footer-banner">
+    <div class="footer-banner-links">
+        <div class="footer-banner-left">
+            <div id="footer-banner-tips">
+                <div class="copyright">©2022 - 2023 By
+                    <a class="footer-banner-link" href="/" rel="external nofollow">Ethereal</a>
+                    <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral"><img src="https://cdn1.tianli0.top/gh/HelloEveryonehh/blog_img/%E5%8F%88%E6%8B%8D%E4%BA%91_logo5.png"align="absmiddle" width="59px" height="30px" /></a><span>提供加速服务</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-banner-right">
+            <a class="footer-banner-link" href="/rss/">订阅</a>
+            
+                <a class="footer-banner-link" target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index" rel="noopener external nofollow noreferrer noopener">
+                    鲁ICP备2023010775号
+                </a>
+            
+            <a class="footer-banner-link cc" target="_blank" href="https://creativecommons.org/licenses/by/4.0/" title="cc协议">
+                <i class="fa-solid fa-closed-captioning"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+                </footer>
+            </div>
+         
+        <div>
+    <script type="text/javascript" src="/js/utils.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    
+
+<script src="/lib/pjax.min.js"></script>
+
+
+
+<script src="/lib/snackbar.min.js"></script>
+
+
+    
+<script src="/lib/view-image.min.js"></script>
+
+
+
+<div id="js-pjax">
+    
+     
+</div>
+
+
+    
+<script src="/js/extend/covercolor/local.js"></script>
+
+        
+
+    <script>
+  let pjaxSelectors = [
+    'title',
+    '#body-wrap',
+    '#site-config',
+    'meta[name="description"]',
+    '#js-pjax'
+  ]
+  
+  const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+  })
+
+  document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+</script>
+    
+</div>
+        
+     
+        <div class="needEndHide" id="nav-music" onclick="acrylic.musicToggle()">
+    <div id="nav-music-hoverTips">音乐已暂停</div>
+    <meting-js id="1708664797" server="tencent" type="playlist" mutex="true"
+        preload="none" data-lrctype="0" order="random" theme="var(--heo-main)"></meting-js>
+</div>
+    
+    </body>
+</html>
+<script>const posts=["posts/56940/","posts/30698/","posts/35045/","posts/4871/","posts/65152/","posts/27416/","posts/51259/","posts/43993/","posts/44953/","posts/28504/","posts/28184/","posts/44761/","posts/9654/","posts/27800/","posts/40341/","posts/60354/","posts/51917/","posts/47871/","posts/16107/","posts/1/","posts/65491/","posts/1595/","posts/44121/","posts/44313/","posts/20098/","posts/60718/","posts/42970/","posts/62703/","posts/32224/","posts/10588/","posts/6212/","posts/18589/","posts/17325/","posts/33260/","posts/19428/","posts/62499/","posts/541/","posts/38447/","posts/59648/","posts/9231/","posts/37501/","posts/41655/","posts/49164/","posts/62824/"];function toRandomPost(){ window.pjax ? pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]) : window.open('/'+posts[Math.floor(Math.random()*posts.length)], "_self"); };</script>
